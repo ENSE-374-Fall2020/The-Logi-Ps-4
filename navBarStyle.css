@@ -1,3 +1,9 @@
+/* 
+    repeating teal: rgb(164, 255, 235)
+    repeating red/pink:  rgb(250, 168, 168)
+
+*/
+
 .navBar1 {
     font-family: Arial, Helvetica, sans-serif;
     position: -webkit-sticky;
@@ -27,7 +33,7 @@
 
 
 .navBar1 a:hover {
-    background-color: rgb(247, 144, 144);
+    background-color:  rgb(250, 168, 168);
     color: rgb(0, 0, 0);
     transition-duration: 0.2s;
 }
@@ -48,13 +54,13 @@
     outline: none;
     transition-duration: 0.2s;
     font-size: 20px;
-    background-color: rgb(251, 255, 254);
-    color: rgb(247, 144, 144)
+    background-color: rgb(255, 255, 255);
+    color:  rgb(250, 168, 168);
 }
 
 .navBar1 .dropdown1 .dropdownButton1:hover {
     background-color: white;
-    color: rgb(247, 144, 144);
+    color: rgb(250, 168, 168);
     transition-duration: 0.2s;
 }
 
@@ -66,7 +72,7 @@
     width: auto;
     display: none;
     padding: 12px;
-    background-color:  rgb(247, 144, 144);
+    background-color:   rgb(250, 168, 168);
 }
 
 .navBar1 .dropdown1:hover .dropdownContent1 {
@@ -103,7 +109,7 @@
 .navBar1 .dropdown1 a:hover, .dropdownContent1 button:hover {
     cursor: pointer;
     background-color: white;
-    color:  rgb(247, 144, 144);
+    color:   rgb(250, 168, 168);
     transition-duration: 0.2s;
 }
 
@@ -134,15 +140,8 @@ html body{
     margin-left: 43%;
 }
 
-.workout-container{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-}
 
-.forum-container{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-}
+/* Buttons stuff */
 
 .landing-buttons-container
 {
@@ -192,7 +191,7 @@ html body{
     height: 50px;
     font-size: 20px;
     font-weight: 500;
-    background-color: rgb(245, 153, 160);
+    background-color:  rgb(250, 168, 168);
     color: rgb(0, 0, 0);
     border: solid rgb(0, 0, 0) 3px;
     transition-duration: 0.2s;
@@ -202,33 +201,91 @@ html body{
     background-color: rgb(255, 255, 255);
 }
 
-.accordion .workout-container .card
+/* Stuff for exercises page is below */
+
+.exercise .exercise-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.exercise .accordion .exercise-container .card
 {
-   background-color:  rgb(250, 168, 168); 
+   background-color:   rgb(250, 168, 168); 
    font-size: 25px;
    margin: 3%; 
 }
 
-.accordion .card-header button
+.exercise .accordion .card-header button
 {
     font-size:25px;
-    background-color:rgb(245, 153, 160);
+    background-color: rgb(250, 168, 168);
      color: black;
      text-align: center;
 }
-.accordion .workout-container .card a
+.exercise .accordion .exercise-container .card a
 {
-   background-color:  rgb(101, 202, 197);  
+   background-color: rgb(164, 255, 235);  
    color: black;
 }
 
-.accordion .list-group-item{
-    background-color: rgb(207, 245, 238); 
+.exercise .accordion .list-group-item{
+    background-color: rgb(164, 255, 235); 
     font-size: 20px; 
     color: black;
 }
-.accordion .workout-container .card a:hover
+.exercise .accordion .exercise-container .card a:hover
 {
-   background-color:  rgb(254, 255, 255);  
+   background-color:  rgb(255, 255, 255);  
    color: black;
+}
+
+/* Stuff for forum page here */
+
+.forum-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.forum-container .card{
+    width: 18rem;
+    background-color:  rgb(164, 255, 235);
+    margin: 3%;
+}
+
+.forum-container .card .card-header{
+    color:   rgb(250, 168, 168);
+}
+
+/* Stuff for workout page */
+
+.workout-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.workout-container .card {
+    background-color:  rgb(250, 168, 168); 
+    margin: 3%;
+}
+
+.workout-container .card .card-title{
+    text-align: center;
+}
+
+.workout-container .card .card .card-header{
+    background-color:  rgb(164, 255, 235); 
+}
+
+.workout-container .card .card .mb-0 button{
+    color: black; 
+    font-size: 17px;
+}
+
+.workout-container .accordion .card .card-body{
+    background-color: rgb(255, 255, 255);
+}
+
+.workout-container .card .center input{
+    color: black;
+    background-color:  rgb(164, 255, 235);
 }

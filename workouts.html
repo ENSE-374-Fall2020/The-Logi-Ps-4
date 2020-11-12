@@ -54,27 +54,30 @@
 
     <form action="workoutbuilder.html">
         <button type="submit" class="landing-button"> Create a workout </button>
-        </form>
-    
-    <div class="workout-container"> <!-- dynamic number of columns: see stylesheet. repeat(4, 1fr), will always add 4 cards per row -->
+    </form>
 
-        <div class="card" style="width: 18rem; background-color:  rgb(250, 168, 168); margin: 3%;">
+    <div class="workout-container">
+        <!-- dynamic number of columns: see stylesheet. repeat(4, 1fr), will always add 4 cards per row -->
+
+        <!-- IMPORTANT NOTE: the number in the id's for line 70, 72, 75, 80 will have to get rendered, this is what makes them open independently (1, 2, 3...) -->
+
+        <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title" style="text-align: center;"> Sprint Intervals </h5> <!-- pull data to get workout title -->
-               
+                <h5 class="card-title" style="text-align: center;"> Sprint Intervals </h5>
+                <!-- pull data to get workout title -->
 
-                <div class="accordion" id="accordionExample">
+
+                <div class="accordion" id="accordionExample1">
                     <div class="card">
-                        <div class="card-header" id="headingOne" style="background-color:  rgb(207, 245, 238); ">
+                        <div class="card-header" id="heading1">
                             <h2 class="mb-0">
-                                <button aria-expanded="false" style="color: black; font-size: 17px;" class="btn btn-link btn-block text-left" type="button"
-                                    data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
+                                <button aria-expanded="false" class="btn btn-link btn-block text-left" type="button"
+                                    data-toggle="collapse" data-target="#collapse1" aria-controls="collapse1">
                                     View Workout
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
-                            data-parent="#accordionExample">
+                        <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#accordionExample1">
                             <div class="card-body">
                                 <li class="card-text">Render exercise here </li>
                                 <li class="card-text">Render exercise here </li>
@@ -84,30 +87,30 @@
                         </div>
                     </div>
                     <form class="center" action='/addWorkout' method='post'>
-                        <input style="color: black; background-color:  rgb(164, 255, 235);" type="submit"
-                            class="btn btn-primary" value="Add Workout">
+                        <input type="submit" class="btn btn-primary" value="Add Workout">
                     </form>
                 </div>
             </div>
         </div>
-        
-        <div class="card" style="width: 18rem; background-color:  rgb(250, 168, 168); margin: 3%; height: auto">
-            <div class="card-body">
-                <h5 class="card-title" style="text-align: center;"> Sprint Intervals </h5> <!-- pull data to get workout title -->
-               
 
-                <div class="accordion" id="accordionExample">
+        <div class="card" style="width: 18rem">
+            <div class="card-body">
+                <h5 class="card-title" style="text-align: center;"> Sprint Intervals </h5>
+                <!-- pull data to get workout title -->
+
+
+                <div class="accordion" id="accordionExample2">
                     <div class="card">
-                        <div class="card-header" id="headingOne" style="background-color: rgb(207, 245, 238);">
-                            <h2 class="mb-0" style="justify-content: middle;">
-                                <button aria-expanded="false" style="color: black; font-size: 17px;" class="btn btn-link btn-block text-left" type="button"
-                                    data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne">
+                        <div class="card-header" id="heading2">
+                            <h2 class="mb-0">
+                                <button aria-expanded="false" class="btn btn-link btn-block text-left" type="button"
+                                    data-toggle="collapse" data-target="#collapse2" aria-controls="collapse2">
                                     View Workout
                                 </button>
                             </h2>
                         </div>
-                        <div id="collapseOne" class="collapse " aria-labelledby="headingOne"
-                            data-parent="#accordionExample">
+                        <div id="collapse2" class="collapse" aria-labelledby="heading2"
+                            data-parent="#accordionExample2">
                             <div class="card-body">
                                 <li class="card-text">Render exercise here </li>
                                 <li class="card-text">Render exercise here </li>
@@ -120,8 +123,7 @@
                         </div>
                     </div>
                     <form class="center" action='/addWorkout' method='post'>
-                        <input style="color: black; background-color:  rgb(164, 255, 235);" type="submit"
-                            class="btn btn-primary" value="Add Workout">
+                        <input type="submit" class="btn btn-primary" value="Add Workout">
                     </form>
                 </div>
             </div>
