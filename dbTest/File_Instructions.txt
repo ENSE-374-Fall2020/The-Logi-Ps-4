@@ -1,0 +1,23 @@
+***************
+dbObjects.js
+
+Initializes schemas for all collections
+-- Only needs to be called once!
+
+
+
+***************
+dbExerciseInit.js
+
+DESTROYS ALL existing 'exercises' documents,
+then reinitializes list with a few static examples
+
+
+
+***************
+dbExamples.js
+
+-- Test file -> modify to you heart's content
+
+Adds a couple static example exercises to
+the existing collection
