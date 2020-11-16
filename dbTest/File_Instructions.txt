@@ -1,23 +1,32 @@
-***************
 dbObjects.js
+***************
 
 Initializes schemas for all collections
--- Only needs to be called once!
+-- Called in script dbExerciseInit.js
 
 
 
-***************
 dbExerciseInit.js
+***************
 
 DESTROYS ALL existing 'exercises' documents,
 then reinitializes list with a few static examples
 
 
 
+dbTestingCode.js
 ***************
-dbExamples.js
 
--- Test file -> modify to you heart's content
+-- Testing/prototyping file -> modify to you heart's content
 
-Adds a couple static example exercises to
-the existing collection
+bundle of testing/playing around with the data structures,
+results in adding a few STATIC exercises to the list
+
+includes prototype functions:
+    -- async function addStaticExercises(id, name, type, muscles, tutorialURL) {
+        ... constructor for exercise schema
+        ... mistake: I think I built this in the wrong place -JM
+
+    -- async function findExercisesByType(value) {
+        ... search function that returns a list populated
+            by the type equal to string "value" 

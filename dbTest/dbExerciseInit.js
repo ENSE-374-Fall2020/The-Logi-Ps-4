@@ -13,16 +13,20 @@ mongoose.connect("mongodb://localhost:27017/testdb",
         useUnifiedTopology: true
     });
 
-async function databaseCalls() {
     console.log("connected to testdb");
 
+async function destroyExerciseCollection() {
     // destroy existing collection of exercises
+
     await Exercise.deleteMany({}, function(err) {
         if (err) console.log("Error in deleting existing collection");
         else console.log("Collection 'exercises' destroyed");
     });
+}
 
+    async function generateExerciseCollection() {
     // generate new collection of static exercises
+
     console.log("Generating static list of exercises...");
     const exercise1 = new Exercise({
         _id: 1,
@@ -82,4 +86,8 @@ async function databaseCalls() {
     console.log("List created successfully");
 }
 
-databaseCalls();
+destroyExerciseCollection();
+generateExerciseCollection();
+
+exports.destroyExerciseCollection = destroyExerciseCollection;
+exports.generateExerciseCollection = generateExerciseCollection;

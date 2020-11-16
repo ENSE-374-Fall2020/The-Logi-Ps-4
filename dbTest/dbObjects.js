@@ -23,8 +23,9 @@ const Exercise = mongoose.model("Exercise", exerciseSchema);
 const setSchema = new mongoose.Schema(
     {
         _id: Number,
-        set_id: Number,
-        exercise_id: Number, // could be string if exercise uses name as id
+        // set_id: Number,
+        // exercise_id: Number, // could be string if exercise uses name as id
+        exercise: String,
         workout_id: Number,
         amount: Number,
         duration: Number
@@ -34,7 +35,8 @@ const Set = mongoose.model("Set", setSchema);
 
 const workoutSchema = new mongoose.Schema(
     {
-        workout_id: Number,
+        _id: Number, 
+        // workout_id: Number,
         creator: String
         // difficulty: Number
     });
@@ -42,7 +44,8 @@ const Workout = mongoose.model("Workout", workoutSchema);
 
 const finishedWorkoutSchema = new mongoose.Schema(
     {
-        finished_id: Number,
+        _id: Number,
+        // finished_id: Number,
         user_id: Number,
         workout_id: Number,
         date_finished: Date
@@ -51,7 +54,8 @@ const FinishedWorkout = mongoose.model("FinishedWorkout", finishedWorkoutSchema)
 
 const currentWorkoutSchema = new mongoose.Schema(
     {
-        current_id: Number,
+        _id: Number,
+        // current_id: Number,
         user_id: Number,
         workout_id: Number
     });
@@ -59,7 +63,8 @@ const CurrentWorkout = mongoose.model("CurrentWorkout", currentWorkoutSchema);
 
 const userSchema = new mongoose.Schema(
     {
-        user_id: Number, // could remove and use username as identifier
+        _id: Number,
+        // user_id: Number, // could remove and use username as identifier
         username: String,
         password: String,
         weight: Number,
@@ -69,7 +74,8 @@ const User = mongoose.model("User", userSchema);
 
 const postSchema = new mongoose.Schema(
     {
-        post_id: Number,
+        _id: Number,
+        // post_id: Number,
         user_id: Number,
         content: String,
         date_posted: Date
