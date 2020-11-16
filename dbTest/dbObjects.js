@@ -21,7 +21,6 @@ const setSchema = new mongoose.Schema(
     {
         _id: Number,
         exercise: String, // alternative: exercise_id: Number,
-        workout_id: Number,
         amount: Number,
         duration: Number
     });
