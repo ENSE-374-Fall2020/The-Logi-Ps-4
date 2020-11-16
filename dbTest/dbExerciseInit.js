@@ -5,7 +5,6 @@
 const dbObjects = require(__dirname + "/dbObjects.js");
 const Exercise = dbObjects.Exercise;
 
-const { Db } = require("mongodb");
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/testdb",
     {

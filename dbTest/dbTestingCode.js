@@ -7,8 +7,6 @@ const CurrentWorkout = dbObjects.CurrentWorkout;
 const User = dbObjects.User;
 const Post = dbObjects.Post;
 
-const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
-const { Db } = require("mongodb");
 const mongoose = require("mongoose");
 
 async function addStaticExercises(id, name, type, muscles, tutorialURL) {

@@ -7,56 +7,45 @@
 const mongoose = require("mongoose");
 
 console.log("Initializing schemas...");
-// **NOTE: added "muscles" category array for muscle group
 const exerciseSchema = new mongoose.Schema(
     {
         _id: Number,
-        // exercise_id: Number, // could remove and use name as identifier
         name: String,
         type: String,
         muscles: [String],
         tutorialURL: String
-        // difficulty: Number
     });
 const Exercise = mongoose.model("Exercise", exerciseSchema);
 
 const setSchema = new mongoose.Schema(
     {
         _id: Number,
-        // set_id: Number,
-        // exercise_id: Number, // could be string if exercise uses name as id
-        exercise: String,
+        exercise: String, // alternative: exercise_id: Number,
         workout_id: Number,
         amount: Number,
         duration: Number
-        // difficulty: Number
     });
 const Set = mongoose.model("Set", setSchema);
 
 const workoutSchema = new mongoose.Schema(
     {
         _id: Number, 
-        // workout_id: Number,
-        creator: String
-        // difficulty: Number
+        creator: String,
+        sets: [Set]
     });
 const Workout = mongoose.model("Workout", workoutSchema);
 
 const finishedWorkoutSchema = new mongoose.Schema(
     {
         _id: Number,
-        // finished_id: Number,
-        user_id: Number,
         workout_id: Number,
-        date_finished: Date
+        // date_finished: Date // replaceable with mongoDB getTimestamp() method
     });
 const FinishedWorkout = mongoose.model("FinishedWorkout", finishedWorkoutSchema);
 
 const currentWorkoutSchema = new mongoose.Schema(
     {
         _id: Number,
-        // current_id: Number,
-        user_id: Number,
         workout_id: Number
     });
 const CurrentWorkout = mongoose.model("CurrentWorkout", currentWorkoutSchema);
@@ -64,21 +53,22 @@ const CurrentWorkout = mongoose.model("CurrentWorkout", currentWorkoutSchema);
 const userSchema = new mongoose.Schema(
     {
         _id: Number,
-        // user_id: Number, // could remove and use username as identifier
         username: String,
         password: String,
-        weight: Number,
-        height: Number
+        currentWorkouts: [CurrentWorkout],
+        finishedWorkouts: [FinishedWorkout]
+        // weight: Number,  // optional
+        // height: Number,  // extra
+        // age: Number      // data
     });
 const User = mongoose.model("User", userSchema);
 
 const postSchema = new mongoose.Schema(
     {
         _id: Number,
-        // post_id: Number,
         user_id: Number,
         content: String,
-        date_posted: Date
+        // date_posted: Date // replaceable with mongoDB getTimestamp() method
     });
 const Post = mongoose.model("Post", postSchema);
 
