@@ -81,7 +81,3 @@ exports.User = User;
 exports.Post = Post;
 
 console.log("Schemas initialized and exported successfully");
-
-// *****************************************************************************
-// ALTERNATIVE: use embedded document to reference exercises in sets in workouts
-// *****************************************************************************
