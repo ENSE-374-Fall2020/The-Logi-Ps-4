@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="css/navBarStyle.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/e9a8538c89.js" crossorigin="anonymous"></script>
 
-    <title>Document</title>
+    <title>Workout Builder</title>
 </head>
 
 <body>
@@ -48,9 +49,99 @@
             </div>
         </div>
     </div>
-    </div>
-    
-   <h1> Form for workout builder here</h1>
+
+    <h1 class="text-center">Create New Workout</h1>
+
+    <!--
+       Name
+       Add a set (card)
+            exercise
+            amount
+            duration
+   -->
+
+    <section class="container">
+        <form action="/createWorkout" id="createWorkout" name="createWorkout">
+            <div class="row">
+                <div class="col-md-4 border">col-md-4</div>
+                <div id="nameContainer" class="col-md-4 form-group">
+                    <label for="workoutName">Name:</label>
+                    <input type="text" class="form-control" id="workoutName" required />
+                </div>
+                <div class="col-md-4 border">col-md-4</div>
+            </div>
+            <!--Begin adding sets-->
+            <div class="row border" id="setsContainer">
+
+                <!--Card #1-->
+                <div class="col-md-3 m-3">
+                    <div class="card set m-3">
+                        <h4 class="card-title bg-primary text-light text-center p-2 m-2">Set 1</h4>
+
+                        <img class="card-img-top p-2" src="img/squat.jpg" alt="Card image cap" />
+                        <div class="card-body bg-light">
+                            <label for="exercise">Exercise:</label>
+                            <select name="exercise" id="exercise" required>
+                                <!--list to be populated by
+                                        exercises pulled from db-->
+                                <option value="squat">Squat</option>
+                                <option value="legcurl.png">Leg Curl</option>
+                            </select>
+                            <label for="amount">Amount:</label>
+                            <input type="text" class="form-control" id="amount" name="amount" placeholder="N/A" />
+                            <label for="duration">Duration:</label>
+                            <input type="text" class="form-control" id="duration" name="duration" placeholder="N/A" />
+                        </div>
+                    </div>
+                </div>
+
+                <!--Card #2-->
+                <div class="col-md-3 m-3">
+                    <div class="card set m-3">
+                        <h4 class="card-title bg-primary text-light text-center p-2 m-2">Set 2</h4>
+
+                        <img class="card-img-top p-2" src="img/legcurl.png" alt="Card image cap" />
+                        <div class="card-body bg-light">
+                            <label for="exercise">Exercise:</label>
+                            <select name="exercise" id="exercise" required>
+                                <!--list to be populated by
+                                        exercises pulled from db-->
+                                <option value="squat">Squat</option>
+                                <option value="legcurl.png">Leg Curl</option>
+                            </select>
+                            <label for="amount">Amount:</label>
+                            <input type="text" class="form-control" id="amount" name="amount" placeholder="N/A" />
+                            <label for="duration">Duration:</label>
+                            <input type="text" class="form-control" id="duration" name="duration" placeholder="N/A" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card ADD-->
+                <div class="col-md-3 m-3">
+                    <div id="addSetCard" class="card set m-3">
+                        <div class="card-body h-100">
+                            <button class="btn btn-block btn-success p-3">
+                                <p>ADD SET</p>
+                                <i class="fas fa-plus display-4 p-3"></i>
+                            </button>
+                            <button class="btn btn-block btn-info p-3">
+                                <p>ADD REST</p>
+                                <i class="far fa-clock display-4 p-3"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!--
+                            card same size with big + button
+                            and little "Rest" button
+                            accessed in JS to insert new, blank set
+                        -->
+                </div>
+            </div>
+        </form>
+    </section>
+
+
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

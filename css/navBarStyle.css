@@ -150,13 +150,11 @@ html body{
 }
 
 .landing-buttons-container #one{
-    grid-column-start: 1;
-    grid-column-end: 2;
+    grid-column: 1 / 2;
 }
 
 .landing-buttons-container #two{
-    grid-column-start: 2;
-    grid-column-end: 3;
+    grid-column: 2 / 3;
 }
 
 .landing-buttons-container button{
@@ -288,4 +286,10 @@ html body{
 .workout-container .card .center input{
     color: black;
     background-color:  rgb(164, 255, 235);
+}
+
+/* Workout Builder Form */
+
+.set {
+    width: 200px;
 }
