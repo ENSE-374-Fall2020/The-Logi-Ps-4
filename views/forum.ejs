@@ -14,51 +14,7 @@
 
 <body>
 
-    <div class="logo">
-        <img src="img/nike.png">
-    </div>
-
-    <div class="navBar1">
-        <a class="left" href="landing.html"> HOME</a>
-        <a class="left" href="workouts.html"> WORKOUTS </a>
-        <a class="left" href="exercises.html"> EXERCISES </a>
-        <a class="left" href="forum.html"> COMMUNITY </a>
-
-        <div class="dropdown1">
-            <button class="dropdownButton1">
-                <span>Sign Out </span>
-            </button>
-            <div class="dropdownContent1">
-                <input type="hidden" name="username" value="bob123" /> <!-- replace value to get username from db-->
-                <h4> <%= username%> </h4>
-                <table>
-                  <h4> Completed Workouts </h4>
-                    <% for (let item of items){%>
-                        <%if (item.done === true){%>
-                        <!--Finished workouts-->
-                        <%- include ("partials/doneWorkouts.ejs", {username: username, item: item})-%>
-                        <%}%>
-                        <%} else {%>
-
-                        <%}%>
-                    <%}%>
-                    
-                    
-                    <!-- <tr>
-                        <td>This week: </td>
-                        <td>This month: </td>
-                        <td>This year: </td>
-                    </tr> -->
-                    <tr>
-                        <!-- pull data from db here for completed workouts -->
-                    </tr>
-                </table>
-                <form action='/logout' id='logout' method="post">
-                    <button class="signout">Sign Out </button>
-                </form>
-            </div>
-        </div>
-    </div>
+  <%- include("navbar"); %>
 
     <h1 class="center"> Community Forum </h1>
 
@@ -69,15 +25,14 @@
 <div class="forum-container"> 
 
     <div class="card">
-       <% for (let post of posts){%>
+       <% for (let post of posts){ %>
                         <%if (username === post.username){%>
                         <!--Finished workouts-->
                         <%- include ("partials/userspost.ejs", {username: username, post:post})-%>
-                        <%}%>
-                        <%} else {%>
+                        <% } else { %>
 
-                        <%}%>
-                    <%}%>
+                        <% } %>
+                    <% } %>
     </div>
     <div class="card">
         <div class="card-header"> USERNAME </div> <!-- pull user from db-->

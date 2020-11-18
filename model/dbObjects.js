@@ -31,7 +31,7 @@ const workoutSchema = new mongoose.Schema(
         _id: Number, 
         creator: String,
         name: String,
-        sets: [Set]
+        sets: [setSchema]
     });
 const Workout = mongoose.model("Workout", workoutSchema);
 
@@ -55,8 +55,8 @@ const userSchema = new mongoose.Schema(
         _id: Number,
         username: String,
         password: String,
-        currentWorkouts: [CurrentWorkout],
-        finishedWorkouts: [FinishedWorkout]
+        currentWorkouts: [currentWorkoutSchema],
+        finishedWorkouts: [finishedWorkoutSchema]
         // weight: Number,  // optional
         // height: Number,  // extra
         // age: Number      // data
@@ -78,6 +78,7 @@ exports.Workout = Workout;
 exports.finishedWorkout = FinishedWorkout;
 exports.currentWorkout = CurrentWorkout;
 exports.User = User;
+exports.userSchema = userSchema; // required for passport-local-mongoose in index.js
 exports.Post = Post;
 
 console.log("Schemas initialized and exported successfully");
