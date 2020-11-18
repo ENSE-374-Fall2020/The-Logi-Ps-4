@@ -1,124 +1,29 @@
-/* 
-    repeating teal: rgb(164, 255, 235)
-    repeating red/pink:  rgb(250, 168, 168)
 
-*/
-
-.navBar1 {
-    font-family: Arial, Helvetica, sans-serif;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
-    text-align: center;
-    background-color: rgb(164, 255, 235);
-    z-index: 10;
+:root {
+    --custom-blue: rgb(164, 211, 255);
+    --custom-bluer: rgb(53, 117, 255);
 }
 
-.navBar1 a {
-    padding: 18px 16px;
-    height: 60px;
-    width: 20%;
-    font-size: 20px;
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    transition-duration: 0.2s;
-}
-
-.navBar1 a.left {
-    float: left;
-}
-
-
-.navBar1 a:hover {
-    background-color:  rgb(250, 168, 168);
-    color: rgb(0, 0, 0);
-    transition-duration: 0.2s;
-}
-
-.navBar1 .dropdown1 {
-    float: right;
-    width: auto;
-    transition-duration: 0.2s;
-}
-
-.navBar1 .dropdown1 .dropdownButton1 {
-    float: right;
-    margin: 0;
-    width: 220px;
-    height: 60px;
-    padding: 16px 12px 18px 12px;
-    border: none;
-    outline: none;
-    transition-duration: 0.2s;
-    font-size: 20px;
-    background-color: rgb(255, 255, 255);
-    color:  rgb(250, 168, 168);
-}
-
-.navBar1 .dropdown1 .dropdownButton1:hover {
-    background-color: white;
-    color: rgb(250, 168, 168);
-    transition-duration: 0.2s;
-}
-
-.navBar1 .dropdown1 .dropdownContent1 {
-    position: absolute;
-    top: 60px;
-    right: 0;
-    overflow: visible;
-    width: auto;
-    display: none;
-    padding: 12px;
-    background-color:   rgb(250, 168, 168);
-}
-
-.navBar1 .dropdown1:hover .dropdownContent1 {
-    display: block;
-    float: right;
-    text-align: right;
-}
-
-.navBar1 .dropdown1 a, .dropdownContent1 button {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    margin: auto;
-    margin-top: 10px;
-    padding: 10px;
-    height: 40px;
-    font-size: 15px;
-    background-color: rgb(164, 255, 235);
-    color: rgb(0, 0, 0);
-    border: solid black 1px;
-    outline: solid black 1px ;
-    transition-duration: 0.2s;
-}
-
-.navBar1 .dropdown1 a, .dropdownContent1 th, td {
-    border: solid  rgb(164, 255, 235) 3px;
-    padding: 10px;
-    margin: auto;
-}
-.navBar1 .dropdown1  a, .dropdownContent1 h4 {
-    text-align: center;
-}
-
-.navBar1 .dropdown1 a:hover, .dropdownContent1 button:hover {
-    cursor: pointer;
-    background-color: white;
-    color:   rgb(250, 168, 168);
-    transition-duration: 0.2s;
-}
 
 
 .hide {
     display: none;
 }
 
+.title {
+    margin: 10px;
+    padding: 10px;
+    text-align: left;
+    border-bottom: var(--custom-bluer) 2px solid;
+}
+
+
 /*Main Page*/
+
+
+#loginAccordion {
+    width: 300px;
+}
 
 .center
 {
@@ -127,19 +32,8 @@
     padding: 15px;
 }
 html body{
-    background-color: rgb(225, 255, 247);
+    background-color: rgb(243, 243, 243);
 }
-
-.logo img{
-    width: 200px;
-    height:100px;
-    margin: auto;
-}
-.logo{
-    margin-right: 50%;
-    margin-left: 43%;
-}
-
 
 /* Buttons stuff */
 
@@ -189,7 +83,7 @@ html body{
     height: 50px;
     font-size: 20px;
     font-weight: 500;
-    background-color:  rgb(250, 168, 168);
+    background-color: var(--custom-bluer);
     color: rgb(0, 0, 0);
     border: solid rgb(0, 0, 0) 3px;
     transition-duration: 0.2s;
@@ -208,7 +102,7 @@ html body{
 
 .exercise .accordion .exercise-container .card
 {
-   background-color:   rgb(250, 168, 168); 
+   background-color:  var(--custom-bluer); 
    font-size: 25px;
    margin: 3%; 
 }
@@ -216,18 +110,18 @@ html body{
 .exercise .accordion .card-header button
 {
     font-size:25px;
-    background-color: rgb(250, 168, 168);
+    background-color:var(--custom-bluer);
      color: black;
      text-align: center;
 }
 .exercise .accordion .exercise-container .card a
 {
-   background-color: rgb(164, 255, 235);  
+   background-color:var(--custom-blue);  
    color: black;
 }
 
 .exercise .accordion .list-group-item{
-    background-color: rgb(164, 255, 235); 
+    background-color:var(--custom-blue); 
     font-size: 20px; 
     color: black;
 }
@@ -246,12 +140,12 @@ html body{
 
 .forum-container .card{
     width: 18rem;
-    background-color:  rgb(164, 255, 235);
+    background-color: var(--custom-blue);
     margin: 3%;
 }
 
 .forum-container .card .card-header{
-    color:   rgb(250, 168, 168);
+    color:  var(--custom-bluer);
 }
 
 /* Stuff for workout page */
@@ -262,7 +156,7 @@ html body{
 }
 
 .workout-container .card {
-    background-color:  rgb(250, 168, 168); 
+    background-color: var(--custom-bluer); 
     margin: 3%;
 }
 
@@ -271,7 +165,7 @@ html body{
 }
 
 .workout-container .card .card .card-header{
-    background-color:  rgb(164, 255, 235); 
+    background-color: var(--custom-blue); 
 }
 
 .workout-container .card .card .mb-0 button{
@@ -285,11 +179,126 @@ html body{
 
 .workout-container .card .center input{
     color: black;
-    background-color:  rgb(164, 255, 235);
+    background-color: var(--custom-blue);
 }
 
 /* Workout Builder Form */
 
-.set {
-    width: 200px;
+.setCard {
+    width: 240px;
+}
+
+.workoutCard {
+    width: 300px;
+}
+
+/* navBar */
+
+.navBar1 {
+    font-family: Arial, Helvetica, sans-serif;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    background-color:var(--custom-blue);
+    z-index: 10;
+}
+
+.navBar1 a {
+    padding: 18px 16px;
+    height: 60px;
+    width: 20%;
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+.navBar1 a.left {
+    float: left;
+}
+
+
+.navBar1 a:hover {
+    background-color: var(--custom-bluer);
+    color: rgb(0, 0, 0);
+    transition-duration: 0.2s;
+}
+
+.navBar1 .dropdown1 {
+    float: right;
+    width: auto;
+    transition-duration: 0.2s;
+}
+
+.navBar1 .dropdown1 .dropdownButton1 {
+    float: right;
+    margin: 0;
+    width: 220px;
+    height: 60px;
+    padding: 16px 12px 18px 12px;
+    border: none;
+    outline: none;
+    transition-duration: 0.2s;
+    font-size: 20px;
+    background-color: rgb(255, 255, 255);
+    color: var(--custom-bluer);
+}
+
+.navBar1 .dropdown1 .dropdownButton1:hover {
+    background-color: white;
+    color:var(--custom-bluer);
+    transition-duration: 0.2s;
+}
+
+.navBar1 .dropdown1 .dropdownContent1 {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    overflow: visible;
+    width: auto;
+    display: none;
+    padding: 12px;
+    background-color:  var(--custom-bluer);
+}
+
+.navBar1 .dropdown1:hover .dropdownContent1 {
+    display: block;
+    float: right;
+    text-align: right;
+}
+
+.navBar1 .dropdown1 a, .dropdownContent1 button {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: auto;
+    margin-top: 10px;
+    padding: 10px;
+    height: 40px;
+    font-size: 15px;
+    background-color:var(--custom-blue);
+    color: rgb(0, 0, 0);
+    border: solid black 1px;
+    outline: solid black 1px ;
+    transition-duration: 0.2s;
+}
+
+.navBar1 .dropdown1 a, .dropdownContent1 th, td {
+    border: solid var(--custom-blue) 3px;
+    padding: 10px;
+    margin: auto;
+}
+.navBar1 .dropdown1  a, .dropdownContent1 h4 {
+    text-align: center;
+}
+
+.navBar1 .dropdown1 a:hover, .dropdownContent1 button:hover {
+    cursor: pointer;
+    background-color: white;
+    color:  var(--custom-bluer);
+    transition-duration: 0.2s;
 }

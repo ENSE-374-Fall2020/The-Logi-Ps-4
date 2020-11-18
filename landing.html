@@ -50,7 +50,7 @@
     </div>
     </div>
     <br>
-    <h1 class="center"> Current Workouts </h1>
+    <h1 class="title"> Current Workouts </h1>
 
     <form action="/viewCompleted" method="post">
         <button type="submit" class="landing-button"> View completed </button>
@@ -67,84 +67,52 @@
         </form>
     </div>
 
-    <br>
-    <div class="workout-container">
-        <!-- dynamic number of columns: see stylesheet. repeat(4, 1fr), will always add 4 cards per row -->
 
+<!-- Responsive grid, articles will automatically wrap -->
+    <section id="workoutCardList" class="d-flex flex-wrap">
 
-        <!-- IMPORTANT NOTE: the number in the id's for line 82, 84, 87, 92, 93 will have to get rendered, this is what makes them open independently (1, 2, 3...) -->
+        <!--EJS :::: <article id="<%=workout.name%>Card" class="card workoutCard m-3">-->
+        <article id="workoutName1Card" class="card workoutCard m-3">
+            <!--EJS :::: <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse" data-target="#<%workout.name%>>SetsList"-->
+            <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse" data-target="#workoutName1SetsList"
+                aria-expanded="false" aria-controls="workoutName1SetsList">
+                    <h4>workout Name</h4>
+            </button>
 
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title"> Sprint Intervals </h5> <!-- pull data to get workout title -->
-
-
-                <div class="accordion" id="accordionExample1">
-                    <div class="card">
-                        <div class="card-header" id="heading1">
-                            <h2 class="mb-0">
-                                <button aria-expanded="false" class="btn btn-link btn-block text-left" type="button"
-                                    data-toggle="collapse" data-target="#collapse1" aria-controls="collapse1">
-                                    View Workout
-                                </button>
-                            </h2>
-                        </div>
-                        <div id="collapse1" class="collapse" aria-labelledby="heading1"
-                            data-parent="#accordionExample1">
-                            <div class="card-body">
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                            </div>
-                        </div>
-                    </div>
-                    <form class="center">
-                        <input type="submit" class="btn btn-primary" value="Workout Completed">
-                    </form>
+            <!--EJS :::: div id="<%=workout.name%>SetsList" class="collapse">-->
+            <div id="workoutName1SetsList" class="collapse">
+                <div class="card-body list-group">
+                    <ol>
+                        <li><span class="badge badge-secondary m-2">1km</span>Warm-up Jog</li>
+                        <li><span class="badge badge-secondary m-2">2km</span>Tempo Run</li>
+                    </ol>
                 </div>
             </div>
-        </div>
+            <button class="btn btn-success">
+                Mark Completed
+            </button>
+        </article>
 
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title"> Sprint Intervals </h5> <!-- pull data to get workout title -->
+        <article id="workoutName2Card" class="card workoutCard m-3">
+            <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse" data-target="#workoutName2SetsList"
+                aria-expanded="false" aria-controls="workoutName2SetsList">
+                    <h4>Tempo Run</h4>
+            </button>
 
-
-                <div class="accordion" id="accordionExample2">
-                    <div class="card">
-                        <div class="card-header" id="heading2">
-                            <h2 class="mb-0" style="justify-content: middle;">
-                                <button aria-expanded="false" class="btn btn-link btn-block text-left" type="button"
-                                    data-toggle="collapse" data-target="#collapse2" aria-controls="collapse2">
-                                    View Workout
-                                </button>
-                            </h2>
-                        </div>
-                        <div id="collapse2" class="collapse" aria-labelledby="heading2"
-                            data-parent="#accordionExample2">
-                            <div class="card-body">
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                                <li class="card-text">Render exercise here </li>
-                            </div>
-                        </div>
-                    </div>
-                    <form class="center">
-                        <input type="submit" class="btn btn-primary" value="Workout Completed">
-                    </form>
+            <div id="workoutName2SetsList" class="collapse">
+                <div class="card-body list-group">
+                    <ol>
+                        <li><span class="badge badge-secondary m-2">1km</span>Warm-up Jog</li>
+                        <li><span class="badge badge-secondary m-2">2km</span>Tempo Run</li>
+                    </ol>
                 </div>
             </div>
-        </div>
+            <button class="btn btn-success">
+                Mark Completed
+            </button>
+        </article>
 
-    </div>
+    </section>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
