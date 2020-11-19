@@ -1,0 +1,41 @@
+<div class="logo">
+    <img src="img/nike.png">
+    </div>
+    
+    <div class="navBar1">
+    <a class="left" href="/landing"> HOME</a>
+    <a class="left" href="/workouts"> WORKOUTS </a>
+    <a class="left" href="/exercises"> EXERCISES </a>
+    <a class="left" href="/forum"> COMMUNITY </a>
+    
+    <div class="dropdown1">
+        <button class="dropdownButton1">
+            <span>Sign Out </span>
+        </button>
+        <div class="dropdownContent1">
+            <input type="hidden" name="username" value="<%=username%>" /> <!-- replace value to get username from db-->
+            <h4> <%=username%> </h4>
+            <table>
+                <h4> Completed Workouts </h4>
+                <tr>
+                    <td>This week: </td>
+                    <td>This month: </td>
+                    <td>This year: </td>
+                </tr>
+                <tr>
+                    <!-- pull data from db here for completed workouts -->
+                    <% for (let workout of workouts){ %>
+                        <%if (workout.done === true){%>
+                        <!--Finished workouts-->
+                        <%- include ("partials/finishwork.ejs", {username: username, workout:workout})-%>
+                        <% } else { %>
+                        <% } %>
+                    <% } %>
+                </tr>
+            </table>
+            <form action="/logout" id="logout" method="post">
+                <button class="signout">Sign Out </button>
+            </form>
+        </div>
+    </div>
+    </div>
