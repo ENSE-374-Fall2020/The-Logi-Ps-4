@@ -36,15 +36,11 @@
 }
 
 .mainButton .innerButton {
-    border-bottom: solid green 1px;
+    border: solid green 1px;
+    border-radius: 8px;
     font-size: 20px;
     padding: 20px;
 }
-
-.noEffects {
-    text-decoration: none;
-}
-
 
 /*Main Page*/
 
