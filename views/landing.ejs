@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/e9a8538c89.js" crossorigin="anonymous"></script>
+
     <title>Landing Page</title>
 </head>
 
@@ -20,31 +23,67 @@
 
     <h1 class="title"> Current Workouts </h1>
 
-    <form action="/viewCompleted" method="post">
-        <button type="submit" class="landing-button"> View completed </button>
-    </form>
+    <section id="mainButtons" class="d-flex flex-wrap justify-content-around">
 
-    <div class="landing-buttons-container">
+        <article>
+            <form method="GET" action="/workouts">
+                <button type="submit" id="buttonBrowseWorkouts" class="mainButton">
+                    <div class="innerButton">
+                        <p>
+                            <i class="fas fa-search"></i>
+                            <b>Browse Community Workouts</b>
+                        </p>
+                        <p>
+                            Take a look at workouts others in the community have created
+                        </p>
+                    </div>
+                </button>
+            </form>
+        </article>
 
-        <form action="/workouts">
-            <button type="submit" id="one"> Add a workout </button>
-        </form>
+        <article>
+            <form method="GET" action="/workoutBuilder">
+                <button type="submit" id="buttonCreateWorkout" class="mainButton">
+                    <article>
+                        <div class="innerButton">
+                            <p>
+                                <i class="fas fa-dumbbell"></i>
+                                <b>Create New Workout</b>
+                            </p>
+                            <p>
+                                Build a workout from scratch
+                            </p>
+                        </div>
+                </button>
+            </form>
+        </article>
 
-        <form action="/workoutBuilder">
-            <button type="submit" id="two"> Create a workout </button>
-        </form>
-    </div>
+        <article>
+            <form method="GET" action="viewWorkouts">
+                <button type="submit" id="buttonViewWorkouts" class="mainButton">
+                    <div class="innerButton">
+                        <p>
+                            <i class="fas fa-tasks"></i>
+                            <b>View Completed Workouts</b>
+                        </p>
+                        <p>
+                            Take a look through all the workouts you've completed
+                        </p>
+                    </div>
+                </button>
+            </form>
+        </article>
+    </section>
 
-
-<!-- Responsive grid, articles will automatically wrap -->
+    <!-- Responsive grid, articles will automatically wrap -->
     <section id="workoutCardList" class="d-flex flex-wrap">
 
         <!--EJS :::: <article id="<%=//workout.name%>Card" class="card workoutCard m-3">-->
         <article id="workoutName1Card" class="card workoutCard m-3">
             <!--EJS :::: <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse" data-target="#<%=//workout.name%>SetsList"-->
-            <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse" data-target="#workoutName1SetsList"
-                aria-expanded="false" aria-controls="workoutName1SetsList">
-                    <h4>workout Name</h4>
+            <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse"
+                data-target="#workoutName1SetsList" aria-expanded="false" aria-controls="workoutName1SetsList">
+                <h4>workout Name</h4>
             </button>
 
             <!--EJS :::: div id="<%=//workout.name%>SetsList" class="collapse">-->
@@ -62,9 +101,9 @@
         </article>
 
         <article id="workoutName2Card" class="card workoutCard m-3">
-            <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse" data-target="#workoutName2SetsList"
-                aria-expanded="false" aria-controls="workoutName2SetsList">
-                    <h4>Tempo Run</h4>
+            <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse"
+                data-target="#workoutName2SetsList" aria-expanded="false" aria-controls="workoutName2SetsList">
+                <h4>Tempo Run</h4>
             </button>
 
             <div id="workoutName2SetsList" class="collapse">

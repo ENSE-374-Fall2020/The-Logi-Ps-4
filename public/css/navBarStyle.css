@@ -17,6 +17,34 @@
     border-bottom: var(--custom-bluer) 2px solid;
 }
 
+.mainButton {
+    background-color: inherit;
+    max-width: 360px;
+    border-radius: 6px;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    transition-duration: 0.3s;
+    border: none;
+}
+
+.mainButton:hover {
+    transition-duration: 0.3s;
+    margin: 4px 10px 16px 10px;
+    box-shadow: 10px 10px 20px grey;
+    cursor: pointer;
+}
+
+.mainButton .innerButton {
+    border-bottom: solid green 1px;
+    font-size: 20px;
+    padding: 20px;
+}
+
+.noEffects {
+    text-decoration: none;
+}
+
 
 /*Main Page*/
 
@@ -32,7 +60,7 @@
     padding: 15px;
 }
 html body{
-    background-color: rgb(243, 243, 243);
+    background-color: rgb(233, 233, 233);
 }
 
 /* Buttons stuff */
