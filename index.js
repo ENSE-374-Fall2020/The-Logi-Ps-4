@@ -106,3 +106,9 @@ app.get("/logout", function (request, response) {
 app.post("/logout", function (request, response) {
     response.redirect("/logout");
 })
+
+// Jacob is testing out some stuff...
+// just ignore this for now
+app.get("/chartExample", function (request, response) {
+    response.render("chartExample");
+})
