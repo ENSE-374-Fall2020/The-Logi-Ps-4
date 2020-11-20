@@ -1,0 +1,26 @@
+<article id="<%=work.name%>Card" class="card workoutCard m-3">
+           
+    <!--EJS :::: <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse" data-target="#<%=//workout.name%>>SetsList"-->
+    <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse"
+        data-target="#workoutName1SetsList" aria-expanded="false" aria-controls="workoutName1SetsList">
+        <h4><%=work.name%></h4>
+    </button>
+
+    <!--EJS :::: div id="<%=//workout.name%>SetsList" class="collapse">-->
+    <div id="<%=work.name%>SetsList" class="collapse">
+        <div class="card-body list-group">
+            <h5 class="text-center">Created By: <%=username%></h5>
+            <ol>
+                <% for (let item of items){ %>
+                    <%-include ("<li><span class="badge badge-secondary m-2"><%=work.distance%></span><%=exercise.name%></li>")-%>
+                    <% } %>
+                
+            </ol>
+        </div>
+    </div>
+        <%if (work.done === true){%>
+            <%- include ("<button class="btn btn-warning">Mark Completed</button>")-%>
+            <% } else { %>
+                <%- include ("<button class="btn btn-warning">Add to workouts</button>")-%>
+            <% } %>
+</article>
