@@ -1,0 +1,21 @@
+<article id="<%=exercise.id>" class="card setCard m-3">
+    <h4 class="card-title bg-primary text-light text-center p-2 m-2"><%=exercise.name%></h4>
+    <img class="card-img-top p-2" src="<%=exercise.image%>" alt="Card image cap" />
+    <div class="card-body bg-light">
+        <h5>Muscles Used:</h5>
+        <ul>
+            <li>
+                <% for (let muscle of muscles){ %>
+                <!--muscle groups-->
+                <%- include ("exercise.muscle", {muscle:muscle})-%>
+                <% } %>
+        </li>
+            
+        </ul>
+        <a href="<%=exercise.link%>">
+            <button class="btn btn-outline-info">
+                Demonstration
+            </button>
+        </a>
+    </div>
+</article>
