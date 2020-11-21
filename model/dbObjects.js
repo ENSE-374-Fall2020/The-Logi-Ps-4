@@ -12,7 +12,9 @@ const exerciseSchema = new mongoose.Schema(
         _id: Number,
         name: String,
         type: String,
+        imagePath: String,
         muscles: [String],
+        bodyPart: [String],
         tutorialURL: String
     });
 const Exercise = mongoose.model("Exercise", exerciseSchema);
