@@ -6,6 +6,7 @@
 
 const mongoose = require("mongoose");
 
+
 console.log("Initializing schemas...");
 const exerciseSchema = new mongoose.Schema(
     {
@@ -23,8 +24,9 @@ const setSchema = new mongoose.Schema(
     {
         _id: Number,
         exercise: String, // alternative: exercise_id: Number,
-        amount: Number,
-        duration: Number
+        repetitions: Number,
+        sets: Number,
+        duration: String
     });
 const Set = mongoose.model("Set", setSchema);
 
@@ -47,40 +49,29 @@ const FinishedWorkout = mongoose.model("FinishedWorkout", finishedWorkoutSchema)
 
 const currentWorkoutSchema = new mongoose.Schema(
     {
-        _id: Number,
+       // _id: Number,
         workout_id: Number
     });
 const CurrentWorkout = mongoose.model("CurrentWorkout", currentWorkoutSchema);
-
-const userSchema = new mongoose.Schema(
-    {
-        _id: Number,
-        username: String,
-        password: String,
-        currentWorkouts: [currentWorkoutSchema],
-        finishedWorkouts: [finishedWorkoutSchema]
-        // weight: Number,  // optional
-        // height: Number,  // extra
-        // age: Number      // data
-    });
-const User = mongoose.model("User", userSchema);
-
+/*
 const postSchema = new mongoose.Schema(
     {
         _id: Number,
-        user_id: Number,
+        creator: User,
         content: String,
+        title: String
         // date_posted: Date // replaceable with mongoDB getTimestamp() method
     });
 const Post = mongoose.model("Post", postSchema);
+*/
 
 exports.Exercise = Exercise;
 exports.Set = Set;
 exports.Workout = Workout;
 exports.finishedWorkout = FinishedWorkout;
+exports.finishedWorkoutSchema = finishedWorkoutSchema;
 exports.currentWorkout = CurrentWorkout;
-exports.User = User;
-exports.userSchema = userSchema; // required for passport-local-mongoose in index.js
-exports.Post = Post;
+exports.currentWorkoutSchema = currentWorkoutSchema;
+
 
 console.log("Schemas initialized and exported successfully");

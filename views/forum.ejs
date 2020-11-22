@@ -18,67 +18,18 @@
 
     <h1 class="center"> Community Forum </h1>
 
-    <form action="/addToForum" method="post">
+    <form action="/addToForum" method="get">
         <button type="submit" class="landing-button"> Add post to forum </button>
         </form>
 
-<div class="forum-container"> 
-
+<div class="forum-container">
     <div class="card">
-       <% for (let post of posts){ %>
-                        <%if (username === post.username){%>
-                        <!--Finished workouts-->
-                        <%- include ("partials/userspost.ejs", {username: username, post:post})-%>
-                        <% } else { %>
-
-                        <% } %>
-                    <% } %>
+      <% for (var i = 0; i < posts.length; i++) { %>
+          <%- include ("partials/userspost", {post:posts[i]})-%>
+       <% } %>
+       %>             
     </div>
-    <div class="card">
-        <div class="card-header"> USERNAME </div> <!-- pull user from db-->
-        <div class="card-body">
-          <h5 class="card-title"> Post Title </h5> <!-- pull post title from db-->
-          <p class="card-text"> Post content </p>
-          <div class="card-footer text-muted"> Date </div> <!-- pull date of post from db-->
-        </div>
-      </div>
-
-      <div class="card" >
-        <div class="card-header" > USERNAME </div> <!-- pull user from db-->
-        <div class="card-body">
-          <h5 class="card-title"> Post Title </h5> <!-- pull post title from db-->
-          <p class="card-text"> Post content </p>
-          <div class="card-footer text-muted"> Date </div> <!-- pull date of post from db-->
-        </div>
-      </div>
-
-      <div class="card" >
-        <div class="card-header" > USERNAME </div> <!-- pull user from db-->
-        <div class="card-body">
-          <h5 class="card-title"> Post Title </h5> <!-- pull post title from db-->
-          <p class="card-text"> Post content </p>
-          <div class="card-footer text-muted"> Date </div> <!-- pull date of post from db-->
-        </div>
-      </div>
-
-      <div class="card" >
-        <div class="card-header" > USERNAME </div> <!-- pull user from db-->
-        <div class="card-body">
-          <h5 class="card-title"> Post Title </h5> <!-- pull post title from db-->
-          <p class="card-text"> Post content </p>
-          <div class="card-footer text-muted"> Date </div> <!-- pull date of post from db-->
-        </div>
-      </div>
-
-      <div class="card" >
-        <div class="card-header" > USERNAME </div> <!-- pull user from db-->
-        <div class="card-body">
-          <h5 class="card-title"> Post Title </h5> <!-- pull post title from db-->
-          <p class="card-text"> Post content </p>
-          <div class="card-footer text-muted"> Date </div> <!-- pull date of post from db-->
-        </div>
-      </div>
-
+    
 </div>
 
 

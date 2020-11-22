@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-         <!-- Icons -->
+         
     <script src="https://kit.fontawesome.com/e9a8538c89.js" crossorigin="anonymous"></script>
 
     <title>Document</title>
@@ -40,77 +41,44 @@
         </article>
     </section>
 
-    <!-- Responsive grid, articles will automatically wrap -->
+    
     <section id="workoutCardList" class="d-flex flex-wrap">
 
-        <!--EJS :::: <article id="<%=//workout.name%>Card" class="card workoutCard m-3">-->
-        <article id="workoutName1Card" class="card workoutCard m-3">
-            <!--EJS :::: <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse" data-target="#<%=//workout.name%>>SetsList"-->
-            <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse"
-                data-target="#workoutName1SetsList" aria-expanded="false" aria-controls="workoutName1SetsList">
-                <h4>workout Name</h4>
+        <% for (var i = 0; i < workouts.length; i++) { %>
+
+       <article id="<%=workouts[i]._id%>" class="card workoutCard m-3">
+           <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse"
+                data-target="#workoutName<%=workouts[i]._id%>SetsList" aria-expanded="false" aria-controls="workoutName<%=workouts[i]._id%>SetsList">
+                <h4><%=workouts[i].name%></h4>
             </button>
 
-            <!--EJS :::: div id="<%=//workout.name%>SetsList" class="collapse">-->
-            <div id="workoutName1SetsList" class="collapse">
+           <div id="workoutName<%=workouts[i]._id%>SetsList" class="collapse">
                 <div class="card-body list-group">
-                    <h5 class="text-center">Created By: USERNAME</h5>
+                    <h5 class="text-center">Created By: <%=workouts[i].creator%></h5>
                     <ol>
-                        <li><span class="badge badge-secondary m-2">1km</span>Warm-up Jog</li>
-                        <li><span class="badge badge-secondary m-2">2km</span>Tempo Run</li>
-                    </ol>
-                </div>
-            </div>
-            <button class="btn btn-warning">
-                Add To Your Workouts
-            </button>
-        </article>
 
-        <article id="workoutName2Card" class="card workoutCard m-3">
-            <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse"
-                data-target="#workoutName2SetsList" aria-expanded="false" aria-controls="workoutName2SetsList">
-                <h4>Tempo Run</h4>
-            </button>
-
-            <div id="workoutName2SetsList" class="collapse">
-                <div class="card-body list-group">
-                    <h5 class="text-center">Created By: USERNAME</h5>
-                    <ol>
-                        <li><span class="badge badge-secondary m-2">1km</span>Warm-up Jog</li>
-                        <li><span class="badge badge-secondary m-2">2km</span>Tempo Run</li>
-                    </ol>
-                </div>
-            </div>
-            <button class="btn btn-warning">
-                Add To Your Workouts
-            </button>
-        </article>
-
-        <article id="workoutName3Card" class="card workoutCard m-3">
-            <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse"
-                data-target="#workoutName3SetsList" aria-expanded="false" aria-controls="workoutName3SetsList">
-                <h4>10 Minute Hustle</h4>
-            </button>
-
-            <div id="workoutName3SetsList" class="collapse">
-                <div class="card-body list-group">
-                    <h5 class="text-center">Created By: USERNAME</h5>
-                    <ol>
-                        <li><span class="badge badge-secondary m-2">4min</span>Hustle</li>
-                        <li><span class="badge badge-secondary m-2">min</span>Big Hustle</li>
-                        <li><span class="badge badge-secondary m-2">min</span>Little Hustle</li>
+                        <% for (var setNumber = 0; setNumber < workouts[i].sets.length; setNumber++) { %>
+                            <% if (workouts[i].sets[setNumber].repetitions != null && workouts[i].sets[setNumber].repetitions != "") { %>
+                        <li><span class="badge badge-secondary m-2"><%=workouts[i].sets[setNumber].sets%> sets x <%=workouts[i].sets[setNumber].repetitions%> reps </span><%=workouts[i].sets[setNumber].exercise%></li>
+                        <% } else if (workouts[i].sets[setNumber].sets != null && workouts[i].sets[setNumber].sets != "") { %>
+                        <li><span class="badge badge-secondary m-2"><%=workouts[i].sets[setNumber].sets%> sets of <%=workouts[i].sets[setNumber].duration%> </span><%=workouts[i].sets[setNumber].exercise%></li>
+                        <% } else { %>
+                            <li><span class="badge badge-secondary m-2"><%=workouts[i].sets[setNumber].duration%> </span><%=workouts[i].sets[setNumber].exercise%></li>
+                        <% } %>
+                        <% } %>
 
                     </ol>
                 </div>
             </div>
-            <button class="btn btn-warning">
-                Add To Your Workouts
-            </button>
+            <form action="/addWorkout" method="post">
+                <input type="hidden" name="workoutId" value="<%=workouts[i]._id%>" />
+                <input type="submit" class="btn btn-warning" value="Add To Your Workouts"/>
+            </form>
         </article>
+
+        <% } %>
 
     </section>
-
-
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -125,4 +93,4 @@
 
 </body>
 
-</html>
+</html> 

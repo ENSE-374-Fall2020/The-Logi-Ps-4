@@ -295,7 +295,7 @@ html body{
     text-align: right;
 }
 
-.navBar1 .dropdown1 a, .dropdownContent1 button {
+.navBar1 .dropdown1 a, .dropdownContent1 input {
     justify-content: center;
     align-items: center;
     display: flex;
@@ -320,9 +320,29 @@ html body{
     text-align: center;
 }
 
-.navBar1 .dropdown1 a:hover, .dropdownContent1 button:hover {
+.navBar1 .dropdown1 a:hover, .dropdownContent1 input:hover {
     cursor: pointer;
     background-color: white;
     color:  var(--custom-bluer);
     transition-duration: 0.2s;
+}
+
+
+#textboxid
+{
+    height:300px;
+    width:60%;
+    margin-left:20%;
+    margin-right:20%;
+    padding:20px;
+    text-align:center;
+}
+
+#postTitleid
+{
+    width:40%;
+    margin-left:30%;
+    margin-right:30%;
+    padding:20px;
+    text-align:center;
 }

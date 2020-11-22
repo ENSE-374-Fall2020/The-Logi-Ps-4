@@ -1,0 +1,61 @@
+
+
+       <article id="<%=workouts[i]._id%>" class="card workoutCard m-3">
+        <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse"
+             data-target="#workoutName<%=workouts[i]._id%>SetsList" aria-expanded="false" aria-controls="workoutName<%=workouts[i]._id%>SetsList">
+             <h4><%=workouts[i].name%></h4>
+         </button>
+
+        <div id="workoutName<%=workouts[i]._id%>SetsList" class="collapse">
+             <div class="card-body list-group">
+                 <h5 class="text-center">Created By: <%=workouts[i].creator%></h5>
+                 <ol>
+
+                     <% for (var setNumber = 0; setNumber < workouts[i].sets.length; setNumber++) { %>
+                         <% if (workouts[i].sets[setNumber].repetitions != null && workouts[i].sets[setNumber].repetitions != "") { %>
+                     <li><span class="badge badge-secondary m-2"><%=workouts[i].sets[setNumber].sets%> sets x <%=workouts[i].sets[setNumber].repetitions%> reps </span><%=workouts[i].sets[setNumber].exercise%></li>
+                     <% } else if (workouts[i].sets[setNumber].sets != null && workouts[i].sets[setNumber].sets != "") { %>
+                     <li><span class="badge badge-secondary m-2"><%=workouts[i].sets[setNumber].sets%> sets of <%=workouts[i].sets[setNumber].duration%> </span><%=workouts[i].sets[setNumber].exercise%></li>
+                     <% } else { %>
+                         <li><span class="badge badge-secondary m-2"><%=workouts[i].sets[setNumber].duration%> </span><%=workouts[i].sets[setNumber].exercise%></li>
+                     <% } %>
+                     <% } %>
+
+                 </ol>
+             </div>
+         </div>
+         <form action="/addWorkout" method="post">
+             <input type="hidden" name="workoutId" value="<%=workouts[i]._id%>" />
+             <input type="submit" class="btn btn-warning" value="Add To Your Workouts"/>
+         </form>
+     </article>
+
+
+
+<!--
+<article id="<%=work.name%>Card" class="card workoutCard m-3">
+           
+    EJS :::: <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse" data-target="#<%=//workout.name%>>SetsList"
+    <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse"
+        data-target="#workoutName1SetsList" aria-expanded="false" aria-controls="workoutName1SetsList">
+        <h4><%=work.name%></h4>
+    </button>
+
+    EJS :::: div id="<%=//workout.name%>SetsList" class="collapse">
+    <div id="<%=work.name%>SetsList" class="collapse">
+        <div class="card-body list-group">
+            <h5 class="text-center">Created By: <%=username%></h5>
+            <ol>
+                <% for (let item of items){ %>
+                    <%-include ("<li><span class="badge badge-secondary m-2"><%=work.distance%></span><%=exercise.name%></li>")-%>
+                    <% } %>
+                
+            </ol>
+        </div>
+    </div>
+        <%if (work.done === true){%>
+            <%- include ("<button class="btn btn-warning">Mark Completed</button>")-%>
+            <% } else { %>
+                <%- include ("<button class="btn btn-warning">Add to workouts</button>")-%>
+            <% } %>
+</article>-->
