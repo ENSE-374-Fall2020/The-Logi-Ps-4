@@ -11,8 +11,8 @@
         <div class="card-body list-group">
             <h5 class="text-center">Created By: <%=username%></h5>
             <ol>
-                <% for (let item of items){ %>
-                    <%-include ("<li><span class="badge badge-secondary m-2"><%=work.distance%></span><%=exercise.name%></li>")-%>
+                <% for (let item of items){
+                    <li><span class="badge badge-secondary m-2"><%=work.distance%></span><%=exercise.name%></li>);
                     <% } %>
                 
             </ol>

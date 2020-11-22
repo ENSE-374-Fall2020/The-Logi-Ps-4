@@ -27,10 +27,9 @@
     <div class="card">
        <% for (let post of posts){ %>
                         <%if (username === post.username){%>
-                        <!--Finished workouts-->
+                        <!--posts-->
                         <%- include ("partials/userspost.ejs", {username: username, post:post})-%>
                         <% } else { %>
-
                         <% } %>
                     <% } %>
     </div>

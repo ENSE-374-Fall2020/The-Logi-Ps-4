@@ -37,7 +37,7 @@
             <section id="setCardList" class="row d-flex flex-wrap">
 
                 <article id="set1Card" class="card setCard m-3">
-                    <h4 class="card-title bg-primary text-light text-center p-2 m-2">Set 1</h4>
+                    <h4 class="card-title bg-primary text-light text-center p-2 m-2"><%= set.number%></h4>
                     <img class="card-img-top p-2" src="img/squat.jpg" alt="Card image cap" />
 
                     <div class="card-body bg-light">
@@ -45,6 +45,7 @@
                         <select name="exercise" id="exercise" required>
                             <!--list to be populated by
                             exercises pulled from db-->
+                            <%- include ("exercises")-%>
                             <option value="squat">Squat</option>
                             <option value="legcurl">Leg Curl</option>
                         </select>
@@ -64,6 +65,7 @@
                         <select name="exercise" id="exercise" required>
                             <!--list to be populated by
                             exercises pulled from db-->
+                            <%- include ("exercises")-%>
                             <option value="squat">Squat</option>
                             <option value="legcurl">Leg Curl</option>
                         </select>
@@ -73,7 +75,14 @@
                         <input type="text" class="form-control" id="duration" name="duration" placeholder="N/A" />
                     </div>
                 </article>
-
+                <% for (let set of sets){ %>
+                    <%if (set.add === true){%>
+                    <!--creating sets and rests-->
+                    <%- include ("partials/set.ejs", {username: username})-%>
+                    <% } else if (rest.add === true) { %>
+                        <%- include ("partials/rest.ejs", {username: username}) -%>
+                    <% } %>
+                <% } %>
                 <article id="addSetCard" class="card setCard m-3">
                     <div class="card-body h-100">
                         <button class="btn btn-block btn-success p-3">

@@ -42,9 +42,12 @@
 
     <!-- Responsive grid, articles will automatically wrap -->
     <section id="workoutCardList" class="d-flex flex-wrap">
-
+        <% for (let work of works){ %>
+            <%-include("partials/work.ejs, {username:username, work:work}")-%>
+            <% } %>
         <!--EJS :::: <article id="<%=//workout.name%>Card" class="card workoutCard m-3">-->
         <article id="workoutName1Card" class="card workoutCard m-3">
+           
             <!--EJS :::: <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse" data-target="#<%=//workout.name%>>SetsList"-->
             <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse"
                 data-target="#workoutName1SetsList" aria-expanded="false" aria-controls="workoutName1SetsList">

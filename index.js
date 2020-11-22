@@ -69,15 +69,55 @@ app.get("/", function (request, response) {
 });
 
 app.get("/landing", function (request, response) {
-    response.render("landing");
+    let exampleUsername = "Billy";
+    // pass the set of workouts that belong to the current user
+    // User.currentWorkouts[];
+    // ORRRRRR
+    // just pass the user
+    let exampleWorkout = new Workout ({
+        _id: 40,
+        creator: "Billy",
+        name: "This workout was statically created in index.js",
+        sets: [
+            {
+                _id: 30,
+                exercise: "Squat",
+                amount: "100",
+                duration: "0"
+        }]
+    });
+    let exampleWorkoutList = [exampleWorkout];
+    response.render("landing", { username: exampleUsername, usersCurrentWorkouts: exampleWorkoutList});
 });
 
 app.get("/exercises", function (request, response) {
-    response.render("exercises");
+    let exampleUsername = "Billy";
+    let exampleExercise1 = new Exercise ({
+        _id: 1,
+        name: "Situp",
+        type: "strength",
+        muscles: ["Abs"],
+        bodyParts: ["Stomach"],
+        imagePath: "/img/LogiPs.png",
+        tutorialURL: "/"
+    });
+    let exampleExercise2 = new Exercise ({
+        _id: 2,
+        name: "Squat",
+        type: "strength",
+        muscles: ["Quadriceps", "Hamstrings"],
+        bodyParts: ["Legs", "Stomach"],
+        imagePath: "/img/exercises/squat.jpg",
+        tutorialURL: "/"
+    });
+    let allExercisesList = [exampleExercise1, exampleExercise2];
+    response.render("exercises", { username: exampleUsername, allExercisesList: allExercisesList});
 });
 
 app.get("/workouts", function (request, response) {
-    response.render("workouts");
+    // pass the set of all workouts that are mutually exclusive
+    // with all the workouts that belong to the current user
+    response.render("workouts", {});
 });
 
 app.get("/workoutBuilder", function (request, response) {

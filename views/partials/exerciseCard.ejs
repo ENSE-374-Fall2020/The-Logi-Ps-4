@@ -1,0 +1,25 @@
+<%
+// CURRENTLY NEVER CALLED
+
+// given an exercise from the database
+// create a single card for the exercise
+%>
+
+<article id="<%=exercise.name%>Card" class="card setCard m-3">
+    <h4 class="card-title bg-primary text-light text-center p-2 m-2"><%=exercise.name%></h4>
+    <img class="card-img-top p-2" src="<%=exercise.imagePath%>" alt="Card image cap" />
+    <div class="card-body bg-light">
+        <h5>Muscles Used:</h5>
+        <ul>
+            <% for (let muscle of exercise.muscles) { %>
+            <li><%=muscle%></li>
+            <% } %>
+
+        </ul>
+        <a href="<%=exercise.tutorialURL%>">
+            <button class="btn btn-outline-info">
+                Demonstration
+            </button>
+        </a>
+    </div>
+</article>
