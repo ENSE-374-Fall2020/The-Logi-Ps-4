@@ -18,17 +18,16 @@
 
     <h1 class="center"> Community Forum </h1>
 
-    <form action="/addToForum" method="get">
+    <form action="/addToForum" method="post">
+        <input type="hidden" name="numberOfPosts" value="<%=posts.length%>"/>
         <button type="submit" class="landing-button"> Add post to forum </button>
         </form>
 
 <div class="forum-container">
-    <div class="card">
       <% for (var i = 0; i < posts.length; i++) { %>
           <%- include ("partials/userspost", {post:posts[i]})-%>
        <% } %>
        %>             
-    </div>
     
 </div>
 

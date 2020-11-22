@@ -1,7 +1,8 @@
-    <span type="hidden" name="id" value="<%=post._id"%></span>
-    <div class="card-header"> <%=post.creator.username%> </div> <!-- pull user from db-->
+<div class="card">
+  <div class="card-header"> <%=post.creator.username%> </div> <!-- pull user from db-->
     <div class="card-body">
       <h5 class="card-title">  <%=post.title%> </h5> <!-- pull post title from db-->
       <p class="card-text"> <%=post.content%> </p>
       <div class="card-footer text-muted"> Date </div> <!-- pull date of post from db-->
     </div> 
+  </div>

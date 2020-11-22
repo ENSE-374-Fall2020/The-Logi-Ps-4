@@ -197,7 +197,7 @@ app.get("/workoutBuilder", function (request, response) {
     response.render("workoutBuilder");
 });
 
-//still doing thsi one
+
 app.get("/forum", function (request, response) {
     const forumList = [];
 
@@ -207,31 +207,35 @@ app.get("/forum", function (request, response) {
         } else {
             Posts.forEach((Post) => {
                 forumList.push(Post);
-            })
+            })       
         }
-    response.render("forum", {posts: forumList});
-
-    /*
-    let testPost = new Post ({
-        _id: 5,
-        user_id: 4,
-        content: "This is some dynamically generated post text!!"
-    });
-    response.render("forum", { username: "Big Bob", items: [] });
-    */
+        console.log(forumList.length);
+    response.render("forum", {posts: forumList}); 
+});
 });
 
+app.post("/addToForum", function(req, res){
+    console.log(req.body.numberOfPosts);
+    res.render("newPost", {numberOfPosts: req.body.numberOfPosts, username: req.user.username});
 });
 
-app.get("/addToForum", function(req, res){
-    res.render("newPost", {username: req.user.username});
-});
 
-/*
 app.post("/postIt", function(req, res){
- 
+ var postContent = req.body.postContent;
+ var postTitle = req.body.postTitle;
+ var creatorOfPost = req.user;
+ var id = req.body.postId++;
+
+ Post.create({
+     _id: id,
+     creator: creatorOfPost,
+     content: postContent,
+     title: postTitle
+ }, function(){
+     res.redirect("/forum");
+ })
 });
-*/
+
 
 
 
