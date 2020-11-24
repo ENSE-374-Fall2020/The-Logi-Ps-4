@@ -62,9 +62,10 @@
 
     
 -->
-        <% for (var workoutNumber = workouts.length - 1; workoutNumber >= 0; workoutNumber--) { %>
-            <%- include ("partials/work", {workouts: workouts, workoutNumber: workoutNumber})-%>
-        <% } %>
+
+<% for (let workout of allWorkouts) { %>
+    <%-include ("partials/workoutCard.ejs", {workout: workout, current: false}); -%>
+<% } %>
 
     </section>
 

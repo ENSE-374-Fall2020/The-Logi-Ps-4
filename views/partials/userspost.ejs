@@ -1,7 +1,7 @@
 <!-- Given: post object -->
 
 <div class="card">
-  <div class="card-header"> <%=post.creator.username%> </div> <!-- pull user from db-->
+  <div class="card-header"> <%=post.creator%> </div> <!-- pull user from db-->
     <div class="card-body">
       <h5 class="card-title">  <%=post.title%> </h5> <!-- pull post title from db-->
       <p class="card-text"> <%=post.content%> </p>

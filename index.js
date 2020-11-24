@@ -66,7 +66,7 @@ const User = mongoose.model("User", userSchema);
 const postSchema = new mongoose.Schema(
     {
         _id: Number,
-        creator: userSchema,
+        creator: String,
         content: String,
         title: String
         // date_posted: Date // replaceable with mongoDB getTimestamp() method
@@ -85,22 +85,12 @@ app.listen(port, function () {
     console.log("Server is running on port " + port);
 });
 
-app.post("/register", function (req, res) {
-    console.log("Registering a new user");
-    // calls a passport-local-mongoose function for registering new users
-    // expect an error if the user already exists!
-    User.register({ username: req.body.username }, req.body.password, function (err, user) {
-        if (err) {
-            console.log(err);
-            res.redirect("/")
-        } else {
-            // authenticate using passport-local
-            // what is this double function syntax?! It's called currying.
-            passport.authenticate("local")(req, res, function () {
-                res.redirect("/landing")
-            });
-        }
-    });
+app.get("/", function (request, response) {
+    response.redirect("/login");
+});
+
+app.get("/login", function (request, response) {
+    response.render("login");
 });
 
 app.post("/login", function (req, res) {
@@ -126,31 +116,26 @@ app.post("/login", function (req, res) {
     });
 });
 
+app.post("/register", function (req, res) {
+    console.log("Registering a new user");
+    // calls a passport-local-mongoose function for registering new users
+    User.register({ username: req.body.username }, req.body.password, function (err, user) {
+        if (err) {
+            console.log(err);
+            res.redirect("/")
+        } else {
+            // authenticate using passport-local
+            passport.authenticate("local")(req, res, function () {
+                res.redirect("/landing")
+            });
+        }
+    });
+});
+
 app.get("/logout", function (req, res) {
     console.log("A user logged out")
     req.logout();
     res.redirect("/");
-})
-
-// this function doesn't work, currentWorkouts is undefined
-app.post("/addWorkout", function (req, res) {
-    User.find(
-        { username: req.user.username },
-        function (err, result) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(result.currentWorkouts);
-                result.currentWorkouts.push({ workout_id: req.body.workoutId })
-
-                res.redirect("/landing");
-            }
-        });
-});
-
-
-app.get("/", function (request, response) {
-    response.redirect("/login");
 });
 
 app.get("/landing", function (request, response) {
@@ -174,6 +159,26 @@ app.get("/landing", function (request, response) {
     let exampleWorkoutList = [exampleWorkout];
     response.render("landing", { username: exampleUsername, usersCurrentWorkouts: exampleWorkoutList });
 });
+
+// this function doesn't work, currentWorkouts is undefined
+app.post("/addWorkout", function (req, res) {
+    User.find(
+        { username: req.user.username },
+        function (err, result) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(result.currentWorkouts);
+                result.currentWorkouts.push({ workout_id: req.body.workoutId })
+
+                res.redirect("/landing");
+            }
+        });
+});
+
+
+
+
 
 app.get("/exercises", function (request, response) {
 
@@ -205,7 +210,7 @@ app.get("/workouts", function (request, response) {
                 workoutList.push(Workout);
             })
         }
-        response.render("workouts", { workouts: workoutList });
+        response.render("workouts", { allWorkouts: workoutList });
     });
 });
 
@@ -256,15 +261,3 @@ app.post("/postIt", function (req, res) {
 
 
 
-app.get("/login", function (request, response) {
-    response.render("login");
-});
-
-app.get("/logout", function (request, response) {
-    // log user out
-    response.redirect("/login"); 
-});
-
-app.post("/logout", function (request, response) {
-    response.redirect("/logout");
-});
