@@ -90,163 +90,190 @@ app.get("/", function (request, response) {
 });
 
 app.get("/login", function (request, response) {
-    response.render("login");
+    if (request.isAuthenticated()) { // already logged in
+        response.redirect("/landing");
+    } else { // user not logged in
+        response.render("login");
+    }
 });
 
-app.post("/login", function (req, res) {
+app.post("/login", function (request, response) {
     console.log("A user is logging in")
     // create a user
     const user = new User({
-        username: req.body.username,
-        password: req.body.password
+        username: request.body.username,
+        password: request.body.password
     });
     // try to log them in
-    req.login(user, function (err) {
+    request.login(user, function (err) {
         if (err) {
             // failure
             console.log(err);
-            res.redirect("/")
+            response.redirect("/login")
         } else {
             // success
             // authenticate using passport-local
-            passport.authenticate("local")(req, res, function () {
-                res.redirect("/landing");
+            passport.authenticate("local")(request, response, function () {
+                response.redirect("/landing");
             });
         }
     });
 });
 
-app.post("/register", function (req, res) {
+app.post("/register", function (request, response) {
     console.log("Registering a new user");
     // calls a passport-local-mongoose function for registering new users
-    User.register({ username: req.body.username }, req.body.password, function (err, user) {
+    User.register({ username: request.body.username }, request.body.password, function (err, user) {
         if (err) {
             console.log(err);
-            res.redirect("/")
+            response.redirect("/login")
         } else {
             // authenticate using passport-local
-            passport.authenticate("local")(req, res, function () {
-                res.redirect("/landing")
+            passport.authenticate("local")(request, response, function () {
+                response.redirect("/landing")
             });
         }
     });
 });
 
-app.get("/logout", function (req, res) {
+app.get("/logout", function (request, response) {
     console.log("A user logged out")
-    req.logout();
-    res.redirect("/");
+    request.logout();
+    response.redirect("/login");
+});
+
+app.post("/logout", function (request, response) {
+    response.redirect("/logout");
 });
 
 app.get("/landing", function (request, response) {
-    let exampleUsername = "Billy";
-    // pass the set of workouts that belong to the current user
-    // User.currentWorkouts[];
-    // ORRRRRR
-    // just pass the user
-    let exampleWorkout = new Workout({
-        _id: 40,
-        creator: "Billy",
-        name: "This workout was statically created in index.js",
-        sets: [
-            {
-                _id: 30,
-                exercise: "Squat",
-                amount: "100",
-                duration: "0"
-            }]
-    });
-    let exampleWorkoutList = [exampleWorkout];
-    response.render("landing", { username: exampleUsername, usersCurrentWorkouts: exampleWorkoutList });
+    if (request.isAuthenticated()) {
+        let exampleUsername = "Billy";
+        // pass the set of workouts that belong to the current user
+        // User.currentWorkouts[];
+        // ORRRRRR
+        // just pass the user
+        let exampleWorkout = new Workout({
+            _id: 40,
+            creator: "Billy",
+            name: "This workout was statically created in index.js",
+            sets: [
+                {
+                    _id: 30,
+                    exercise: "Squat",
+                    amount: "100",
+                    duration: "0"
+                }]
+        });
+        let exampleWorkoutList = [exampleWorkout];
+        response.render("landing", { username: exampleUsername, usersCurrentWorkouts: exampleWorkoutList });
+    } else { // user not logged in
+        response.redirect("/login");
+    }
+
 });
 
 // this function doesn't work, currentWorkouts is undefined
-app.post("/addWorkout", function (req, res) {
-    User.find(
-        { username: req.user.username },
-        function (err, result) {
+app.post("/addWorkout", function (request, response) {
+    if (request.isAuthenticated()) {
+        User.find(
+            { username: request.user.username },
+            function (err, result) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log(result.currentWorkouts);
+                    result.currentWorkouts.push({ workout_id: request.body.workoutId })
+
+                    response.redirect("/landing");
+                }
+            });
+    } else { // user not logged in
+        response.redirect("/login");
+    }
+});
+
+app.get("/exercises", function (request, response) {
+    if (request.isAuthenticated()) {
+        const exerciseList = [];
+
+        Exercise.find({}, (err, Exercises) => {
             if (err) {
                 console.log(err);
             } else {
-                console.log(result.currentWorkouts);
-                result.currentWorkouts.push({ workout_id: req.body.workoutId })
+                Exercises.forEach((Exercise) => {
+                    exerciseList.push(Exercise);
+                })
+                console.log(exerciseList);
 
-                res.redirect("/landing");
             }
+            response.render("exercises", { exercises: exerciseList });
         });
-});
-
-
-
-
-
-app.get("/exercises", function (request, response) {
-
-    const exerciseList = [];
-
-    Exercise.find({}, (err, Exercises) => {
-        if (err) {
-            console.log(err);
-        } else {
-            Exercises.forEach((Exercise) => {
-                exerciseList.push(Exercise);
-            })
-            console.log(exerciseList);
-
-        }
-        response.render("exercises", { exercises: exerciseList });
-    });
+    } else { // user not logged in
+        response.redirect("/login");
+    }
 });
 
 app.get("/workouts", function (request, response) {
+    if (request.isAuthenticated()) {
+        const workoutList = [];
 
-    const workoutList = [];
-
-    Workout.find({}, (err, Workouts) => {
-        if (err) {
-            console.log(err);
-        } else {
-            Workouts.forEach((Workout) => {
-                workoutList.push(Workout);
-            })
-        }
-        response.render("workouts", { allWorkouts: workoutList });
-    });
+        Workout.find({}, (err, Workouts) => {
+            if (err) {
+                console.log(err);
+            } else {
+                Workouts.forEach((Workout) => {
+                    workoutList.push(Workout);
+                })
+            }
+            response.render("workouts", { allWorkouts: workoutList });
+        });
+    } else { // user not logged in
+        response.redirect("/login");
+    }
 });
 
 app.get("/workoutBuilder", function (request, response) {
-    response.render("workoutBuilder");
+    if (request.isAuthenticated()) {
+        response.render("workoutBuilder");
+    } else { // user not logged in
+        response.redirect("/login");
+    }
 });
 
 
 app.get("/forum", function (request, response) {
-    const forumList = [];
+    if (request.isAuthenticated()) {
+        const forumList = [];
 
-    Post.find({}, (err, Posts) => {
-        if (err) {
-            console.log(err);
-        } else {
-            Posts.forEach((Post) => {
-                forumList.push(Post);
-            })
-        }
-        console.log(forumList.length);
-        response.render("forum", { posts: forumList });
-    });
+        Post.find({}, (err, Posts) => {
+            if (err) {
+                console.log(err);
+            } else {
+                Posts.forEach((Post) => {
+                    forumList.push(Post);
+                })
+            }
+            console.log(forumList.length);
+            response.render("forum", { posts: forumList });
+        });
+    } else { // user not logged in
+        response.redirect("/login");
+    }
 });
 
-app.post("/addToForum", function (req, res) {
-    console.log(req.body.numberOfPosts);
+app.post("/addToForum", function (request, response) {
+    console.log(request.body.numberOfPosts);
     let exampleUsername = "Billy";
-    res.render("newPost", { numberOfPosts: req.body.numberOfPosts, username: req.user });
+    response.render("newPost", { numberOfPosts: request.body.numberOfPosts, username: request.user });
 });
 
 
-app.post("/postIt", function (req, res) {
-    var postContent = req.body.postContent;
-    var postTitle = req.body.postTitle;
-    var creatorOfPost = req.user;
-    var id = req.body.postId++;
+app.post("/postIt", function (request, response) {
+    var postContent = request.body.postContent;
+    var postTitle = request.body.postTitle;
+    var creatorOfPost = request.user;
+    var id = request.body.postId++;
 
     Post.create({
         _id: id,
@@ -254,7 +281,7 @@ app.post("/postIt", function (req, res) {
         content: postContent,
         title: postTitle
     }, function () {
-        res.redirect("/forum");
+        response.redirect("/forum");
     })
 });
 

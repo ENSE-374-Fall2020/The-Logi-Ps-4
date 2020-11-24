@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Login Page</title>
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="styles.css" />
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -14,20 +13,16 @@
 
 <body>
     <div class="jumbotron">
-        <div class="container">
-            <h1>Progress: Path To Success</h1>
-        </div>
-        
+        <h1 class="text-center m-3">Progress: Your Path To Success</h1>
+
         <div class="login">
             <div id="accordion">
                 <div class="card">
                     <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                Log In
-                            </button>
-                        </h5>
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            <h5 class="mb-0">Log In</h5>
+                        </button>
                     </div>
 
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
@@ -52,23 +47,21 @@
                 </div>
                 <div class="card">
                     <div class="card-header" id="headingTwo">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
-                                aria-expanded="false" aria-controls="collapseTwo">
-                                Sign Up
-                            </button>
-                        </h5>
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+                            <h5 class="mb-0">Sign Up</h5>
+                        </button>
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div class="card-body">
 
-                            <form class="form-signin text-center" method="POST" name ="registration" action="/register">
+                            <form class="form-signin text-center" method="POST" name="registration" action="/register">
                                 <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
                                 <label for="firstname" class="sr-only">Firstname</label>
                                 <input type="text" id="firstname" name="firstname" class="form-control"
                                     placeholder="Firstname" required autofocus>
                                 <label for="lastname" class="sr-only">Lastname</label>
-                                  <input type="text" id="lastname" name="lastname" class="form-control"
+                                <input type="text" id="lastname" name="lastname" class="form-control"
                                     placeholder="Lastname" required autofocus>
                                 <label for="email" class="sr-only">Username</label>
                                 <input type="username" id="username" name="username" class="form-control"
@@ -98,6 +91,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-</body> 
+</body>
 
 </html>
