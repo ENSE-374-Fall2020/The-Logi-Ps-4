@@ -22,10 +22,17 @@
         <input type="hidden" name="numberOfPosts" value="<%=posts.length%>"/>
         <button type="submit" class="landing-button"> Add post to forum </button>
         </form>
+<!-- idea: 
 
+    1. passed the array of posts from db, start at most recently added post
+    2. pass the post the ejs (contains title, user, content)
+
+    ISSUE: possible separation of concern issue given the creator is a whole user, not just a user_id
+    
+-->
 <div class="forum-container">
-      <% for (var i = 0; i < posts.length; i++) { %>
-          <%- include ("partials/userspost", {post:posts[i]})-%>
+      <% for (var postNumber = (posts.length - 1); postNumber >= 0; postNumber--) { %>
+          <%- include ("partials/userspost", {post:posts[postNumber]})-%>
        <% } %>
        %>             
     

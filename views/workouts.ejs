@@ -43,39 +43,27 @@
 
     
     <section id="workoutCardList" class="d-flex flex-wrap">
+<!-- idea: 
 
-        <% for (var i = 0; i < workouts.length; i++) { %>
+    1. passed the array of workouts from db
+    (array of workouts contain an array of sets -> we want to loop through the sets to output all of them)
+    2. start from the last workout added to the database (to output new -> old)
 
-       <article id="<%=workouts[i]._id%>" class="card workoutCard m-3">
-           <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse"
-                data-target="#workoutName<%=workouts[i]._id%>SetsList" aria-expanded="false" aria-controls="workoutName<%=workouts[i]._id%>SetsList">
-                <h4><%=workouts[i].name%></h4>
-            </button>
+    see work.ejs for rest of loop code
 
-           <div id="workoutName<%=workouts[i]._id%>SetsList" class="collapse">
-                <div class="card-body list-group">
-                    <h5 class="text-center">Created By: <%=workouts[i].creator%></h5>
-                    <ol>
+    3. loop through the sets of the workout
+       - if set DOES have reptitions, output sets x reps
+       - if set DOES NOT have repetitions but has sets and a duration, output sets of duration
+       -if set only has a duration, output duration
 
-                        <% for (var setNumber = 0; setNumber < workouts[i].sets.length; setNumber++) { %>
-                            <% if (workouts[i].sets[setNumber].repetitions != null && workouts[i].sets[setNumber].repetitions != "") { %>
-                        <li><span class="badge badge-secondary m-2"><%=workouts[i].sets[setNumber].sets%> sets x <%=workouts[i].sets[setNumber].repetitions%> reps </span><%=workouts[i].sets[setNumber].exercise%></li>
-                        <% } else if (workouts[i].sets[setNumber].sets != null && workouts[i].sets[setNumber].sets != "") { %>
-                        <li><span class="badge badge-secondary m-2"><%=workouts[i].sets[setNumber].sets%> sets of <%=workouts[i].sets[setNumber].duration%> </span><%=workouts[i].sets[setNumber].exercise%></li>
-                        <% } else { %>
-                            <li><span class="badge badge-secondary m-2"><%=workouts[i].sets[setNumber].duration%> </span><%=workouts[i].sets[setNumber].exercise%></li>
-                        <% } %>
-                        <% } %>
+    4. if user wants to add to his workout, pass the value of the workout id to the addWorkout route
 
-                    </ol>
-                </div>
-            </div>
-            <form action="/addWorkout" method="post">
-                <input type="hidden" name="workoutId" value="<%=workouts[i]._id%>" />
-                <input type="submit" class="btn btn-warning" value="Add To Your Workouts"/>
-            </form>
-        </article>
+    NOTE: May want to add a different button if workout already resides in users currentWorkouts (just an idea if time permits, don't have to)
 
+    
+-->
+        <% for (var workoutNumber = workouts.length - 1; workoutNumber >= 0; workoutNumber--) { %>
+            <%- include ("partials/work", {workouts: workouts, workoutNumber: workoutNumber})-%>
         <% } %>
 
     </section>

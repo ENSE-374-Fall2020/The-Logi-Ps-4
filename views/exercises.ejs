@@ -35,15 +35,22 @@
                             </button>
                         </h5>
                     </div>
+<!-- idea: 
+    comment: I realize this is not the most efficient way of doing this (loop needs to repeat each time -> lots of repeated work) but I'm not sure how to do it otherwise
+    1. passed in the array of exercises from the db
+    2. loop through the exercises bodyParts (bpNumber is short for bodyPartNumber)
+    3. if (ex) legs is in bodyParts array, show exercise name in legs side list (vice versa for all bodyParts)
 
+    * the side list exercises are linked to their card by exercise id
+-->
 
                     <div id="sideListLegsBody" class="collapse" aria-labelledby="sideListLegsHeader"
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
-                            <% for (var i = 0; i < exercises.length; i++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[i].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[i].bodyPart[bpNumber] === "legs") { %>
-                            <a class="list-group-item" href="#<%=exercises[i]._id%>"><%=exercises[i].name%></a>
+                            <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "legs") { %>
+                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -64,10 +71,10 @@
                     <div id="sideListArmsBody" class="collapse" aria-labelledby="sideListArmsHeader"
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
-                            <% for (var i = 0; i < exercises.length; i++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[i].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[i].bodyPart[bpNumber] === "arms") { %>
-                            <a class="list-group-item" href="#<%=exercises[i]._id%>"><%=exercises[i].name%></a>
+                            <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "arms") { %>
+                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -87,10 +94,10 @@
                     <div id="sideListAbsBody" class="collapse" aria-labelledby="sideListAbsHeader"
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
-                            <% for (var i = 0; i < exercises.length; i++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[i].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[i].bodyPart[bpNumber] === "abs") { %>
-                            <a class="list-group-item" href="#<%=exercises[i]._id%>"><%=exercises[i].name%></a>
+                            <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "abs") { %>
+                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -110,10 +117,10 @@
                     <div id="sideListBackBody" class="collapse" aria-labelledby="sideListBackHeader"
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
-                            <% for (var i = 0; i < exercises.length; i++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[i].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[i].bodyPart[bpNumber] === "back") { %>
-                            <a class="list-group-item" href="#<%=exercises[i]._id%>"><%=exercises[i].name%></a>
+                            <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "back") { %>
+                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -133,10 +140,10 @@
                     <div id="sideListShouldersBody" class="collapse" aria-labelledby="sideListShouldersHeader"
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
-                            <% for (var i = 0; i < exercises.length; i++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[i].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[i].bodyPart[bpNumber] === "shoulders") { %>
-                            <a class="list-group-item" href="#<%=exercises[i]._id%>"><%=exercises[i].name%></a>
+                            <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "shoulders") { %>
+                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -156,10 +163,10 @@
                     <div id="sideListChestBody" class="collapse" aria-labelledby="sideListChestHeader"
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
-                            <% for (var i = 0; i < exercises.length; i++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[i].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[i].bodyPart[bpNumber] === "chest") { %>
-                            <a class="list-group-item" href="#<%=exercises[i]._id%>"><%=exercises[i].name%></a>
+                            <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "chest") { %>
+                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -170,34 +177,27 @@
             </section>
 
 
-            <!--
-            <section id="exerciseSideList" class="col-sm-3 bg-light list-group">
-                <a class="list-group-item" href="#squatCard">Squat</a>
-                <a class="list-group-item " href="#list-item-12">Leg Curl</a>
-                <a class="list-group-item" href="#list-item-13">Wall Chair</a>
-                <a class="list-group-item" href="#pushupCard">Pushup</a>
-                <a class="list-group-item " href="#list-item-12">Pullup</a>
-                <a class="list-group-item" href="#list-item-13">Weight Curl</a>
-            </section>
-            -->
-
             <!-- End of side list section -->
 
             <!-- Container for all exercise cards -->
             <section id="exerciseCardList" class="col-md-9 d-flex flex-wrap">
-                <% for (var i = 0; i < exercises.length; i++) { %>
+                <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
 
-                <article id="<%=exercises[i]._id%>" class="card setCard m-3">
-                    <h4 class="card-title bg-primary text-light text-center p-2 m-2"><%=exercises[i].name%></h4>
+                <article id="<%=exercises[exerciseNumber]._id%>" class="card setCard m-3">
+                    <h4 class="card-title bg-primary text-light text-center p-2 m-2"><%=exercises[exerciseNumber].name%></h4>
                     <img class="card-img-top p-2" src="img/squat.jpg" alt="Card image cap" />
                     <div class="card-body bg-light">
                         <h5>Muscles Used:</h5>
                         <ul>
-                            <% for (var muscleNumber = 0; muscleNumber < exercises[i].muscles.length; muscleNumber++) { %>
-                            <li><%=exercises[i].muscles[muscleNumber]%></li>
+        <!-- idea: 
+            1. passed in the array of exercises from the db
+            2. loop through the exercises muscles and output in the list
+        -->
+                            <% for (var muscleNumber = 0; muscleNumber < exercises[exerciseNumber].muscles.length; muscleNumber++) { %>
+                            <li><%=exercises[exerciseNumber].muscles[muscleNumber]%></li>
                             <% } %>
                         </ul>
-                        <a href="<%=exercises[i].tutorialURL%>">
+                        <a href="<%=exercises[exerciseNumber].tutorialURL%>">
                             <button class="btn btn-outline-info">
                                 Demonstration
                             </button>
@@ -206,198 +206,10 @@
                 </article>
 
                 <% } %>
-<!-- 
-                <article id="legCurlCard" class="card setCard m-3">
-                    <h4 class="card-title bg-primary text-light text-center p-2 m-2">Leg Curl</h4>
-                    <img class="card-img-top p-2" src="img/legcurl.png" alt="Card image cap" />
-                    <div class="card-body bg-light">
-                        <h5>Muscles Used:</h5>
-                        <ul>
-                            <li>Quadricep</li>
-                            <li>Hamstring</li>
-                            <li>Some other muscle</li>
-                        </ul>
-                        <a href="someYoutubeVideo.com">
-                            <button class="btn btn-outline-info">
-                                Demonstration
-                            </button>
-                        </a>
-                    </div>
-                </article>
-
-                <article id="legCurlCard" class="card setCard m-3">
-                    <h4 class="card-title bg-primary text-light text-center p-2 m-2">Leg Curl</h4>
-                    <img class="card-img-top p-2" src="img/legcurl.png" alt="Card image cap" />
-                    <div class="card-body bg-light">
-                        <h5>Muscles Used:</h5>
-                        <ul>
-                            <li>Quadricep</li>
-                            <li>Hamstring</li>
-                        </ul>
-                        <a href="someYoutubeVideo.com">
-                            <button class="btn btn-outline-info">
-                                Demonstration
-                            </button>
-                        </a>
-                    </div>
-                </article>
-
-                <article id="legCurlCard" class="card setCard m-3">
-                    <h4 class="card-title bg-primary text-light text-center p-2 m-2">Leg Curl</h4>
-                    <img class="card-img-top p-2" src="img/legcurl.png" alt="Card image cap" />
-                    <div class="card-body bg-light">
-                        <h5>Muscles Used:</h5>
-                        <ul>
-                            <li>Quadricep</li>
-                            <li>Hamstring</li>
-                        </ul>
-                        <a href="someYoutubeVideo.com">
-                            <button class="btn btn-outline-info">
-                                Demonstration
-                            </button>
-                        </a>
-                    </div>
-                </article>
-
-                <article id="legCurlCard" class="card setCard m-3">
-                    <h4 class="card-title bg-primary text-light text-center p-2 m-2">Leg Curl</h4>
-                    <img class="card-img-top p-2" src="img/legcurl.png" alt="Card image cap" />
-                    <div class="card-body bg-light">
-                        <h5>Muscles Used:</h5>
-                        <ul>
-                            <li>Quadricep</li>
-                            <li>Hamstring</li>
-                        </ul>
-                        <a href="someYoutubeVideo.com">
-                            <button class="btn btn-outline-info">
-                                Demonstration
-                            </button>
-                        </a>
-                    </div>
-                </article>-->
             </section>
       </div>  
     </div>
 
-    <!--<h3 class="center"> LEGS </h3>
-
-    <div class="exercise">
-        <div class="accordion" id="accordionExample">
-
-            <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
-                        data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                        Legs
-                    </button>
-                </h2>
-
-
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-
-                    <div class="card-body">
-                        <div id="list-example" class="list-group">
-
-                            <br>
-                        </div>
-                        <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
-
-                            <div class="exercise-container">
-
-                                <div id="list-item-11" class="card" style="width: 18rem;">
-                                    <img src="img/squat.jpg" class="card-img-top" alt="Squat">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Squats</h5>
-                                        <p class="card-text">Short description on how to perform</p>
-                                        <a href="www.youtube.com" class="btn btn-primary">View tutorial</a>
-                                    </div>
-                                </div>
-
-
-                                <div id="list-item-12" class="card" style="width: 18rem;">
-                                    <img src="img/legcurl.png" class="card-img-top" alt="Squat">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Leg Curl</h5>
-                                        <p class="card-text">Short description on how to perform</p>
-                                        <a href="www.youtube.com" class="btn btn-primary">View tutorial</a>
-                                    </div>
-                                </div>
-
-                                <div id="list-item-13" class="card" style="width: 18rem;">
-                                    <img src="img/wallchair.png" class="card-img-top" alt="Squat">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Wall Chair </h5>
-                                        <p class="card-text">Short description on how to perform</p>
-                                        <a href="www.youtube.com" class="btn btn-primary">View tutorial</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="card-header" id="headingTwo">
-                <h2 class="mb-0">
-                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
-                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Stomach
-                    </button>
-                </h2>
-            </div>
-
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-
-                <div class="card-body">
-                    <div id="list-example" class="list-group">
-                        <a class="list-group-item" href="#list-item-21"> Squats </a>
-                        <a class="list-group-item" href="#list-item-22"> Leg Curl </a>
-                        <a class="list-group-item" href="#list-item-23"> Wall Chair</a>
-                        <br>
-                    </div>
-                    <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
-
-                        <div class="workout-container">
-
-                            <div id="list-item-21" class="card" style="width: 18rem;">
-                                <img src="img/squat.jpg" class="card-img-top" alt="Squat">
-                                <div class="card-body">
-                                    <h5 class="card-title">Squats</h5>
-                                    <p class="card-text">Short description on how to perform</p>
-                                    <a href="www.youtube.com" class="btn btn-primary">View tutorial</a>
-                                </div>
-                            </div>
-
-
-                            <div id="list-item-22" class="card" style="width: 18rem;">
-                                <img src="img/legcurl.png" class="card-img-top" alt="Squat">
-                                <div class="card-body">
-                                    <h5 class="card-title">Leg Curl</h5>
-                                    <p class="card-text">Short description on how to perform</p>
-                                    <a href="www.youtube.com" class="btn btn-primary">View tutorial</a>
-                                </div>
-                            </div>
-
-                            <div id="list-item-23" class="card" style="width: 18rem;">
-                                <img src="img/wallchair.png" class="card-img-top" alt="Squat">
-                                <div class="card-body">
-                                    <h5 class="card-title">Wall Chair </h5>
-                                    <p class="card-text">Short description on how to perform</p>
-                                    <a href="www.youtube.com" class="btn btn-primary">View tutorial</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
--->
 
 
 
