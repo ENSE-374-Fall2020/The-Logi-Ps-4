@@ -1,0 +1,32 @@
+<!-- required variables:
+    Workout workout
+    Boolean current
+-->
+
+<article id="Card<%=workout._id%>" class="card workoutCard m-3">
+    <button type="button" class="btn btn-primary bg-primary card-header" 
+    data-toggle="collapse" data-target="#WorkoutSetsList<%=workout._id%>">
+        <h4><%=workout.name%></h4>
+    </button>
+
+    <div id="WorkoutSetsList<%=workout._id%>" class="collapse">
+        <div class="card-body list-group">
+            <h5 class="text-center">Created By: <%=workout.creator%></h5>
+            <ol>
+                <% for (let set of workout.sets) { %>
+                <li><span class="badge badge-secondary m-2"><%
+                    if (set.amount) { // if an amount exists
+                        set.amount; // display the amount
+                    }
+                    %></span><%=set.exercise%></li>
+                <% } %>
+                <li><span class="badge badge-secondary m-2">2km</span>Tempo Run</li>
+            </ol>
+        </div>
+    </div>
+    <%  if (current) {  %>
+    <button id="complete<%=workout.id%>" class='btn btn-success'>Mark Completed</button>
+    <% } else { %>
+    <button id="add<%=workout.id%>" class='btn btn-success'>Add To Your Workouts</button>
+    <% } %>
+</article>

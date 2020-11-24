@@ -1,29 +1,31 @@
-<article id="<%=workouts[workoutNumber]._id%>" class="card workoutCard m-3">
-    <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse"
-         data-target="#workoutName<%=workouts[workoutNumber]._id%>SetsList" aria-expanded="false" aria-controls="workoutName<%=workouts[workoutNumber]._id%>SetsList">
-         <h4><%=workouts[workoutNumber].name%></h4>
-     </button>
 
-    <div id="workoutName<%=workouts[workoutNumber]._id%>SetsList" class="collapse">
-         <div class="card-body list-group">
-             <h5 class="text-center">Created By: <%=workouts[workoutNumber].creator%></h5>
-             <ol>
 
-                 <% for (var setNumber = 0; setNumber < workouts[workoutNumber].sets.length; setNumber++) { %>
-                     <% if (workouts[workoutNumber].sets[setNumber].repetitions != null && workouts[workoutNumber].sets[setNumber].repetitions != "") { %>
-                 <li><span class="badge badge-secondary m-2"><%=workouts[workoutNumber].sets[setNumber].sets%> sets x <%=workouts[workoutNumber].sets[setNumber].repetitions%> reps </span><%=workouts[workoutNumber].sets[setNumber].exercise%></li>
-                 <% } else if (workouts[workoutNumber].sets[setNumber].sets != null && workouts[workoutNumber].sets[setNumber].sets != "") { %>
-                 <li><span class="badge badge-secondary m-2"><%=workouts[workoutNumber].sets[setNumber].sets%> sets of <%=workouts[workoutNumber].sets[setNumber].duration%> </span><%=workouts[workoutNumber].sets[setNumber].exercise%></li>
-                 <% } else { %>
-                     <li><span class="badge badge-secondary m-2"><%=workouts[workoutNumber].sets[setNumber].duration%> </span><%=workouts[workoutNumber].sets[setNumber].exercise%></li>
-                 <% } %>
-                 <% } %>
-
-             </ol>
+     <article id="<%=workouts[workoutNumber]._id%>" class="card workoutCard m-3">
+        <button type="button" class="btn btn-outline-primary card-header" data-toggle="collapse"
+             data-target="#workoutName<%=workouts[workoutNumber]._id%>SetsList" aria-expanded="false" aria-controls="workoutName<%=workouts[workoutNumber]._id%>SetsList">
+             <h4><%=workouts[workoutNumber].name%></h4>
+         </button>
+    
+        <div id="workoutName<%=workouts[workoutNumber]._id%>SetsList" class="collapse">
+             <div class="card-body list-group">
+                 <h5 class="text-center">Created By: <%=workouts[workoutNumber].creator%></h5>
+                 <ol>
+    
+                     <% for (var setNumber = 0; setNumber < workouts[workoutNumber].sets.length; setNumber++) { %>
+                         <% if (workouts[workoutNumber].sets[setNumber].repetitions != null && workouts[workoutNumber].sets[setNumber].repetitions != "") { %>
+                     <li><span class="badge badge-secondary m-2"><%=workouts[workoutNumber].sets[setNumber].sets%> sets x <%=workouts[workoutNumber].sets[setNumber].repetitions%> reps </span><%=workouts[workoutNumber].sets[setNumber].exercise%></li>
+                     <% } else if (workouts[workoutNumber].sets[setNumber].sets != null && workouts[workoutNumber].sets[setNumber].sets != "") { %>
+                     <li><span class="badge badge-secondary m-2"><%=workouts[workoutNumber].sets[setNumber].sets%> sets of <%=workouts[workoutNumber].sets[setNumber].duration%> </span><%=workouts[workoutNumber].sets[setNumber].exercise%></li>
+                     <% } else { %>
+                         <li><span class="badge badge-secondary m-2"><%=workouts[workoutNumber].sets[setNumber].duration%> </span><%=workouts[workoutNumber].sets[setNumber].exercise%></li>
+                     <% } %>
+                     <% } %>
+    
+                 </ol>
+             </div>
          </div>
-     </div>
-     <form action="/addWorkout" method="post">
-         <input type="hidden" name="workoutId" value="<%=workouts[workoutNumber]._id%>" />
-         <input type="submit" class="btn btn-warning" value="Add To Your Workouts"/>
-     </form>
- </article>
+         <form action="/addWorkout" method="post">
+             <input type="hidden" name="workoutId" value="<%=workouts[workoutNumber]._id%>" />
+             <input type="submit" class="btn btn-warning" value="Add To Your Workouts"/>
+         </form>
+     </article>

@@ -19,9 +19,9 @@ const Exercise = dbObjects.Exercise;
 const Set = dbObjects.Set;
 const Workout = dbObjects.Workout;
 const FinishedWorkout = dbObjects.FinishedWorkout;
-const finishedWorkoutSchema =  dbObjects.finishedWorkoutSchema;
+const finishedWorkoutSchema = dbObjects.finishedWorkoutSchema;
 const CurrentWorkout = dbObjects.CurrentWorkout;
-const currentWorkoutSchema =  dbObjects.currentWorkoutSchema;
+const currentWorkoutSchema = dbObjects.currentWorkoutSchema;
 //const User = dbObjects.User;
 //const userSchema = dbObjects.userSchema;
 //const Post = dbObjects.Post;
@@ -49,29 +49,29 @@ mongoose.connect("mongodb://localhost:27017/testdb",
         useUnifiedTopology: true
     });
 
-    const userSchema = new mongoose.Schema(
-        {
-            username: String,
-            password: String,
-            currentWorkouts: [currentWorkoutSchema],
-            finishedWorkouts: [finishedWorkoutSchema]
-            // weight: Number,  // optional
-            // height: Number,  // extra
-            // age: Number      // data
-        });
+const userSchema = new mongoose.Schema(
+    {
+        username: String,
+        password: String,
+        currentWorkouts: [currentWorkoutSchema],
+        finishedWorkouts: [finishedWorkoutSchema]
+        // weight: Number,  // optional
+        // height: Number,  // extra
+        // age: Number      // data
+    });
 
-    userSchema.plugin(passportLocalMongoose);
-    const User = mongoose.model("User", userSchema);
+userSchema.plugin(passportLocalMongoose);
+const User = mongoose.model("User", userSchema);
 
-    const postSchema = new mongoose.Schema(
-        {
-            _id: Number,
-            creator: userSchema,
-            content: String,
-            title: String
-            // date_posted: Date // replaceable with mongoDB getTimestamp() method
-        });
-    const Post = mongoose.model("Post", postSchema);
+const postSchema = new mongoose.Schema(
+    {
+        _id: Number,
+        creator: userSchema,
+        content: String,
+        title: String
+        // date_posted: Date // replaceable with mongoDB getTimestamp() method
+    });
+const Post = mongoose.model("Post", postSchema);
 
 
 // create a strategy for storing users with Passport
@@ -81,37 +81,37 @@ passport.deserializeUser(User.deserializeUser());
 
 
 const port = 3000;
-app.listen(port, function() {
+app.listen(port, function () {
     console.log("Server is running on port " + port);
 });
 
-app.post("/register", function(req, res) {
+app.post("/register", function (req, res) {
     console.log("Registering a new user");
     // calls a passport-local-mongoose function for registering new users
     // expect an error if the user already exists!
-    User.register({username: req.body.username}, req.body.password, function(err, user){
+    User.register({ username: req.body.username }, req.body.password, function (err, user) {
         if (err) {
             console.log(err);
             res.redirect("/")
         } else {
             // authenticate using passport-local
             // what is this double function syntax?! It's called currying.
-            passport.authenticate("local")(req, res, function(){
+            passport.authenticate("local")(req, res, function () {
                 res.redirect("/landing")
             });
         }
     });
 });
 
-app.post("/login", function(req, res) {
+app.post("/login", function (req, res) {
     console.log("A user is logging in")
     // create a user
-    const user = new User ({
+    const user = new User({
         username: req.body.username,
         password: req.body.password
-     });
-     // try to log them in
-    req.login (user, function(err) {
+    });
+    // try to log them in
+    req.login(user, function (err) {
         if (err) {
             // failure
             console.log(err);
@@ -119,33 +119,33 @@ app.post("/login", function(req, res) {
         } else {
             // success
             // authenticate using passport-local
-            passport.authenticate("local")(req, res, function() {
-                res.redirect("/landing"); 
+            passport.authenticate("local")(req, res, function () {
+                res.redirect("/landing");
             });
         }
     });
 });
 
-app.get("/logout", function(req, res){
+app.get("/logout", function (req, res) {
     console.log("A user logged out")
     req.logout();
     res.redirect("/");
 })
 
 // this function doesn't work, currentWorkouts is undefined
-app.post("/addWorkout", function(req, res){
-      User.find(
-        {username: req.user.username},
-        function(err, result){
-        if (err) {
-           console.log(err);
-        } else {
-       console.log(result.currentWorkouts);
-        result.currentWorkouts.push({workout_id:req.body.workoutId})
-       
-       res.redirect("/landing");
-        }
-    });
+app.post("/addWorkout", function (req, res) {
+    User.find(
+        { username: req.user.username },
+        function (err, result) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(result.currentWorkouts);
+                result.currentWorkouts.push({ workout_id: req.body.workoutId })
+
+                res.redirect("/landing");
+            }
+        });
 });
 
 
@@ -154,11 +154,29 @@ app.get("/", function (request, response) {
 });
 
 app.get("/landing", function (request, response) {
-    response.render("landing");
+    let exampleUsername = "Billy";
+    // pass the set of workouts that belong to the current user
+    // User.currentWorkouts[];
+    // ORRRRRR
+    // just pass the user
+    let exampleWorkout = new Workout({
+        _id: 40,
+        creator: "Billy",
+        name: "This workout was statically created in index.js",
+        sets: [
+            {
+                _id: 30,
+                exercise: "Squat",
+                amount: "100",
+                duration: "0"
+            }]
+    });
+    let exampleWorkoutList = [exampleWorkout];
+    response.render("landing", { username: exampleUsername, usersCurrentWorkouts: exampleWorkoutList });
 });
 
 app.get("/exercises", function (request, response) {
-    
+
     const exerciseList = [];
 
     Exercise.find({}, (err, Exercises) => {
@@ -169,11 +187,10 @@ app.get("/exercises", function (request, response) {
                 exerciseList.push(Exercise);
             })
             console.log(exerciseList);
-            
+
         }
-    response.render("exercises", {exercises: exerciseList});
-});
-    
+        response.render("exercises", { exercises: exerciseList });
+    });
 });
 
 app.get("/workouts", function (request, response) {
@@ -188,9 +205,8 @@ app.get("/workouts", function (request, response) {
                 workoutList.push(Workout);
             })
         }
-    response.render("workouts", {workouts: workoutList});
-});
-
+        response.render("workouts", { workouts: workoutList });
+    });
 });
 
 app.get("/workoutBuilder", function (request, response) {
@@ -207,33 +223,34 @@ app.get("/forum", function (request, response) {
         } else {
             Posts.forEach((Post) => {
                 forumList.push(Post);
-            })       
+            })
         }
         console.log(forumList.length);
-    response.render("forum", {posts: forumList}); 
-});
+        response.render("forum", { posts: forumList });
+    });
 });
 
-app.post("/addToForum", function(req, res){
+app.post("/addToForum", function (req, res) {
     console.log(req.body.numberOfPosts);
-    res.render("newPost", {numberOfPosts: req.body.numberOfPosts, username: req.user.username});
+    let exampleUsername = "Billy";
+    res.render("newPost", { numberOfPosts: req.body.numberOfPosts, username: req.user });
 });
 
 
-app.post("/postIt", function(req, res){
- var postContent = req.body.postContent;
- var postTitle = req.body.postTitle;
- var creatorOfPost = req.user;
- var id = req.body.postId++;
+app.post("/postIt", function (req, res) {
+    var postContent = req.body.postContent;
+    var postTitle = req.body.postTitle;
+    var creatorOfPost = req.user;
+    var id = req.body.postId++;
 
- Post.create({
-     _id: id,
-     creator: creatorOfPost,
-     content: postContent,
-     title: postTitle
- }, function(){
-     res.redirect("/forum");
- })
+    Post.create({
+        _id: id,
+        creator: creatorOfPost,
+        content: postContent,
+        title: postTitle
+    }, function () {
+        res.redirect("/forum");
+    })
 });
 
 
@@ -245,9 +262,9 @@ app.get("/login", function (request, response) {
 
 app.get("/logout", function (request, response) {
     // log user out
-    response.redirect("/landing"); // TEMPORARY REDIRECTION
+    response.redirect("/login"); 
 });
 
 app.post("/logout", function (request, response) {
     response.redirect("/logout");
-})
+});

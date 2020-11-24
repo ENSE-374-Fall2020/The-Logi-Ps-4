@@ -18,7 +18,7 @@
 
 <body>
 
-  <%- include("navbar"); %>
+  <%- include("partials/navbar", {username: "Billy", finishedWorkouts: [undefined]}); -%>
 
 <br>
 <form action="/postIt" method="post">

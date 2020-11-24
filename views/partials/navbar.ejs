@@ -1,13 +1,13 @@
 <div class="logo">
     <img src="img/nike.png">
-    </div>
-    
-    <div class="navBar1">
+</div>
+
+<div class="navBar1">
     <a class="left" href="/landing"> HOME</a>
     <a class="left" href="/workouts"> WORKOUTS </a>
     <a class="left" href="/exercises"> EXERCISES </a>
     <a class="left" href="/forum"> COMMUNITY </a>
-    
+
     <div class="dropdown1">
         <button class="dropdownButton1">
             <span>Sign Out </span>
@@ -24,13 +24,16 @@
                 </tr>
                 <tr>
                     <!-- pull data from db here for completed workouts -->
-                    <% for (let workout of workouts){ %>
-                        <%if (workout.done === true){%>
-                        <!--Finished workouts-->
-                        <%- include ("partials/finishwork.ejs", {username: username, workout:workout})-%>
-                        <% } else { %>
-                        <% } %>
-                    <% } %>
+                    <% for (let workout of finishedWorkouts){ 
+                        // if (workout.done === true){ 
+                        // load finished workouts
+                        // **************************************
+                        // TODO: finishwork.ejs 
+                        // **************************************
+                        // include ("partials/finishwork.ejs", {username: username, workout:workout})
+                    // } else { 
+                    // } 
+                    } %>
                 </tr>
             </table>
             <form action="/logout" id="logout" method="post">
@@ -38,4 +41,4 @@
             </form>
         </div>
     </div>
-    </div>
+</div>

@@ -14,8 +14,7 @@
 
 <body>
 
-    <%- include("navbar"); %>
-
+    <%- include("partials/navbar", {username: "Billy", finishedWorkouts: [undefined]}); -%>
 
     <h1 class="title"> Exercises </h1>
 
@@ -48,8 +47,8 @@
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "legs") { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "legs") { %>
                             <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
@@ -72,8 +71,8 @@
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "arms") { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "arms") { %>
                             <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
@@ -95,8 +94,8 @@
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "abs") { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "abs") { %>
                             <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
@@ -118,8 +117,8 @@
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "back") { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "back") { %>
                             <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
@@ -141,8 +140,8 @@
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "shoulders") { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "shoulders") { %>
                             <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
@@ -164,8 +163,8 @@
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyPart.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyPart[bpNumber] === "chest") { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "chest") { %>
                             <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
@@ -180,31 +179,29 @@
             <!-- End of side list section -->
 
             <!-- Container for all exercise cards -->
-            <section id="exerciseCardList" class="col-md-9 d-flex flex-wrap">
-                <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
 
-                <article id="<%=exercises[exerciseNumber]._id%>" class="card setCard m-3">
-                    <h4 class="card-title bg-primary text-light text-center p-2 m-2"><%=exercises[exerciseNumber].name%></h4>
-                    <img class="card-img-top p-2" src="img/squat.jpg" alt="Card image cap" />
+            <section id="exerciseCardList" class="col-md-9 d-flex flex-wrap">
+                <% for (let exercise of exercises) {
+                // include ("partials/exerciseCard.ejs", {exercise: exercise});
+                %>
+                <article id="<%=exercise.name%>Card" class="card setCard m-3">
+                    <h4 class="card-title bg-primary text-light text-center p-2 m-2"><%=exercise.name%></h4>
+                    <img class="card-img-top p-2" src="<%=exercise.imagePath%>" alt="Card image cap" />
                     <div class="card-body bg-light">
                         <h5>Muscles Used:</h5>
                         <ul>
-        <!-- idea: 
-            1. passed in the array of exercises from the db
-            2. loop through the exercises muscles and output in the list
-        -->
-                            <% for (var muscleNumber = 0; muscleNumber < exercises[exerciseNumber].muscles.length; muscleNumber++) { %>
-                            <li><%=exercises[exerciseNumber].muscles[muscleNumber]%></li>
+                            <% for (let muscle of exercise.muscles) { %>
+                            <li><%=muscle%></li>
                             <% } %>
+
                         </ul>
-                        <a href="<%=exercises[exerciseNumber].tutorialURL%>">
+                        <a href="<%=exercise.tutorialURL%>">
                             <button class="btn btn-outline-info">
                                 Demonstration
                             </button>
                         </a>
                     </div>
                 </article>
-
                 <% } %>
             </section>
       </div>  

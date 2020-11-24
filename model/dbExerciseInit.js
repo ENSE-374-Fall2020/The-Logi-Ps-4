@@ -35,7 +35,7 @@ async function destroyExerciseCollection() {
         type: "strength",
         imagePath: "",
         muscles: ["abs"],
-        bodyPart: ["abs"],
+        bodyParts: ["abs"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise1.save();
@@ -44,9 +44,9 @@ async function destroyExerciseCollection() {
         _id: 2,
         name: "Squat",
         type: "strength",
-        imagePath: "",
+        imagePath: "img/exercises/squat.jpg",
         muscles: ["quadriceps", "glutes", "hamstrings", "abs"],
-        bodyPart: ["abs", "legs"],
+        bodyParts: ["abs", "legs"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise2.save();
@@ -57,7 +57,7 @@ async function destroyExerciseCollection() {
         type: "strength",
         imagePath: "",
         muscles: ["arms", "shoulders", "chest", "back"],
-        bodyPart: ["abs", "chest", "arms"],
+        bodyParts: ["abs", "chest", "arms"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise3.save();
@@ -68,7 +68,7 @@ async function destroyExerciseCollection() {
         type: "strength",
         imagePath: "",
         muscles: ["arms", "shoulders", "chest", "back"],
-        bodyPart: ["abs", "chest", "arms"],
+        bodyParts: ["abs", "chest", "arms"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise4.save();
@@ -79,7 +79,7 @@ async function destroyExerciseCollection() {
         type: "endurance",
         imagePath: "",
         muscles: ["legs"],
-        bodyPart: ["abs", "legs", "cardio"],
+        bodyParts: ["abs", "legs", "cardio"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise5.save();
@@ -90,7 +90,7 @@ async function destroyExerciseCollection() {
         type: "strength",
         imagePath: "",
         muscles: ["arms", "shoulders", "legs"],
-        bodyPart: ["abs", "legs", "cardio"],
+        bodyParts: ["abs", "legs", "cardio"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise6.save();
@@ -101,13 +101,13 @@ async function destroyExerciseCollection() {
         type: "endurance",
         imagePath: "",
         muscles: ["abs", "legs"],
-        bodyPart: ["abs", "legs", "cardio"],
+        bodyParts: ["abs", "legs", "cardio"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise7.save();
 
     const set1 = new Set({
-        _id: 1,
+        _id: 11,
         exercise: "Sprint",
         repetitions: 8,
         sets: 3
@@ -116,7 +116,7 @@ async function destroyExerciseCollection() {
     await set1.save();
 
     const set2 = new Set({
-        _id: 2,
+        _id: 12,
         exercise: "Downward Dog",
         duration: "45 seconds",
         sets: 3
@@ -125,7 +125,7 @@ async function destroyExerciseCollection() {
     await set2.save();
 
     const set3 = new Set({
-        _id: 3,
+        _id: 13,
         exercise: "Pushup",
         repetitions: 25,
         sets: 3
@@ -134,7 +134,7 @@ async function destroyExerciseCollection() {
     await set3.save();
 
     const set4 = new Set({
-        _id: 4,
+        _id: 14,
         exercise: "Run",
         duration: "2km"
     })
@@ -142,7 +142,7 @@ async function destroyExerciseCollection() {
     await set4.save();
 
     const workout1 = new Workout({
-        _id: 1,
+        _id: 21,
         name: "Full Body",
         sets: [set1, set2, set3]
     })
@@ -150,7 +150,7 @@ async function destroyExerciseCollection() {
     await workout1.save();
 
     const workout2 = new Workout({
-        _id: 2,
+        _id: 22,
         name: "Track & Field",
         sets: [set1, set2, set4]
     })
