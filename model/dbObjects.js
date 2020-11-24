@@ -53,17 +53,17 @@ const currentWorkoutSchema = new mongoose.Schema(
         workout_id: Number
     });
 const CurrentWorkout = mongoose.model("CurrentWorkout", currentWorkoutSchema);
-/*
+
 const postSchema = new mongoose.Schema(
     {
         _id: Number,
-        creator: User,
+        creator: String,
         content: String,
         title: String
         // date_posted: Date // replaceable with mongoDB getTimestamp() method
     });
 const Post = mongoose.model("Post", postSchema);
-*/
+
 
 exports.Exercise = Exercise;
 exports.Set = Set;
@@ -72,6 +72,7 @@ exports.finishedWorkout = FinishedWorkout;
 exports.finishedWorkoutSchema = finishedWorkoutSchema;
 exports.currentWorkout = CurrentWorkout;
 exports.currentWorkoutSchema = currentWorkoutSchema;
+exports.Post = Post;
 
 
 console.log("Schemas initialized and exported successfully");

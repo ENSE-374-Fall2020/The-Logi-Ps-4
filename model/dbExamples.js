@@ -7,7 +7,6 @@ const CurrentWorkout = dbObjects.CurrentWorkout;
 const User = dbObjects.User;
 const Post = dbObjects.Post;
 
-const { Db } = require("mongodb");
 const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/testdb",
     {

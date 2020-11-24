@@ -32,10 +32,11 @@
                     Sign Out
                 </a>
                 <div class="w3-dropdown-content w3-bar-block w3-border w3-card-4" style="right:0; text-align: center">
-                    <input type="hidden" name="username" value="bob123" /> <!-- replace value to get username from db-->
-                    <h4> NAME HERE </h4>
+                    <input type="hidden" name="username" value="<%=username%>" /> <!-- replace value to get username from db-->
+                    <h4> Logged in as: <%=username%> </h4>
+                    <hr>
                     <table>
-                        <h4> Completed Workouts </h4>
+                        <h5> Completed Workouts </h5>
                         <tr>
                             <td>This week: </td>
                             <td>This month: </td>

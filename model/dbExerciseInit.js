@@ -1,7 +1,5 @@
 // PURPOSE: clear and initialize list of all exercises
 
-// AUTHOR: Jacob Meyer
-
 const dbObjects = require(__dirname + "/dbObjects.js");
 const Exercise = dbObjects.Exercise;
 const Set = dbObjects.Set;
@@ -14,18 +12,18 @@ mongoose.connect("mongodb://localhost:27017/testdb",
         useUnifiedTopology: true
     });
 
-    console.log("connected to testdb");
+console.log("connected to testdb");
 
 async function destroyExerciseCollection() {
     // destroy existing collection of exercises
 
-    await Exercise.deleteMany({}, function(err) {
+    await Exercise.deleteMany({}, function (err) {
         if (err) console.log("Error in deleting existing collection");
         else console.log("Collection 'exercises' destroyed");
     });
 }
 
-    async function generateExerciseCollection() {
+async function generateExerciseCollection() {
     // generate new collection of static exercises
 
     console.log("Generating static list of exercises...");
@@ -106,59 +104,11 @@ async function destroyExerciseCollection() {
     });
     await exercise7.save();
 
-    const set1 = new Set({
-        _id: 11,
-        exercise: "Sprint",
-        repetitions: 8,
-        sets: 3
-    })
-
-    await set1.save();
-
-    const set2 = new Set({
-        _id: 12,
-        exercise: "Downward Dog",
-        duration: "45 seconds",
-        sets: 3
-    })
-
-    await set2.save();
-
-    const set3 = new Set({
-        _id: 13,
-        exercise: "Pushup",
-        repetitions: 25,
-        sets: 3
-    })
-
-    await set3.save();
-
-    const set4 = new Set({
-        _id: 14,
-        exercise: "Run",
-        duration: "2km"
-    })
-
-    await set4.save();
-
-    const workout1 = new Workout({
-        _id: 21,
-        name: "Full Body",
-        sets: [set1, set2, set3]
-    })
-
-    await workout1.save();
-
-    const workout2 = new Workout({
-        _id: 22,
-        name: "Track & Field",
-        sets: [set1, set2, set4]
-    })
-
-    await workout2.save();
-
     await mongoose.connection.close();
-    console.log("List created successfully");
+
+    
+
+    console.log("Exercise list created successfully");
 }
 
 destroyExerciseCollection();

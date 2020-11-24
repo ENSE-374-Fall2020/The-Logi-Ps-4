@@ -21,13 +21,12 @@
                     }
                     %></span><%=set.exercise%></li>
                 <% } %>
-                <li><span class="badge badge-secondary m-2">2km</span>Tempo Run</li>
             </ol>
         </div>
     </div>
     <%  if (current) {  %>
     <button id="complete<%=workout.id%>" class='btn btn-success'>Mark Completed</button>
     <% } else { %>
-    <button id="add<%=workout.id%>" class='btn btn-success'>Add To Your Workouts</button>
+    <button id="add<%=workout.id%>" class='btn btn-warning'>Add To Your Workouts</button>
     <% } %>
 </article>

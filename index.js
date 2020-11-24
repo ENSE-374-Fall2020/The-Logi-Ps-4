@@ -24,7 +24,7 @@ const CurrentWorkout = dbObjects.CurrentWorkout;
 const currentWorkoutSchema = dbObjects.currentWorkoutSchema;
 //const User = dbObjects.User;
 //const userSchema = dbObjects.userSchema;
-//const Post = dbObjects.Post;
+const Post = dbObjects.Post;
 
 // create and set up express.js app
 const app = express();
@@ -43,7 +43,7 @@ app.use(session({
 // set up passport
 app.use(passport.initialize());
 app.use(passport.session());
-mongoose.connect("mongodb://localhost:27017/testdb",
+mongoose.connect("mongodb://localhost:27017/progressDB",
     {
         useNewUrlParser: true, // these avoid MongoDB deprecation warnings
         useUnifiedTopology: true
@@ -63,6 +63,7 @@ const userSchema = new mongoose.Schema(
 userSchema.plugin(passportLocalMongoose);
 const User = mongoose.model("User", userSchema);
 
+/*
 const postSchema = new mongoose.Schema(
     {
         _id: Number,
@@ -72,7 +73,7 @@ const postSchema = new mongoose.Schema(
         // date_posted: Date // replaceable with mongoDB getTimestamp() method
     });
 const Post = mongoose.model("Post", postSchema);
-
+*/
 
 // create a strategy for storing users with Passport
 passport.use(User.createStrategy());
@@ -148,7 +149,6 @@ app.post("/logout", function (request, response) {
 
 app.get("/landing", function (request, response) {
     if (request.isAuthenticated()) {
-        let exampleUsername = "Billy";
         // pass the set of workouts that belong to the current user
         // User.currentWorkouts[];
         // ORRRRRR
@@ -166,7 +166,7 @@ app.get("/landing", function (request, response) {
                 }]
         });
         let exampleWorkoutList = [exampleWorkout];
-        response.render("landing", { username: exampleUsername, usersCurrentWorkouts: exampleWorkoutList });
+        response.render("landing", { username: request.user.username, usersCurrentWorkouts: exampleWorkoutList });
     } else { // user not logged in
         response.redirect("/login");
     }
@@ -263,26 +263,37 @@ app.get("/forum", function (request, response) {
 });
 
 app.post("/addToForum", function (request, response) {
-    console.log(request.body.numberOfPosts);
-    let exampleUsername = "Billy";
-    response.render("newPost", { numberOfPosts: request.body.numberOfPosts, username: request.user });
+    if (request.isAuthenticated()) {
+        console.log(request.body.numberOfPosts);
+        let exampleUsername = "Billy";
+        response.render("newPost", { numberOfPosts: request.body.numberOfPosts, username: request.user.username });
+    } else {
+        response.redirect("/login");
+    }
 });
 
 
 app.post("/postIt", function (request, response) {
     var postContent = request.body.postContent;
     var postTitle = request.body.postTitle;
-    var creatorOfPost = request.user;
+    var creatorOfPost = request.user.username;
     var id = request.body.postId++;
 
-    Post.create({
-        _id: id,
-        creator: creatorOfPost,
-        content: postContent,
-        title: postTitle
-    }, function () {
+    // if title or content are blank
+    if (postContent == "" || postContent == undefined
+        || postTitle == "" || postTitle == undefined) {
+            response.redirect(307, "/addToForum");
+
+    } else {
+        let newPost = new Post({
+            _id: id,
+            creator: creatorOfPost,
+            content: postContent,
+            title: postTitle
+        });
+        newPost.save();
         response.redirect("/forum");
-    })
+    }
 });
 
 
