@@ -168,49 +168,17 @@ app.post("/addWorkout", function (request, response) {
         console.log("request.user.username : " + request.user.username )
   
         User.findById(request.user._id, function(err, user) {
-            // use user.save() after???
+            if (err) {
+                console.log("Error adding workout to user");
+            } else {
+                user.currentWorkouts.push({ workout_id: request.body.workoutId });
+                console.log("user: "  + user);
+            }
+            user.save();
         });
-
         // THIS SHOULD CHANGE BUTTON TO MARK COMPLETE INSTEAD
         response.redirect("/landing"); 
-
-
         
-        /*
-        User.update(
-            { username: request.user.username },
-            { $push: { currentWorkouts: request.body._id } }
-        );      
-            =========================
-        let workoutId = Workout.findOne({ id: request._id }, (err, Workout) => {
-            if (err) {
-                console.log("Error in finding workout: " + err);
-            } else {
-
-            }
-        });
-        
-        // let UserToAdd = User.findOneAndUpdate({ username: request.user.username }, (err, UserToAdd) => {
-        User.findOneAndUpdate(
-            { username: request.user.username },
-            { $push: { currentWorkouts: workoutId } }
-        );
-
-        // request.user.currentWorkouts.push
-        =================================================
-        User.find(
-            { username: request.user.username },
-            function (err, result) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log(result.currentWorkouts);
-                    result.currentWorkouts.push({ workout_id: request.body.workoutId })
- 
-                    response.redirect("/landing");
-                }
-            });
-        */
     } else { // user not logged in
         response.redirect("/login");
     }

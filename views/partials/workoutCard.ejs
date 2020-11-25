@@ -25,11 +25,11 @@
         </div>
     </div>
     <%  if (current) {  %>
-    <button id="complete<%=workout.id%>" class='btn btn-success'>Mark Completed</button>
+    <button id="complete<%=workout.id%>" class='btn btn-success form-control'>Mark Completed</button>
     <% } else { %>
         <form action="/addWorkout" method="POST" class="w-100">
-            <input type="hidden" name="_id" value="<%=workout._id%>" />
-    <button type="submit" id="add<%=workout.id%>" class='btn btn-warning'>Add To Your Workouts</button>
+            <input type="hidden" name="workoutId" id="workoutId" value="<%=workout._id%>" />
+    <button type="submit" id="add<%=workout.id%>" class='btn btn-warning form-control'>Add To Your Workouts</button>
 </form>
     <% } %>
 </article>
