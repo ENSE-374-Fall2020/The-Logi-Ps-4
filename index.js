@@ -146,6 +146,7 @@ app.get("/landing", function (request, response) {
         // HOW TF DO ASYNC FUNCTIONS WORK
         // the issue is that the page is rendered without waiting
         // to find and populate the usersCurrentWorkouts array
+        /*
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error loading user's data");
             else {
@@ -168,6 +169,8 @@ app.get("/landing", function (request, response) {
                 // response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
             }
         });
+        */
+       response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
 
     } else { // user not logged in
         response.redirect("/login");
