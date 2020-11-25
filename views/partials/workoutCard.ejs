@@ -6,8 +6,8 @@
 <% console.log("Rendering workout: " + workout); 
     console.log("set list: " + workout.sets); %>
 <article id="Card<%=workout._id%>" class="card workoutCard m-3">
-    <button type="button" class="btn btn-primary bg-primary card-header" 
-    data-toggle="collapse" data-target="#WorkoutSetsList<%=workout._id%>">
+    <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse"
+        data-target="#WorkoutSetsList<%=workout._id%>">
         <h4><%=workout.name%></h4>
     </button>
 
@@ -16,11 +16,20 @@
             <h5 class="text-center">Created By: <%=workout.creator%></h5>
             <ol>
                 <% for (let set of workout.sets) { %>
-                <li><span class="badge badge-secondary m-2"><%
-                    if (set.amount) { // if an amount exists
-                        set.amount; // display the amount
-                    }
-                    %></span><%=set.exercise%></li>
+                <li><span class="badge badge-secondary m-2">
+                        <% if (set.sets) { /*if sets exists*/ %>
+                        <%=set.sets/*display sets*/%> sets of
+
+                        <% } if(set.repetitions) { /*if reps exist*/ %>
+                        <%=set.repetitions/*display reps*/%> reps of
+                        <% } %>
+
+                    </span><%=set.exercise/*ALWAYS display exercise name*/%>
+
+                    <% if (set.duration) { /*if duration exists*/ %>
+                    for <%=set.duration/*display duration*/%>
+                    <% } %>
+                </li>
                 <% } %>
             </ol>
         </div>
@@ -28,9 +37,9 @@
     <%  if (current) {  %>
     <button id="complete<%=workout.id%>" class='btn btn-success form-control'>Mark Completed</button>
     <% } else { %>
-        <form action="/addWorkout" method="POST" class="w-100">
-            <input type="hidden" name="workoutId" id="workoutId" value="<%=workout._id%>" />
-    <button type="submit" id="add<%=workout.id%>" class='btn btn-warning form-control'>Add To Your Workouts</button>
-</form>
+    <form action="/addWorkout" method="POST" class="w-100">
+        <input type="hidden" name="workoutId" id="workoutId" value="<%=workout._id%>" />
+        <button type="submit" id="add<%=workout.id%>" class='btn btn-warning form-control'>Add To Your Workouts</button>
+    </form>
     <% } %>
 </article>
