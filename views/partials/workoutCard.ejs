@@ -3,7 +3,8 @@
     Boolean current --- true: workout is from users current 
                         false: workout is from all workouts
 -->
-
+<% console.log("Rendering workout: " + workout); 
+    console.log("set list: " + workout.sets); %>
 <article id="Card<%=workout._id%>" class="card workoutCard m-3">
     <button type="button" class="btn btn-primary bg-primary card-header" 
     data-toggle="collapse" data-target="#WorkoutSetsList<%=workout._id%>">

@@ -138,24 +138,37 @@ app.post("/logout", function (request, response) {
 
 app.get("/landing", function (request, response) {
     if (request.isAuthenticated()) {
-        // pass the set of workouts that belong to the current user
-        // User.currentWorkouts[];
-        // ORRRRRR
-        // just pass the user
-        let exampleWorkout = new Workout({
-            _id: 40,
-            creator: "Billy",
-            name: "This workout was statically created in index.js",
-            sets: [
-                {
-                    _id: 30,
-                    exercise: "Squat",
-                    amount: "100",
-                    duration: "0"
-                }]
+
+        let usersCurrentWorkouts = [];
+        // load list of workouts from user's current workouts
+
+        // BUG ALERT
+        // HOW TF DO ASYNC FUNCTIONS WORK
+        // the issue is that the page is rendered without waiting
+        // to find and populate the usersCurrentWorkouts array
+        User.findById(request.user._id, function (err, user) {
+            if (err) console.log("Error loading user's data");
+            else {
+                console.log("loaded user " + user.username + " successfully")
+
+                for (let currentWorkout of user.currentWorkouts) {
+                    Workout.findById(currentWorkout.workout_id, function (err, workout) {
+
+                        if (err) console.log("Error loading workout by user's current workout ids");
+                        else {
+                            console.log("found: " + workout)
+                            usersCurrentWorkouts.push(workout);
+                            response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
+                        }
+                    });
+                    console.log("returned Workouts in loop: " + usersCurrentWorkouts);
+                }
+                console.log("returned Workouts out of loop: " + usersCurrentWorkouts);
+                // This is the CORRECT position of response.render...
+                // response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
+            }
         });
-        let exampleWorkoutList = [exampleWorkout];
-        response.render("landing", { username: request.user.username, usersCurrentWorkouts: exampleWorkoutList });
+
     } else { // user not logged in
         response.redirect("/login");
     }
@@ -165,20 +178,19 @@ app.get("/landing", function (request, response) {
 // this function doesn't work, currentWorkouts is undefined
 app.post("/addWorkout", function (request, response) {
     if (request.isAuthenticated()) {
-        console.log("request.user.username : " + request.user.username )
-  
-        User.findById(request.user._id, function(err, user) {
-            if (err) {
-                console.log("Error adding workout to user");
-            } else {
+        console.log("request.user.username : " + request.user.username)
+
+        User.findById(request.user._id, function (err, user) {
+            if (err) console.log("Error adding workout to user");
+            else {
                 user.currentWorkouts.push({ workout_id: request.body.workoutId });
-                console.log("user: "  + user);
+                console.log("user: " + user);
             }
             user.save();
         });
         // THIS SHOULD CHANGE BUTTON TO MARK COMPLETE INSTEAD
-        response.redirect("/landing"); 
-        
+        response.redirect("/landing");
+
     } else { // user not logged in
         response.redirect("/login");
     }

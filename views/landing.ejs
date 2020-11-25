@@ -78,7 +78,8 @@
     <!-- Responsive grid, articles will automatically wrap -->
     <section id="workoutCardList" class="d-flex flex-wrap">
 
-        <% for (let workout of usersCurrentWorkouts) { %>
+        <% for (let workout of usersCurrentWorkouts) { 
+            console.log("workout sets: " + workout.sets);%>
             <%-include ("partials/workoutCard.ejs", {workout: workout, current: true}); -%>
         <% } %>
         
