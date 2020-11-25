@@ -9,7 +9,8 @@ require("dotenv").config();
 // load passport-dependencies
 const session = require("express-session")
 const passport = require("passport")
-const passportLocalMongoose = require("passport-local-mongoose")
+const passportLocalMongoose = require("passport-local-mongoose");
+const { redirect } = require("statuses");
 
 // load database objects
 const dbObjects = require(__dirname + "/model/dbObjects.js");
@@ -62,18 +63,6 @@ const userSchema = new mongoose.Schema(
 
 userSchema.plugin(passportLocalMongoose);
 const User = mongoose.model("User", userSchema);
-
-/*
-const postSchema = new mongoose.Schema(
-    {
-        _id: Number,
-        creator: String,
-        content: String,
-        title: String
-        // date_posted: Date // replaceable with mongoDB getTimestamp() method
-    });
-const Post = mongoose.model("Post", postSchema);
-*/
 
 // create a strategy for storing users with Passport
 passport.use(User.createStrategy());
@@ -176,6 +165,39 @@ app.get("/landing", function (request, response) {
 // this function doesn't work, currentWorkouts is undefined
 app.post("/addWorkout", function (request, response) {
     if (request.isAuthenticated()) {
+        console.log("request.user.username : " + request.user.username )
+  
+        User.findById(request.user._id, function(err, user) {
+            // use user.save() after???
+        });
+
+        // THIS SHOULD CHANGE BUTTON TO MARK COMPLETE INSTEAD
+        response.redirect("/landing"); 
+
+
+        
+        /*
+        User.update(
+            { username: request.user.username },
+            { $push: { currentWorkouts: request.body._id } }
+        );      
+            =========================
+        let workoutId = Workout.findOne({ id: request._id }, (err, Workout) => {
+            if (err) {
+                console.log("Error in finding workout: " + err);
+            } else {
+
+            }
+        });
+        
+        // let UserToAdd = User.findOneAndUpdate({ username: request.user.username }, (err, UserToAdd) => {
+        User.findOneAndUpdate(
+            { username: request.user.username },
+            { $push: { currentWorkouts: workoutId } }
+        );
+
+        // request.user.currentWorkouts.push
+        =================================================
         User.find(
             { username: request.user.username },
             function (err, result) {
@@ -184,10 +206,11 @@ app.post("/addWorkout", function (request, response) {
                 } else {
                     console.log(result.currentWorkouts);
                     result.currentWorkouts.push({ workout_id: request.body.workoutId })
-
+ 
                     response.redirect("/landing");
                 }
             });
+        */
     } else { // user not logged in
         response.redirect("/login");
     }
@@ -282,7 +305,7 @@ app.post("/postIt", function (request, response) {
     // if title or content are blank
     if (postContent == "" || postContent == undefined
         || postTitle == "" || postTitle == undefined) {
-            response.redirect(307, "/addToForum");
+        response.redirect(307, "/addToForum");
 
     } else {
         let newPost = new Post({

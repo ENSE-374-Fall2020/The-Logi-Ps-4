@@ -8,14 +8,14 @@ const User = dbObjects.User;
 const Post = dbObjects.Post;
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/testdb",
+mongoose.connect("mongodb://localhost:27017/progressDB",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
 
 async function databaseCalls() {
-    console.log("connected to testdb");
+    console.log("connected to progressDB");
 
     const exercise1 = new Exercise({
         _id: 7,

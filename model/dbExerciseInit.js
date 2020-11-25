@@ -6,7 +6,7 @@ const Set = dbObjects.Set;
 const Workout = dbObjects.Workout;
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/testdb",
+mongoose.connect("mongodb://localhost:27017/progressDB",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true

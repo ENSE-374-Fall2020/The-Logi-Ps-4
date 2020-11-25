@@ -27,6 +27,9 @@
     <%  if (current) {  %>
     <button id="complete<%=workout.id%>" class='btn btn-success'>Mark Completed</button>
     <% } else { %>
-    <button id="add<%=workout.id%>" class='btn btn-warning'>Add To Your Workouts</button>
+        <form action="/addWorkout" method="POST" class="w-100">
+            <input type="hidden" name="_id" value="<%=workout._id%>" />
+    <button type="submit" id="add<%=workout.id%>" class='btn btn-warning'>Add To Your Workouts</button>
+</form>
     <% } %>
 </article>
