@@ -17,7 +17,7 @@
 
 <body>
 
-    <%- include("partials/navbar", {username: "Billy", finishedWorkouts: [undefined]}); %>
+    <%- include("navbar"); %>
 
     <br>
 
@@ -78,11 +78,47 @@
     <!-- Responsive grid, articles will automatically wrap -->
     <section id="workoutCardList" class="d-flex flex-wrap">
 
-        <% for (let workout of usersCurrentWorkouts) { 
-            console.log("workout sets: " + workout.sets);%>
-            <%-include ("partials/workoutCard.ejs", {workout: workout, current: true}); -%>
-        <% } %>
-        
+        <!--EJS :::: <article id="<%=//workout.name%>Card" class="card workoutCard m-3">-->
+        <article id="workoutName1Card" class="card workoutCard m-3">
+            <!--EJS :::: <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse" data-target="#<%=//workout.name%>SetsList"-->
+            <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse"
+                data-target="#workoutName1SetsList" aria-expanded="false" aria-controls="workoutName1SetsList">
+                <h4>workout Name</h4>
+            </button>
+
+            <!--EJS :::: div id="<%=//workout.name%>SetsList" class="collapse">-->
+            <div id="workoutName1SetsList" class="collapse">
+                <div class="card-body list-group">
+                    <ol>
+                        <li><span class="badge badge-secondary m-2">1km</span>Warm-up Jog</li>
+                        <li><span class="badge badge-secondary m-2">2km</span>Tempo Run</li>
+                    </ol>
+                </div>
+            </div>
+            <button class="btn btn-success">
+                Mark Completed
+            </button>
+        </article>
+
+        <article id="workoutName2Card" class="card workoutCard m-3">
+            <button type="button" class="btn btn-primary bg-primary card-header" data-toggle="collapse"
+                data-target="#workoutName2SetsList" aria-expanded="false" aria-controls="workoutName2SetsList">
+                <h4>Tempo Run</h4>
+            </button>
+
+            <div id="workoutName2SetsList" class="collapse">
+                <div class="card-body list-group">
+                    <ol>
+                        <li><span class="badge badge-secondary m-2">1km</span>Warm-up Jog</li>
+                        <li><span class="badge badge-secondary m-2">2km</span>Tempo Run</li>
+                    </ol>
+                </div>
+            </div>
+            <button class="btn btn-success">
+                Mark Completed
+            </button>
+        </article>
+
     </section>
 
 

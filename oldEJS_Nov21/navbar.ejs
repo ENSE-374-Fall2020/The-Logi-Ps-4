@@ -1,0 +1,98 @@
+<!-- <div class="logo">
+    <img src="img/nike.png">
+    </div>
+    
+    <div class="navBar1">
+    <a class="left" href="/landing"> HOME</a>
+    <a class="left" href="/workouts"> WORKOUTS </a>
+    <a class="left" href="/exercises"> EXERCISES </a>
+    <a class="left" href="/forum"> COMMUNITY </a>
+    
+    <div class="dropdown1">
+        <button class="dropdownButton1">
+            <span>Sign Out </span>
+        </button>
+        <div class="dropdownContent1">
+            <input type="hidden" name="username" value="bob123" /> <!-- replace value to get username from db
+            <h4> NAME HERE </h4>
+            <table>
+                <h4> Completed Workouts </h4>
+                <tr>
+                    <td>This week: </td>
+                    <td>This month: </td>
+                    <td>This year: </td>
+                </tr>
+                <tr>
+                    <!-- pull data from db here for completed workouts 
+                </tr>
+            </table>
+            <form action="/logout" id="logout" method="post">
+                <input type="submit" class="signout" value="Sign Out" />
+            </form>
+        </div>
+    </div>
+    </div> -->
+
+<!DOCTYPE html>
+<html>
+<title>Navigation bar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="/landing">HOME</a>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link"></a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/workouts">WORKOUTS</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"></a>
+          </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/exercises">EXERCISES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/forum">COMMUNITY</a>
+          </li>
+      </ul>
+      <div class="form-inline my-2 my-lg-0">
+        <div class="w3-dropdown-hover w3-right">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Sign Out
+            </a>
+            <div class="w3-dropdown-content w3-bar-block w3-border w3-card-4" style="right:0; text-align: center">
+                <input type="hidden" name="username" value="bob123" /> <!-- replace value to get username from db-->
+                <h4> NAME HERE </h4>
+                <table>
+                    <h4> Completed Workouts </h4>
+                    <tr>
+                        <td>This week: </td>
+                        <td>This month: </td>
+                        <td>This year: </td>
+                    </tr>
+                    <tr>
+                        <!-- pull data from db here for completed workouts--> 
+                    </tr>
+                </table>
+                <div class="dropdown-divider"></div>
+              <form action="/logout" id="logout" method="post">
+                <input type="submit" class="signout" value="Sign Out" />
+            </form>
+            </div>
+        </div>
+    </div>
+    </div>
+  </nav>
+</body>
+</html>
+
