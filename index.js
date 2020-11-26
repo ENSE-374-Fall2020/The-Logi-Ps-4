@@ -22,7 +22,7 @@ const Set = dbObjects.Set;
 const Workout = dbObjects.Workout;
 const FinishedWorkout = dbObjects.FinishedWorkout;
 const finishedWorkoutSchema = dbObjects.finishedWorkoutSchema;
-const CurrentWorkout = dbObjects.CurrentWorkout;
+const currentWorkout = dbObjects.currentWorkout;
 const currentWorkoutSchema = dbObjects.currentWorkoutSchema;
 //const User = dbObjects.User;
 //const userSchema = dbObjects.userSchema;
@@ -138,48 +138,41 @@ app.post("/logout", function (request, response) {
 });
 
 app.get("/landing", function (request, response) {
+
     if (request.isAuthenticated()) {
 
         let usersCurrentWorkouts = [];
-        // load list of workouts from user's current workouts
-
-        // BUG ALERT
-        // HOW TF DO ASYNC FUNCTIONS WORK
-        // the issue is that the page is rendered without waiting
-        // to find and populate the usersCurrentWorkouts array
 
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error loading user's data");
             else {
-                console.log("loaded user " + user.username + " successfully")
-
-                for (let currentWorkout of user.currentWorkouts) {
-                    Workout.findById(currentWorkout.workout_id, function (err, workout) {
-
-                        if (err) console.log("Error loading workout by user's current workout ids");
-                        else {
-                            // console.log("1found: " + workout)
-                            usersCurrentWorkouts.push(workout);
-                            // response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
+                async function getWorkouts() {
+                    try {
+                        for (let currentWorkout of user.currentWorkouts) {
+                            await Workout.findById(currentWorkout.workout_id, function (err, workout) {
+                                if (err) console.log("Error loading workout by user's current workout ids");
+                                else {
+                                    usersCurrentWorkouts.push(workout);
+                                }
+                            });
                         }
-                        // console.log("2returned Workouts in loop: " + usersCurrentWorkouts);
-                    });
+                    }
+                    finally {
+                        response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
+                    }
+
                 }
-                // console.log("3returned Workouts out of loop: " + usersCurrentWorkouts);
-                // This is the CORRECT position of response.render...
-                // response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
+                getWorkouts();
             }
         });
 
-        response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
-
-    } else { // user not logged in
+    }
+    else { // user not logged in
         response.redirect("/login");
     }
-
 });
 
-// this function doesn't work, currentWorkouts is undefined
+
 app.post("/addWorkout", function (request, response) {
     if (request.isAuthenticated()) {
         console.log("request.user.username : " + request.user.username)
@@ -187,13 +180,52 @@ app.post("/addWorkout", function (request, response) {
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error adding workout to user");
             else {
-                user.currentWorkouts.push({ workout_id: request.body.workoutId });
+                let workout = new currentWorkout({
+                    workout_id: request.body.workoutId
+                })
+                user.currentWorkouts.push(workout);
                 console.log("user: " + user);
             }
             user.save();
         });
         // THIS SHOULD CHANGE BUTTON TO MARK COMPLETE INSTEAD
         response.redirect("/landing");
+
+    } else { // user not logged in
+        response.redirect("/login");
+    }
+});
+
+app.post("/removeWorkout", function (request, response) {
+
+
+    if (request.isAuthenticated()) {
+        var user = request.user;
+        var workoutid = request.body.workoutId;
+        var workoutIdToRemove;
+        console.log(workoutid);
+
+        User.findById(request.user._id, function (err, user) {
+            if (err) console.log("Error loading user's data");
+            else {
+                console.log("loaded user " + user.username + " successfully")
+                async function getCurrentWorkouts() {
+                    try {
+                        for (let currentWorkout of user.currentWorkouts) {
+                            if (currentWorkout.workout_id == workoutid) {
+                                workoutIdToRemove = currentWorkout._id;
+                            }
+                        }
+                    }
+                    finally {
+                        user.currentWorkouts.pull({ _id: workoutIdToRemove });
+                        user.save();
+                        response.redirect("/landing");
+                    }
+                }
+                getCurrentWorkouts();
+            }
+        });
 
     } else { // user not logged in
         response.redirect("/login");
@@ -263,7 +295,6 @@ app.get("/workoutBuilder", function (request, response) {
 app.post("/buildWorkout", function (request, response) {
     if (request.isAuthenticated()) {
         console.log("index.js /buildWorkout received: " + JSON.stringify(request.body));
-        console.log("index.js /buildWorkout received: " + request.body.value);
 
         let newWorkout = request.body;
         let newWorkoutName = newWorkout.workoutName;
@@ -271,6 +302,9 @@ app.post("/buildWorkout", function (request, response) {
         let newSets = []; // populated in for loop
         let setPointer = 0;
 
+        // BUG: If workout only has 1 exercise, information is not passed in array form
+
+        // COMPLETE: if newWorkout.exercise !== array
         for (var setCount = 0; setCount < newWorkout.exercise.length; setCount++) {
             setPointer = new Set({
                 // _id: new ObjectId,
@@ -293,12 +327,18 @@ app.post("/buildWorkout", function (request, response) {
         });
         newWorkoutObject.save();
 
+        let newCurrentWorkout = new currentWorkout ({
+            workout_id: newWorkoutObject._id
+        })
+
         // add to users current workouts
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error adding workout to user");
             else {
-                user.currentWorkouts.push({ workout_id: newWorkoutObject._id });
-                console.log("pushed workout " + newWorkoutObject + "\nto user " + user.username + "'s currentWorkouts");
+                () => {
+                    user.currentWorkouts.push(newCurrentWorkout);
+                    console.log("pushed workout " + newWorkoutObject + "\nto user " + user.username + "'s currentWorkouts");
+                }
                 user.save();
             }
             console.log("Workout saved successfully");
