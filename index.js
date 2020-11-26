@@ -21,7 +21,7 @@ const Set = dbObjects.Set;
 const Workout = dbObjects.Workout;
 const FinishedWorkout = dbObjects.FinishedWorkout;
 const finishedWorkoutSchema = dbObjects.finishedWorkoutSchema;
-const CurrentWorkout = dbObjects.CurrentWorkout;
+const currentWorkout = dbObjects.currentWorkout;
 const currentWorkoutSchema = dbObjects.currentWorkoutSchema;
 //const User = dbObjects.User;
 //const userSchema = dbObjects.userSchema;
@@ -137,48 +137,41 @@ app.post("/logout", function (request, response) {
 });
 
 app.get("/landing", function (request, response) {
+
     if (request.isAuthenticated()) {
 
         let usersCurrentWorkouts = [];
-        // load list of workouts from user's current workouts
 
-        // BUG ALERT
-        // HOW TF DO ASYNC FUNCTIONS WORK
-        // the issue is that the page is rendered without waiting
-        // to find and populate the usersCurrentWorkouts array
-        /*
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error loading user's data");
             else {
-                console.log("loaded user " + user.username + " successfully")
-
-                for (let currentWorkout of user.currentWorkouts) {
-                    Workout.findById(currentWorkout.workout_id, function (err, workout) {
-
-                        if (err) console.log("Error loading workout by user's current workout ids");
-                        else {
-                            console.log("found: " + workout)
-                            usersCurrentWorkouts.push(workout);
-                            response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
+                async function getWorkouts() {
+                    try {
+                        for (let currentWorkout of user.currentWorkouts) {
+                            await Workout.findById(currentWorkout.workout_id, function (err, workout) {
+                                if (err) console.log("Error loading workout by user's current workout ids");
+                                else {
+                                    usersCurrentWorkouts.push(workout);
+                                }
+                            });
                         }
-                    });
-                    console.log("returned Workouts in loop: " + usersCurrentWorkouts);
+                    }
+                    finally {
+                        response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
+                    }
+
                 }
-                console.log("returned Workouts out of loop: " + usersCurrentWorkouts);
-                // This is the CORRECT position of response.render...
-                // response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
+                getWorkouts();
             }
         });
-        */
-       response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
 
-    } else { // user not logged in
+    }
+    else { // user not logged in
         response.redirect("/login");
     }
-
 });
 
-// this function doesn't work, currentWorkouts is undefined
+
 app.post("/addWorkout", function (request, response) {
     if (request.isAuthenticated()) {
         console.log("request.user.username : " + request.user.username)
@@ -186,7 +179,10 @@ app.post("/addWorkout", function (request, response) {
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error adding workout to user");
             else {
-                user.currentWorkouts.push({ workout_id: request.body.workoutId });
+                let workout = new currentWorkout({
+                    workout_id: request.body.workoutId
+                })
+                user.currentWorkouts.push(workout);
                 console.log("user: " + user);
             }
             user.save();
@@ -197,6 +193,42 @@ app.post("/addWorkout", function (request, response) {
     } else { // user not logged in
         response.redirect("/login");
     }
+});
+
+app.post("/removeWorkout", function (request, response) {
+
+
+    if (request.isAuthenticated()) {
+        var user = request.user;
+        var workoutid = request.body.workoutId;
+        var workoutIdToRemove;
+        console.log(workoutid);
+
+        User.findById(request.user._id, function (err, user) {
+            if (err) console.log("Error loading user's data");
+            else {
+                console.log("loaded user " + user.username + " successfully")
+                async function getCurrentWorkouts() {
+                    try {
+                        for (let currentWorkout of user.currentWorkouts) {
+                                if (currentWorkout.workout_id == workoutid) {
+                                    workoutIdToRemove = currentWorkout._id;
+                                }
+                                }
+                        }
+                    finally {
+                        user.currentWorkouts.pull({_id: workoutIdToRemove});
+                        user.save();
+                            response.redirect("/landing");
+                    }
+                }
+                getCurrentWorkouts();
+            }
+        });
+
+    } else { // user not logged in
+    response.redirect("/login");
+}
 });
 
 app.get("/exercises", function (request, response) {
