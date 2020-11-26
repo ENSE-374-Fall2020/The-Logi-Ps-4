@@ -11,6 +11,7 @@ const session = require("express-session")
 const passport = require("passport")
 const passportLocalMongoose = require("passport-local-mongoose");
 const { redirect } = require("statuses");
+const { ObjectId } = require("bson");
 
 // load database objects
 const dbObjects = require(__dirname + "/model/dbObjects.js");
@@ -146,7 +147,7 @@ app.get("/landing", function (request, response) {
         // HOW TF DO ASYNC FUNCTIONS WORK
         // the issue is that the page is rendered without waiting
         // to find and populate the usersCurrentWorkouts array
-        /*
+
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error loading user's data");
             else {
@@ -157,20 +158,20 @@ app.get("/landing", function (request, response) {
 
                         if (err) console.log("Error loading workout by user's current workout ids");
                         else {
-                            console.log("found: " + workout)
+                            // console.log("1found: " + workout)
                             usersCurrentWorkouts.push(workout);
-                            response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
+                            // response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
                         }
+                        // console.log("2returned Workouts in loop: " + usersCurrentWorkouts);
                     });
-                    console.log("returned Workouts in loop: " + usersCurrentWorkouts);
                 }
-                console.log("returned Workouts out of loop: " + usersCurrentWorkouts);
+                // console.log("3returned Workouts out of loop: " + usersCurrentWorkouts);
                 // This is the CORRECT position of response.render...
                 // response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
             }
         });
-        */
-       response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
+
+        response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
 
     } else { // user not logged in
         response.redirect("/login");
@@ -210,7 +211,7 @@ app.get("/exercises", function (request, response) {
                 Exercises.forEach((Exercise) => {
                     exerciseList.push(Exercise);
                 })
-                console.log(exerciseList);
+                // console.log(exerciseList);
 
             }
             response.render("exercises", { exercises: exerciseList });
@@ -230,7 +231,7 @@ app.get("/workouts", function (request, response) {
             } else {
                 Workouts.forEach((Workout) => {
                     workoutList.push(Workout);
-                })
+                });
             }
             response.render("workouts", { allWorkouts: workoutList });
         });
@@ -241,7 +242,70 @@ app.get("/workouts", function (request, response) {
 
 app.get("/workoutBuilder", function (request, response) {
     if (request.isAuthenticated()) {
-        response.render("workoutBuilder");
+        const exerciseList = [];
+
+        Exercise.find({}, (err, Exercises) => {
+            if (err) {
+                console.log(err);
+            } else {
+                Exercises.forEach((Exercise) => {
+                    exerciseList.push(Exercise);
+                });
+                // console.log(exerciseList);
+            }
+            response.render("workoutBuilder", { exerciseList: exerciseList });
+        });
+    } else { // user not logged in
+        response.redirect("/login");
+    }
+});
+
+app.post("/buildWorkout", function (request, response) {
+    if (request.isAuthenticated()) {
+        console.log("index.js /buildWorkout received: " + JSON.stringify(request.body));
+        console.log("index.js /buildWorkout received: " + request.body.value);
+
+        let newWorkout = request.body;
+        let newWorkoutName = newWorkout.workoutName;
+        console.log("new Workout Name: " + newWorkoutName);
+        let newSets = []; // populated in for loop
+        let setPointer = 0;
+
+        for (var setCount = 0; setCount < newWorkout.exercise.length; setCount++) {
+            setPointer = new Set({
+                // _id: new ObjectId,
+                exercise: newWorkout.exercise[setCount],
+                sets: newWorkout.sets[setCount],
+                repetitions: newWorkout.repetitions[setCount],
+                duration: newWorkout.duration[setCount]
+            });
+            // setPointer.save();
+            newSets.push(setPointer);
+            console.log("iteration " + setCount + setPointer);
+        }
+        console.log("newSets after iterating: " + newSets);
+
+        let newWorkoutObject = new Workout({
+            // _id: new ObjectId,
+            creator: request.user.username,
+            name: newWorkoutName,
+            sets: newSets
+        });
+        newWorkoutObject.save();
+
+        // add to users current workouts
+        User.findById(request.user._id, function (err, user) {
+            if (err) console.log("Error adding workout to user");
+            else {
+                user.currentWorkouts.push({ workout_id: newWorkoutObject._id });
+                console.log("pushed workout " + newWorkoutObject + "\nto user " + user.username + "'s currentWorkouts");
+                user.save();
+            }
+            console.log("Workout saved successfully");
+        });
+
+        // successfully built
+        response.redirect("/landing");
     } else { // user not logged in
         response.redirect("/login");
     }

@@ -43,7 +43,7 @@ const finishedWorkoutSchema = new mongoose.Schema(
     {
         _id: Number,
         workout_id: Number,
-        // date_finished: Date // replaceable with mongoDB getTimestamp() method
+        // date_finished: { type: Date, default: Date.now() } // replaceable with mongoDB getTimestamp() method
     });
 const FinishedWorkout = mongoose.model("FinishedWorkout", finishedWorkoutSchema);
 
@@ -60,7 +60,7 @@ const postSchema = new mongoose.Schema(
         creator: String,
         content: String,
         title: String
-        // date_posted: Date // replaceable with mongoDB getTimestamp() method
+        // date_posted: { type: Date, default: Date.now() } // replaceable with mongoDB getTimestamp() method
     });
 const Post = mongoose.model("Post", postSchema);
 

@@ -209,7 +209,8 @@ html body{
 /* Workout Builder Form */
 
 .setCard {
-    width: 240px;
+    width: 360px;
+    min-height: 450px;
 }
 
 .workoutCard {
