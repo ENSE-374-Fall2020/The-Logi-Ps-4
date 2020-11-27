@@ -313,17 +313,28 @@ app.post("/buildWorkout", function (request, response) {
         // BUG: If workout only has 1 exercise, information is not passed in array form
 
         // COMPLETE: if newWorkout.exercise !== array
-        for (var setCount = 0; setCount < newWorkout.exercise.length; setCount++) {
+        if (Array.isArray(newWorkout.exercise)) {
+            for (var setCount = 0; setCount < newWorkout.exercise.length; setCount++) {
+                setPointer = new Set({
+                    // _id: new ObjectId,
+                    exercise: newWorkout.exercise[setCount],
+                    sets: newWorkout.sets[setCount],
+                    repetitions: newWorkout.repetitions[setCount],
+                    duration: newWorkout.duration[setCount]
+                });
+                // setPointer.save();
+                newSets.push(setPointer);
+                // console.log("iteration " + setCount + setPointer);
+            }
+        } else {
+            // newWorkout = JSON.parse(newWorkout);
             setPointer = new Set({
-                // _id: new ObjectId,
-                exercise: newWorkout.exercise[setCount],
-                sets: newWorkout.sets[setCount],
-                repetitions: newWorkout.repetitions[setCount],
-                duration: newWorkout.duration[setCount]
+                exercise: newWorkout.exercise,
+                sets: newWorkout.sets,
+                repetitions: newWorkout.repetitions,
+                duration: newWorkout.duration
             });
-            // setPointer.save();
-            newSets.push(setPointer);
-            // console.log("iteration " + setCount + setPointer);
+
         }
         // console.log("newSets after iterating: " + newSets);
 
