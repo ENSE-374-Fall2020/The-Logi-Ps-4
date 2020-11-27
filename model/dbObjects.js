@@ -22,7 +22,7 @@ const Exercise = mongoose.model("Exercise", exerciseSchema);
 
 const setSchema = new mongoose.Schema(
     {
-        _id: Number,
+        // _id: Number,
         exercise: String, // alternative: exercise_id: Number,
         repetitions: Number,
         sets: Number,
@@ -32,7 +32,7 @@ const Set = mongoose.model("Set", setSchema);
 
 const workoutSchema = new mongoose.Schema(
     {
-        _id: Number, 
+        // _id: Number, 
         creator: String,
         name: String,
         sets: [setSchema]
@@ -41,7 +41,8 @@ const Workout = mongoose.model("Workout", workoutSchema);
 
 const finishedWorkoutSchema = new mongoose.Schema(
     {
-        _id: Number,
+        // _id: Number,
+        count: Number,
         workout_id: Number,
         // date_finished: { type: Date, default: Date.now() } // replaceable with mongoDB getTimestamp() method
     });
@@ -49,7 +50,7 @@ const FinishedWorkout = mongoose.model("FinishedWorkout", finishedWorkoutSchema)
 
 const currentWorkoutSchema = new mongoose.Schema(
     {
-       // _id: Number,
+        // _id: Number,
         workout_id: Number
     });
 const CurrentWorkout = mongoose.model("CurrentWorkout", currentWorkoutSchema);
@@ -68,9 +69,9 @@ const Post = mongoose.model("Post", postSchema);
 exports.Exercise = Exercise;
 exports.Set = Set;
 exports.Workout = Workout;
-exports.finishedWorkout = FinishedWorkout;
+exports.FinishedWorkout = FinishedWorkout;
 exports.finishedWorkoutSchema = finishedWorkoutSchema;
-exports.currentWorkout = CurrentWorkout;
+exports.CurrentWorkout = CurrentWorkout;
 exports.currentWorkoutSchema = currentWorkoutSchema;
 exports.Post = Post;
 

@@ -22,7 +22,7 @@ const Set = dbObjects.Set;
 const Workout = dbObjects.Workout;
 const FinishedWorkout = dbObjects.FinishedWorkout;
 const finishedWorkoutSchema = dbObjects.finishedWorkoutSchema;
-const currentWorkout = dbObjects.currentWorkout;
+const CurrentWorkout = dbObjects.CurrentWorkout;
 const currentWorkoutSchema = dbObjects.currentWorkoutSchema;
 //const User = dbObjects.User;
 //const userSchema = dbObjects.userSchema;
@@ -180,9 +180,11 @@ app.post("/addWorkout", function (request, response) {
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error adding workout to user");
             else {
-                let workout = new currentWorkout({
+                // console.log("request.body.workoutId: " + request.body.workoutId)
+                const workout = new CurrentWorkout({
                     workout_id: request.body.workoutId
-                })
+                });
+                workout.save();
                 user.currentWorkouts.push(workout);
                 console.log("user: " + user);
             }
@@ -315,9 +317,9 @@ app.post("/buildWorkout", function (request, response) {
             });
             // setPointer.save();
             newSets.push(setPointer);
-            console.log("iteration " + setCount + setPointer);
+            // console.log("iteration " + setCount + setPointer);
         }
-        console.log("newSets after iterating: " + newSets);
+        // console.log("newSets after iterating: " + newSets);
 
         let newWorkoutObject = new Workout({
             // _id: new ObjectId,
@@ -326,21 +328,23 @@ app.post("/buildWorkout", function (request, response) {
             sets: newSets
         });
         newWorkoutObject.save();
+        console.log("newWorkoutObject: " + newWorkoutObject);
 
-        let newCurrentWorkout = new currentWorkout ({
-            workout_id: newWorkoutObject._id
-        })
+        ;
 
         // add to users current workouts
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error adding workout to user");
             else {
-                () => {
-                    user.currentWorkouts.push(newCurrentWorkout);
-                    console.log("pushed workout " + newWorkoutObject + "\nto user " + user.username + "'s currentWorkouts");
-                }
-                user.save();
+                const newCurrentWorkout = new CurrentWorkout({
+                    workout_id: newWorkoutObject._id
+                })
+                newCurrentWorkout.save();
+                // console.log("newCurrentWorkout: " + newCurrentWorkout)
+                user.currentWorkouts.push(newCurrentWorkout);
+                console.log("pushed workout " + newWorkoutObject + "\nto user " + user.username + "'s currentWorkouts");
             }
+            user.save();
             console.log("Workout saved successfully");
         });
 

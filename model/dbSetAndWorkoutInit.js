@@ -34,7 +34,7 @@ async function destroySetCollection() {
 async function generateSetAndWorkoutCollection() {
 
     const set1 = new Set({
-        _id: 11,
+        // // _id: 11,
         exercise: "Sprint",
         repetitions: 8,
         sets: 3
@@ -43,7 +43,7 @@ async function generateSetAndWorkoutCollection() {
     await set1.save();
 
     const set2 = new Set({
-        _id: 12,
+        // _id: 12,
         exercise: "Downward Dog",
         duration: "45 seconds",
         sets: 3
@@ -52,7 +52,7 @@ async function generateSetAndWorkoutCollection() {
     await set2.save();
 
     const set3 = new Set({
-        _id: 13,
+        // _id: 13,
         exercise: "Pushup",
         repetitions: 25,
         sets: 3
@@ -61,7 +61,7 @@ async function generateSetAndWorkoutCollection() {
     await set3.save();
 
     const set4 = new Set({
-        _id: 14,
+        // _id: 14,
         exercise: "Run",
         duration: "2km"
     });
