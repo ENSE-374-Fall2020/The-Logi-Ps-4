@@ -69,7 +69,7 @@ async function generateSetAndWorkoutCollection() {
     await set4.save();
 
     const workout1 = new Workout({
-        _id: 21,
+        // _id: 21,
         name: "Full Body",
         sets: [set1, set2, set3]
     });
@@ -77,7 +77,7 @@ async function generateSetAndWorkoutCollection() {
     await workout1.save();
 
     const workout2 = new Workout({
-        _id: 22,
+        // _id: 22,
         name: "Track & Field",
         sets: [set1, set2, set4]
     });

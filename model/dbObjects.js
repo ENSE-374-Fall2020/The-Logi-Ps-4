@@ -4,6 +4,7 @@
 //
 // AUTHOR: Jacob Meyer
 
+const { ObjectID } = require("bson");
 const mongoose = require("mongoose");
 
 
@@ -51,7 +52,7 @@ const FinishedWorkout = mongoose.model("FinishedWorkout", finishedWorkoutSchema)
 const currentWorkoutSchema = new mongoose.Schema(
     {
         // _id: Number,
-        workout_id: Number
+        workout_id: ObjectID
     });
 const CurrentWorkout = mongoose.model("CurrentWorkout", currentWorkoutSchema);
 

@@ -180,18 +180,24 @@ app.post("/addWorkout", function (request, response) {
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error adding workout to user");
             else {
-                // console.log("request.body.workoutId: " + request.body.workoutId)
-                const workout = new CurrentWorkout({
-                    workout_id: request.body.workoutId
-                });
-                workout.save();
-                user.currentWorkouts.push(workout);
-                console.log("user: " + user);
+                async function saveToCurrentWorkouts() {
+                    // console.log("request.body.workoutId: " + request.body.workoutId)
+                    const workout = new CurrentWorkout({
+                        workout_id: request.body.workoutId
+                    });
+                    console.log("adding to " + user.username + "'s currentWorkouts: " + workout);
+                    await workout.save();
+                    user.currentWorkouts.push(workout);
+                    console.log("user: " + user);
+                    await user.save();
+                    response.redirect("/landing");
+                }
+                saveToCurrentWorkouts();
             }
-            user.save();
+
         });
         // THIS SHOULD CHANGE BUTTON TO MARK COMPLETE INSTEAD
-        response.redirect("/landing");
+        // response.redirect("/landing");
 
     } else { // user not logged in
         response.redirect("/login");
@@ -221,7 +227,7 @@ app.post("/removeWorkout", function (request, response) {
                     }
                     finally {
                         user.currentWorkouts.pull({ _id: workoutIdToRemove });
-                        user.save();
+                        await user.save();
                         response.redirect("/landing");
                     }
                 }
@@ -343,9 +349,9 @@ app.post("/buildWorkout", function (request, response) {
                 // console.log("newCurrentWorkout: " + newCurrentWorkout)
                 user.currentWorkouts.push(newCurrentWorkout);
                 console.log("pushed workout " + newWorkoutObject + "\nto user " + user.username + "'s currentWorkouts");
+                user.save();
+                console.log("Workout saved successfully");
             }
-            user.save();
-            console.log("Workout saved successfully");
         });
 
         // successfully built
