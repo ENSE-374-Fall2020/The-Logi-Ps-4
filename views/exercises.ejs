@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/navBarStyle.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/e9a8538c89.js" crossorigin="anonymous"></script>
+
 
     <title>Exercises</title>
 </head>
@@ -17,6 +19,58 @@
     <%- include("partials/navbar", {username: username}); -%>
 
     <h1 class="title"> Exercises </h1>
+
+    <section id="mainButtons" class="d-flex flex-wrap justify-content-around">
+
+        <article>
+            <form method="GET" action="/workouts">
+                <button type="submit" id="buttonBrowseWorkouts" class="mainButton">
+                    <div class="innerButton">
+                        <p>
+                            <i class="fas fa-search"></i>
+                            <b>Browse Community Workouts</b>
+                        </p>
+                        <p>
+                            See workouts others in the community have created
+                        </p>
+                    </div>
+                </button>
+            </form>
+        </article>
+
+        <article>
+            <form method="GET" action="/workoutBuilder">
+                <button type="submit" id="buttonCreateWorkout" class="mainButton">
+                    <article>
+                        <div class="innerButton">
+                            <p>
+                                <i class="fas fa-dumbbell"></i>
+                                <b>Create New Workout</b>
+                            </p>
+                            <p>
+                                Build a workout from scratch
+                            </p>
+                        </div>
+                </button>
+            </form>
+        </article>
+
+        <article>
+            <form method="GET" action="/landing">
+                <button type="submit" id="buttonYourWorkouts" class="mainButton">
+                    <div class="innerButton">
+                        <p>
+                            <i class="fas fa-search"></i>
+                            <b>View Your Workouts</b>
+                        </p>
+                        <p>
+                            See workouts in your personal list
+                        </p>
+                    </div>
+                </button>
+            </form>
+        </article>
+    </section>
 
     <!-- Container for whole page -->
     <div class="container-fluid">
@@ -58,12 +112,12 @@
 
                 <article class="card">
                     <div id="sideListArmsHeader" class="card-header">
-                        
-                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
-                                data-target="#sideListArmsBody" aria-expanded="true" aria-controls="sideListArmsBody">
-                                <h5>Arms</h5>
-                            </button>
-                        
+
+                        <button class="btn btn-link w-100" type="button" data-toggle="collapse"
+                            data-target="#sideListArmsBody" aria-expanded="true" aria-controls="sideListArmsBody">
+                            <h5>Arms</h5>
+                        </button>
+
                     </div>
 
                     <div id="sideListArmsBody" class="collapse" aria-labelledby="sideListArmsHeader"
@@ -83,10 +137,10 @@
 
                 <article class="card">
                     <div id="sideListStomachHeader" class="card-header">
-                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
-                                data-target="#sideListStomachBody" aria-expanded="true" aria-controls="sideListStomachBody">
-                                <h5>Stomach</h5>
-                            </button>
+                        <button class="btn btn-link w-100" type="button" data-toggle="collapse"
+                            data-target="#sideListStomachBody" aria-expanded="true" aria-controls="sideListStomachBody">
+                            <h5>Stomach</h5>
+                        </button>
                     </div>
                     <div id="sideListStomachBody" class="collapse" aria-labelledby="sideListStomachHeader"
                         data-parent="#exerciseSideList">
@@ -105,10 +159,10 @@
 
                 <article class="card">
                     <div id="sideListBackHeader" class="card-header">
-                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
-                                data-target="#sideListBackBody" aria-expanded="true" aria-controls="sideListBackBody">
-                                <h5>Back</h5>
-                            </button>
+                        <button class="btn btn-link w-100" type="button" data-toggle="collapse"
+                            data-target="#sideListBackBody" aria-expanded="true" aria-controls="sideListBackBody">
+                            <h5>Back</h5>
+                        </button>
                     </div>
                     <div id="sideListBackBody" class="collapse" aria-labelledby="sideListBackHeader"
                         data-parent="#exerciseSideList">
@@ -127,11 +181,11 @@
 
                 <article class="card">
                     <div id="sideListShouldersHeader" class="card-header">
-                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
-                                data-target="#sideListShouldersBody" aria-expanded="true"
-                                aria-controls="sideListShouldersBody">
-                                <h5>Shoulders</h5>
-                            </button>
+                        <button class="btn btn-link w-100" type="button" data-toggle="collapse"
+                            data-target="#sideListShouldersBody" aria-expanded="true"
+                            aria-controls="sideListShouldersBody">
+                            <h5>Shoulders</h5>
+                        </button>
                     </div>
                     <div id="sideListShouldersBody" class="collapse" aria-labelledby="sideListShouldersHeader"
                         data-parent="#exerciseSideList">
@@ -150,10 +204,10 @@
 
                 <article class="card">
                     <div id="sideListChestHeader" class="card-header">
-                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
-                                data-target="#sideListChestBody" aria-expanded="true" aria-controls="sideListChestBody">
-                                <h5>Chest</h5>
-                            </button>
+                        <button class="btn btn-link w-100" type="button" data-toggle="collapse"
+                            data-target="#sideListChestBody" aria-expanded="true" aria-controls="sideListChestBody">
+                            <h5>Chest</h5>
+                        </button>
                     </div>
                     <div id="sideListChestBody" class="collapse" aria-labelledby="sideListChestHeader"
                         data-parent="#exerciseSideList">
@@ -172,10 +226,10 @@
 
                 <article class="card">
                     <div id="sideListCardioHeader" class="card-header">
-                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
-                                data-target="#sideListCardioBody" aria-expanded="true" aria-controls="sideListCardioBody">
-                                <h5>Cardio</h5>
-                            </button>
+                        <button class="btn btn-link w-100" type="button" data-toggle="collapse"
+                            data-target="#sideListCardioBody" aria-expanded="true" aria-controls="sideListCardioBody">
+                            <h5>Cardio</h5>
+                        </button>
                     </div>
                     <div id="sideListCardioBody" class="collapse" aria-labelledby="sideListCardioHeader"
                         data-parent="#exerciseSideList">

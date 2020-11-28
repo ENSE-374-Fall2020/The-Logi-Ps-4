@@ -19,8 +19,6 @@
 
     <%- include("partials/navbar", {username: username}); %>
 
-    <br>
-
     <h1 class="title"> Current Workouts </h1>
 
     <section id="mainButtons" class="d-flex flex-wrap justify-content-around">
@@ -74,7 +72,7 @@
             </form>
         </article>
     </section>
-    <p style="text-align: center; font-weight: bold;">Current Workouts</p>
+    <h3 class="text-center">Your Current Workouts</h3>
     <!-- Responsive grid, articles will automatically wrap -->
     <section id="workoutCardList" class="d-flex flex-wrap justify-content-around">
 
@@ -92,18 +90,18 @@
     </section>
 
     <br>
-    <p style="text-align: center; font-weight: bold;">Completed Workouts</p>
+    <h3 class="text-center">Your Completed Workouts</h3>
     <section style="text-align: center; position: relative;left: 39.5%; ">
         <!--Table-->
-        <ul style = "width: 10%; float: left;list-style-type:none;">
+        <ul style="width: 10%; float: left;list-style-type:none;">
             <% for (let workout of usersFinishedWorkouts) { %>
-                    <li><%=workout.name%></li>
-                <% } %>
+            <li><%=workout.name%></li>
+            <% } %>
         </ul>
-        <ul style = "width: 10%; float: left;list-style-type:none;">
+        <ul style="width: 10%; float: left;list-style-type:none;">
             <% for (let count of countForEachFinishedWorkouts) { %>
-                    <li><%=count%></li>
-                <% } %>
+            <li><%=count%></li>
+            <% } %>
         </ul>
         <!--Table-->
     </section>

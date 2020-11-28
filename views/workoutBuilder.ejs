@@ -17,9 +17,58 @@
 
     <%- include("partials/navbar", {username: username}); -%>
 
-    <h1 class="title">Create New Workout</h1>
+    <h1 class="title">Workout Builder</h1>
 
+    <section id="mainButtons" class="d-flex flex-wrap justify-content-around">
 
+        <article>
+            <form method="GET" action="/workouts">
+                <button type="submit" id="buttonBrowseWorkouts" class="mainButton">
+                    <div class="innerButton">
+                        <p>
+                            <i class="fas fa-search"></i>
+                            <b>Browse Community Workouts</b>
+                        </p>
+                        <p>
+                            See workouts others in the community have created
+                        </p>
+                    </div>
+                </button>
+            </form>
+        </article>
+
+        <article>
+            <form method="GET" action="/landing">
+                <button type="submit" id="buttonYourWorkouts" class="mainButton">
+                    <div class="innerButton">
+                        <p>
+                            <i class="fas fa-search"></i>
+                            <b>View Your Workouts</b>
+                        </p>
+                        <p>
+                            See workouts in your personal list
+                        </p>
+                    </div>
+                </button>
+            </form>
+        </article>
+
+        <article>
+            <form method="GET" action="/exercises">
+                <button type="submit" id="buttonBrowseExercises" class="mainButton">
+                    <div class="innerButton">
+                        <p>
+                            <i class="fas fa-tasks"></i>
+                            <b>Browse Exercises</b>
+                        </p>
+                        <p>
+                            Take a look through different exercises and their muscle groups
+                        </p>
+                    </div>
+                </button>
+            </form>
+        </article>
+    </section>
 
 
     <div class="container-fluid m-3">
@@ -32,7 +81,7 @@
                 </div>
                 <div class="col-md-4"></div>
             </div>
-            
+
 
             <!-- Responsive grid, articles will automatically wrap -->
             <section id="setCardList" class="row d-flex flex-wrap form-group justify-content-around">
@@ -48,7 +97,8 @@
                             <select class="form-control" name="exercise" id="exercise" required>
                                 <option value="" selected disabled hidden>Select an Exercise...</option>
                                 <% for (exercise of exerciseList) { %>
-                                <option value="<%=exercise.name%>" data-image-path="<%=exercise.imagePath%>"><%=exercise.name%></option>
+                                <option value="<%=exercise.name%>" data-image-path="<%=exercise.imagePath%>">
+                                    <%=exercise.name%></option>
                                 <% } %>
                             </select>
                         </div>
@@ -82,7 +132,7 @@
             <section class="row d-flex justify-content-center">
                 <button id="createButton" type="submit" class="btn btn-lg btn-warning m-3 p-3">Create Workout</button>
             </section>
-            
+
         </form>
     </div>
 

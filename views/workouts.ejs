@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,19 +9,36 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-         
+
     <script src="https://kit.fontawesome.com/e9a8538c89.js" crossorigin="anonymous"></script>
 
-    <title>Document</title>
+    <title>Community Workouts</title>
 </head>
 
 <body>
 
     <%- include("partials/navbar", {username: username}); -%>
 
-    <h1 class="title"> Member Workouts </h1>
+    <h1 class="title"> Community Workouts </h1>
 
     <section id="mainButtons" class="d-flex flex-wrap justify-content-around">
+
+        <article>
+            <form method="GET" action="/landing">
+                <button type="submit" id="buttonYourWorkouts" class="mainButton">
+                    <div class="innerButton">
+                        <p>
+                            <i class="fas fa-search"></i>
+                            <b>View Your Workouts</b>
+                        </p>
+                        <p>
+                            See workouts in your personal list
+                        </p>
+                    </div>
+                </button>
+            </form>
+        </article>
+
         <article>
             <form method="GET" action="/workoutBuilder">
                 <button type="submit" id="buttonCreateWorkout" class="mainButton">
@@ -39,11 +55,27 @@
                 </button>
             </form>
         </article>
+
+        <article>
+            <form method="GET" action="/exercises">
+                <button type="submit" id="buttonBrowseExercises" class="mainButton">
+                    <div class="innerButton">
+                        <p>
+                            <i class="fas fa-tasks"></i>
+                            <b>Browse Exercises</b>
+                        </p>
+                        <p>
+                            Take a look through different exercises and their muscle groups
+                        </p>
+                    </div>
+                </button>
+            </form>
+        </article>
     </section>
 
-    
+
     <section id="workoutCardList" class="d-flex flex-wrap">
-<!-- idea: 
+        <!-- idea: 
 
     1. passed the array of workouts from db
     (array of workouts contain an array of sets -> we want to loop through the sets to output all of them)
@@ -63,9 +95,9 @@
     
 -->
 
-<% for (let workout of allWorkouts) { %>
-    <%-include ("partials/workoutCard.ejs", {workout: workout, current: false}); -%>
-<% } %>
+        <% for (let workout of allWorkouts) { %>
+        <%-include ("partials/workoutCard.ejs", {workout: workout, current: false}); -%>
+        <% } %>
 
     </section>
 
@@ -82,4 +114,4 @@
 
 </body>
 
-</html> 
+</html>
