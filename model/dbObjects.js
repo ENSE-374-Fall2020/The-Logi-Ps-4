@@ -44,7 +44,7 @@ const finishedWorkoutSchema = new mongoose.Schema(
     {
         // _id: Number,
         count: Number,
-        workout_id: Number,
+        workout_id: ObjectID,
         // date_finished: { type: Date, default: Date.now() } // replaceable with mongoDB getTimestamp() method
     });
 const FinishedWorkout = mongoose.model("FinishedWorkout", finishedWorkoutSchema);
