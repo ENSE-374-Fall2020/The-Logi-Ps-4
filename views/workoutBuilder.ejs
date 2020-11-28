@@ -32,6 +32,7 @@
                 </div>
                 <div class="col-md-4"></div>
             </div>
+            
 
             <!-- Responsive grid, articles will automatically wrap -->
             <section id="setCardList" class="row d-flex flex-wrap form-group justify-content-around">
@@ -47,7 +48,7 @@
                             <select class="form-control" name="exercise" id="exercise" required>
                                 <option value="" selected disabled hidden>Select an Exercise...</option>
                                 <% for (exercise of exerciseList) { %>
-                                <option value="<%=exercise.name%>"><%=exercise.name%></option>
+                                <option value="<%=exercise.name%>" data-image-path="<%=exercise.imagePath%>"><%=exercise.name%></option>
                                 <% } %>
                             </select>
                         </div>
@@ -78,9 +79,10 @@
                 </article>
 
             </section>
-            <section class="text-center">
-                <button id="createButton" type="submit" class="btn btn-warning">Create Workout</button>
+            <section class="row d-flex justify-content-center">
+                <button id="createButton" type="submit" class="btn btn-lg btn-warning m-3 p-3">Create Workout</button>
             </section>
+            
         </form>
     </div>
 

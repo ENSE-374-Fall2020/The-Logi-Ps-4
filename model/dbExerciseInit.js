@@ -55,7 +55,7 @@ async function generateExerciseCollection() {
         type: "strength",
         imagePath: "img/exercises/pullup.png",
         muscles: ["Deltoid", "Pectoralis", "Triceps", "Biceps", "Abdominals", "Obliques"],
-        bodyParts: ["Stomach", "Chest", "Arms"],
+        bodyParts: ["Stomach", "Chest", "Arms", "Shoulders", "Back"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise3.save();
@@ -66,7 +66,7 @@ async function generateExerciseCollection() {
         type: "strength",
         imagePath: "img/exercises/pushup.png",
         muscles: ["Biceps", "Triceps", "Pectoralis", "Abdominals", "Deltoids"],
-        bodyParts: ["Stomach", "Chest", "Arms"],
+        bodyParts: ["Stomach", "Chest", "Arms", "Shoulders"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise4.save();
@@ -77,7 +77,7 @@ async function generateExerciseCollection() {
         type: "strength",
         imagePath: "",
         muscles: ["Legs"],
-        bodyParts: ["Stomach", "Legs", "Cardio"],
+        bodyParts: ["Legs", "Cardio"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise5.save();
@@ -88,7 +88,7 @@ async function generateExerciseCollection() {
         type: "strength",
         imagePath: "",
         muscles: ["arms", "shoulders", "legs"],
-        bodyParts: ["Stomach", "Legs", "Cardio"],
+        bodyParts: ["Stomach", "Legs", "Cardio", "Shoulders"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise6.save();
@@ -97,9 +97,9 @@ async function generateExerciseCollection() {
         _id: 7,
         name: "Run",
         type: "endurance",
-        imagePath: "",
-        muscles: ["abs", "legs"],
-        bodyParts: ["abs", "legs", "cardio"],
+        imagePath: "img/exercises/run.jpg",
+        muscles: ["Glutes", "Quadriceps", "Hamstrings"],
+        bodyParts: ["Legs", "Cardio"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise7.save();

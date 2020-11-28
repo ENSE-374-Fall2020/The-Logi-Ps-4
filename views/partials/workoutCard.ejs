@@ -13,9 +13,9 @@
     </button>
 
     <div id="WorkoutSetsList<%=workout._id%>" class="collapse">
-        <div class="card-body list-group">
+        <div class="card-body">
             <h5 class="text-center">Created By: <%=workout.creator%></h5>
-            <ol>
+            <ol class="list-group">
                 <% for (let set of workout.sets) { %>
                 <li><span class="badge badge-secondary m-2">
                         <% if (set.sets) { /*if sets exists*/ %>
@@ -33,17 +33,16 @@
                 </li>
                 <% } %>
             </ol>
+    <form id="removeWorkout" action="removeWorkout" method="POST" class="w-100 center">
+        <input type="hidden" name="workoutId" id="workoutId" value="<%=workout._id%>" />
+        <button type="submit" id="remove<%=workout.id%>" class='btn btn-outline-danger form-control'>Remove Workout</button>
+        </form>
         </div>
     </div>
     <%  if (current) {  %>
-      <form id="removeWorkout" action="markAsComplete" method="POST" class="w-100">
+      <form id="markAsComplete" action="markAsComplete" method="POST" class="w-100">
     <button id="complete<%=workout.id%>" class='btn btn-success form-control'>Mark Completed</button>
     <input type="hidden" name="workoutId" id="workoutId" value="<%=workout._id%>" />
-    </form>
-
-    <form id="removeWorkout" action="removeWorkout" method="POST" class="w-100">
-    <input type="hidden" name="workoutId" id="workoutId" value="<%=workout._id%>" />
-    <button style="background-color: rgb(204, 48, 48);" type="submit" id="remove<%=workout.id%>" class='btn btn-success form-control'>Remove Workout</button>
     </form>
     <% } else { %>
     <form action="/addWorkout" method="POST" class="w-100">

@@ -22,33 +22,54 @@ $(document).ready(function () {
     }
 
     function setCardNumber(card, newId) {
-        // console.log("setCardNumber called");
-        card.prop("id", "setCard" + newId);
-        card.find("data").prop("value" , newId);
-        card.find("h4").text("SET #" + newId);
+        // true js DOM/jQuery wizard status has been achieved
+
+        if (card instanceof jQuery) { // card is jQuery object
+            console.log("setCardNumber called for (jQuery) " + card.prop("id") + ", changing to " + newId);
+            card.prop("id", "setCard" + newId);
+            card.find("data").prop("value", newId);
+            card.find("h4").text("SET #" + newId);
+        } else if (card instanceof HTMLElement) { // card is HTML DOM object
+            console.log("setCardNumber called for (DOM) " + card.getAttribute("id") + ", changing to " + newId);
+            card.setAttribute("id", "setCard" + newId);
+            card.firstElementChild.value = newId; // assuming first element is <data>
+            card.firstElementChild.nextElementSibling.innerText = "SET #" + newId; // assuming second element is <h4> title
+        } else {
+            console.log("ERROR setting card number");
+        }
     }
 
     function removeCard(event) {
-        console.log("remove button clicked");
         numberOfSets--;
 
         let currentCard = $(this).parent();
-        console.log("event target: " + currentCard);
+        console.log("removing card " + currentCard.prop("id"));
         // for each card after this one
         // rename ids to itself - 1
         let currentCardId = 0;
-        let cardList = currentCard.nextAll(); // all children AFTER this card
-        console.log("card list: " + cardList + " \n.getted: " + cardList.get());
-        for (card of cardList) {
-            console.log("iterating card is: " + card);
-            currentCardId = card.firstElementChild().getAttribute("value");
-            setCardNumber(card, currentCardId);
-        }
+        let cardList = currentCard.nextAll(":not(#addSetCard)"); // all children AFTER this card
+        // console.log("card list: " + cardList + " \n\t.getted: " + cardList.get());
+        //for (card of cardList) {
+        cardList.each((index, card) => {
+            // console.log("iterating card is: " + card);
+            currentCardId = card.firstElementChild.getAttribute("value");
+            setCardNumber(card, currentCardId - 1);
+        });
         currentCard.remove();
     }
 
+    function updateImageSource(event) {
+        console.log("changing image source...");
+
+        let imagePath = $(this).find(":selected").attr("data-image-path");
+        // console.log("Found imagePath: " + imagePath + " from element: " + $(this).get());
+        let image = $(this).closest("article").children("img");
+        // console.log("Found image element: " + image.get());
+        image.attr("src", imagePath);
+    }
+
     function addBlankCard(event) {
-        console.log("add button clicked");
+        console.log("adding new card...");
         numberOfSets++;
 
         let newCard = blankCard.clone(); // copy default, blank card
@@ -58,11 +79,12 @@ $(document).ready(function () {
         // change all id numbers to current numberOfSets
         setCardNumber(newCard, numberOfSets);
 
-        // add event listener to remove button
-        // for destroying card
+        // add event listeners
+        newCard.find("#exercise").on("change", updateImageSource);
         newCard.find("#removeButton").on("click", removeCard);
     }
 
+    // END function definitions
     // ======================================================
 
     var blankCard = $("#blankCard");

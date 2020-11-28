@@ -23,16 +23,14 @@
         <div class="row">
             <!-- Left-side list of all exercises -->
 
-            <section id="exerciseSideList" class="accordion col-sm-3 bg-light">
+            <section id="exerciseSideList" class="accordion col-sm-3 bg-light p-0">
 
                 <article class="card">
                     <div id="sideListLegsHeader" class="card-header">
-                        <h5>
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                data-target="#sideListLegsBody" aria-expanded="true" aria-controls="sideListLegsBody">
-                                Legs
-                            </button>
-                        </h5>
+                        <button class="btn btn-link w-100" type="button" data-toggle="collapse"
+                            data-target="#sideListLegsBody" aria-expanded="true" aria-controls="sideListLegsBody">
+                            <h5>Legs</h5>
+                        </button>
                     </div>
                     <!-- idea: 
     comment: I realize this is not the most efficient way of doing this (loop needs to repeat each time -> lots of repeated work) but I'm not sure how to do it otherwise
@@ -48,7 +46,7 @@
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { 
                                 for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { 
-                                    if (exercises[exerciseNumber].bodyParts[bpNumber] === "legs") { %>
+                                    if (exercises[exerciseNumber].bodyParts[bpNumber] === "Legs") { %>
                             <a class="list-group-item"
                                 href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
                             <% } 
@@ -60,12 +58,12 @@
 
                 <article class="card">
                     <div id="sideListArmsHeader" class="card-header">
-                        <h5>
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                        
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
                                 data-target="#sideListArmsBody" aria-expanded="true" aria-controls="sideListArmsBody">
-                                Arms
+                                <h5>Arms</h5>
                             </button>
-                        </h5>
+                        
                     </div>
 
                     <div id="sideListArmsBody" class="collapse" aria-labelledby="sideListArmsHeader"
@@ -73,7 +71,7 @@
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
                             <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "arms") { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "Arms") { %>
                             <a class="list-group-item"
                                 href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
@@ -84,20 +82,18 @@
                 </article>
 
                 <article class="card">
-                    <div id="sideListAbsHeader" class="card-header">
-                        <h5>
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
-                                data-target="#sideListAbsBody" aria-expanded="true" aria-controls="sideListAbsBody">
-                                Abs
+                    <div id="sideListStomachHeader" class="card-header">
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
+                                data-target="#sideListStomachBody" aria-expanded="true" aria-controls="sideListStomachBody">
+                                <h5>Stomach</h5>
                             </button>
-                        </h5>
                     </div>
-                    <div id="sideListAbsBody" class="collapse" aria-labelledby="sideListAbsHeader"
+                    <div id="sideListStomachBody" class="collapse" aria-labelledby="sideListStomachHeader"
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
                             <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "abs") { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "Stomach") { %>
                             <a class="list-group-item"
                                 href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
@@ -109,19 +105,17 @@
 
                 <article class="card">
                     <div id="sideListBackHeader" class="card-header">
-                        <h5>
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
                                 data-target="#sideListBackBody" aria-expanded="true" aria-controls="sideListBackBody">
-                                Back
+                                <h5>Back</h5>
                             </button>
-                        </h5>
                     </div>
                     <div id="sideListBackBody" class="collapse" aria-labelledby="sideListBackHeader"
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
                             <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "back") { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "Back") { %>
                             <a class="list-group-item"
                                 href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
@@ -133,20 +127,18 @@
 
                 <article class="card">
                     <div id="sideListShouldersHeader" class="card-header">
-                        <h5>
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
                                 data-target="#sideListShouldersBody" aria-expanded="true"
                                 aria-controls="sideListShouldersBody">
-                                Shoulders
+                                <h5>Shoulders</h5>
                             </button>
-                        </h5>
                     </div>
                     <div id="sideListShouldersBody" class="collapse" aria-labelledby="sideListShouldersHeader"
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
                             <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "shoulders") { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "Shoulders") { %>
                             <a class="list-group-item"
                                 href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
@@ -158,19 +150,39 @@
 
                 <article class="card">
                     <div id="sideListChestHeader" class="card-header">
-                        <h5>
-                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
                                 data-target="#sideListChestBody" aria-expanded="true" aria-controls="sideListChestBody">
-                                Chest
+                                <h5>Chest</h5>
                             </button>
-                        </h5>
                     </div>
                     <div id="sideListChestBody" class="collapse" aria-labelledby="sideListChestHeader"
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
                             <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "chest") { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "Chest") { %>
+                            <a class="list-group-item"
+                                href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
+                            <% } %>
+                            <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div id="sideListCardioHeader" class="card-header">
+                            <button class="btn btn-link w-100" type="button" data-toggle="collapse"
+                                data-target="#sideListCardioBody" aria-expanded="true" aria-controls="sideListCardioBody">
+                                <h5>Cardio</h5>
+                            </button>
+                    </div>
+                    <div id="sideListCardioBody" class="collapse" aria-labelledby="sideListCardioHeader"
+                        data-parent="#exerciseSideList">
+                        <div class="card-body list-group">
+                            <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
+                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
+                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "Cardio") { %>
                             <a class="list-group-item"
                                 href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
