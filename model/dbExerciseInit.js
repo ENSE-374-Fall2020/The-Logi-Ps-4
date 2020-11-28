@@ -27,13 +27,13 @@ async function generateExerciseCollection() {
     // generate new collection of static exercises
 
     console.log("Generating static list of exercises...");
-    const exercise1 = new Exercise({
+    const exercise1 = await new Exercise({
         _id: 1,
-        name: "Situp",
+        name: "Crunch",
         type: "strength",
-        imagePath: "",
-        muscles: ["abs"],
-        bodyParts: ["abs"],
+        imagePath: "img/exercises/crunch.png",
+        muscles: ["Abdominals", "Obliques"],
+        bodyParts: ["Stomach"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise1.save();
@@ -43,8 +43,8 @@ async function generateExerciseCollection() {
         name: "Squat",
         type: "strength",
         imagePath: "img/exercises/squat.jpg",
-        muscles: ["quadriceps", "glutes", "hamstrings", "abs"],
-        bodyParts: ["abs", "legs"],
+        muscles: ["Quadriceps", "Glutes", "Hamstrings", "Abdominals"],
+        bodyParts: ["Stomach", "Legs"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise2.save();
@@ -53,9 +53,9 @@ async function generateExerciseCollection() {
         _id: 3,
         name: "Pullup",
         type: "strength",
-        imagePath: "",
-        muscles: ["arms", "shoulders", "chest", "back"],
-        bodyParts: ["abs", "chest", "arms"],
+        imagePath: "img/exercises/pullup.png",
+        muscles: ["Deltoid", "Pectoralis", "Triceps", "Biceps", "Abdominals", "Obliques"],
+        bodyParts: ["Stomach", "Chest", "Arms"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise3.save();
@@ -64,9 +64,9 @@ async function generateExerciseCollection() {
         _id: 4,
         name: "Pushup",
         type: "strength",
-        imagePath: "",
-        muscles: ["arms", "shoulders", "chest", "back"],
-        bodyParts: ["abs", "chest", "arms"],
+        imagePath: "img/exercises/pushup.png",
+        muscles: ["Biceps", "Triceps", "Pectoralis", "Abdominals", "Deltoids"],
+        bodyParts: ["Stomach", "Chest", "Arms"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise4.save();
@@ -74,10 +74,10 @@ async function generateExerciseCollection() {
     const exercise5 = new Exercise({
         _id: 5,
         name: "Sprint",
-        type: "endurance",
+        type: "strength",
         imagePath: "",
-        muscles: ["legs"],
-        bodyParts: ["abs", "legs", "cardio"],
+        muscles: ["Legs"],
+        bodyParts: ["Stomach", "Legs", "Cardio"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise5.save();
@@ -88,7 +88,7 @@ async function generateExerciseCollection() {
         type: "strength",
         imagePath: "",
         muscles: ["arms", "shoulders", "legs"],
-        bodyParts: ["abs", "legs", "cardio"],
+        bodyParts: ["Stomach", "Legs", "Cardio"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise6.save();

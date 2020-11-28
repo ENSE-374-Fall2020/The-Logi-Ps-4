@@ -10,8 +10,6 @@ require("dotenv").config();
 const session = require("express-session")
 const passport = require("passport")
 const passportLocalMongoose = require("passport-local-mongoose");
-const { redirect } = require("statuses");
-const { ObjectId } = require("bson");
 
 // load database objects
 const dbObjects = require(__dirname + "/model/dbObjects.js");

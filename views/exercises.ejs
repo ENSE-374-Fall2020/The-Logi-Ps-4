@@ -196,15 +196,15 @@
                     <div class="flip-card-inner">
                         <div class="bg-light flip-card-front">
                             <h4 class="card-title bg-primary text-light text-center p-2 m-2"><%=exercise.name%></h4>
-                            <img class="card-img-top img-fluid p-2" src="<%=exercise.imagePath%>"
+                            <img class="img-fluid p-2" src="<%=exercise.imagePath%>" width="240px" height="240px"
                                 alt="Card image cap" />
                         </div>
                         <div class="bg-muted flip-card-back">
-                            <h4 class="card-title bg-secondary text-light text-center p-2 m-2">Targeted Areas</h4>
+                            <h4 class="card-title text-light text-center p-2 m-2">Targeted Muscles</h4>
                             <div class="card-body text-dark">
                                 <ul class="list-group">
                                     <% for (let muscle of exercise.muscles) { %>
-                                    <li class="list-group-item"><%=muscle%></li>
+                                    <li class="list-group-item p-1 text-capitalize"><%=muscle%></li>
                                     <% } %>
 
                                 </ul>
