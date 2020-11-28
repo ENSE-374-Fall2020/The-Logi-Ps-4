@@ -14,7 +14,7 @@
 
 <body>
 
-    <%- include("partials/navbar", {username: "Billy", finishedWorkouts: [undefined]}); -%>
+    <%- include("partials/navbar", {username: username}); -%>
 
     <h1 class="title"> Exercises </h1>
 
@@ -34,7 +34,7 @@
                             </button>
                         </h5>
                     </div>
-<!-- idea: 
+                    <!-- idea: 
     comment: I realize this is not the most efficient way of doing this (loop needs to repeat each time -> lots of repeated work) but I'm not sure how to do it otherwise
     1. passed in the array of exercises from the db
     2. loop through the exercises bodyParts (bpNumber is short for bodyPartNumber)
@@ -46,13 +46,14 @@
                     <div id="sideListLegsBody" class="collapse" aria-labelledby="sideListLegsHeader"
                         data-parent="#exerciseSideList">
                         <div class="card-body list-group">
-                            <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
-                            <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
-                            <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "legs") { %>
-                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
-                            <% } %>
-                            <% } %>
-                            <% } %>
+                            <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { 
+                                for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { 
+                                    if (exercises[exerciseNumber].bodyParts[bpNumber] === "legs") { %>
+                            <a class="list-group-item"
+                                href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
+                            <% } 
+                                } 
+                            } %>
                         </div>
                     </div>
                 </article>
@@ -73,7 +74,8 @@
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
                             <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
                             <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "arms") { %>
-                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
+                            <a class="list-group-item"
+                                href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -96,7 +98,8 @@
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
                             <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
                             <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "abs") { %>
-                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
+                            <a class="list-group-item"
+                                href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -119,7 +122,8 @@
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
                             <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
                             <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "back") { %>
-                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
+                            <a class="list-group-item"
+                                href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -131,7 +135,8 @@
                     <div id="sideListShouldersHeader" class="card-header">
                         <h5>
                             <button class="btn btn-link" type="button" data-toggle="collapse"
-                                data-target="#sideListShouldersBody" aria-expanded="true" aria-controls="sideListShouldersBody">
+                                data-target="#sideListShouldersBody" aria-expanded="true"
+                                aria-controls="sideListShouldersBody">
                                 Shoulders
                             </button>
                         </h5>
@@ -142,7 +147,8 @@
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
                             <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
                             <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "shoulders") { %>
-                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
+                            <a class="list-group-item"
+                                href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -165,7 +171,8 @@
                             <% for (var exerciseNumber = 0; exerciseNumber < exercises.length; exerciseNumber++) { %>
                             <% for (var bpNumber = 0; bpNumber < exercises[exerciseNumber].bodyParts.length; bpNumber++) { %>
                             <% if (exercises[exerciseNumber].bodyParts[bpNumber] === "chest") { %>
-                            <a class="list-group-item" href="#<%=exercises[exerciseNumber]._id%>"><%=exercises[exerciseNumber].name%></a>
+                            <a class="list-group-item"
+                                href="#<%=exercises[exerciseNumber].name%>"><%=exercises[exerciseNumber].name%></a>
                             <% } %>
                             <% } %>
                             <% } %>
@@ -180,31 +187,34 @@
 
             <!-- Container for all exercise cards -->
 
-            <section id="exerciseCardList" class="col-md-9 d-flex flex-wrap">
+            <section id="exerciseCardList" class="col-md-9 d-flex flex-wrap justify-content-around">
                 <% for (let exercise of exercises) {
                 // include ("partials/exerciseCard.ejs", {exercise: exercise});
                 %>
-                <article id="<%=exercise.name%>Card" class="card setCard m-3">
-                    <h4 class="card-title bg-primary text-light text-center p-2 m-2"><%=exercise.name%></h4>
-                    <img class="card-img-top p-2" src="<%=exercise.imagePath%>" alt="Card image cap" />
-                    <div class="card-body bg-light">
-                        <h5>Muscles Used:</h5>
-                        <ul>
-                            <% for (let muscle of exercise.muscles) { %>
-                            <li><%=muscle%></li>
-                            <% } %>
+                <article id="<%=exercise.name%>" class=" exerciseCard flip-card align-self-start m-1">
 
-                        </ul>
-                        <a href="<%=exercise.tutorialURL%>">
-                            <button class="btn btn-outline-info">
-                                Demonstration
-                            </button>
-                        </a>
+                    <div class="flip-card-inner">
+                        <div class="bg-light flip-card-front">
+                            <h4 class="card-title bg-primary text-light text-center p-2 m-2"><%=exercise.name%></h4>
+                            <img class="card-img-top img-fluid p-2" src="<%=exercise.imagePath%>"
+                                alt="Card image cap" />
+                        </div>
+                        <div class="bg-muted flip-card-back">
+                            <h4 class="card-title bg-secondary text-light text-center p-2 m-2">Targeted Areas</h4>
+                            <div class="card-body text-dark">
+                                <ul class="list-group">
+                                    <% for (let muscle of exercise.muscles) { %>
+                                    <li class="list-group-item"><%=muscle%></li>
+                                    <% } %>
+
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </article>
                 <% } %>
             </section>
-      </div>  
+        </div>
     </div>
 
 

@@ -17,7 +17,7 @@
 
 <body>
 
-    <%- include("partials/navbar", {username: "Billy", finishedWorkouts: [undefined]}); %>
+    <%- include("partials/navbar", {username: username}); %>
 
     <br>
 
@@ -76,7 +76,7 @@
     </section>
     <p style="text-align: center; font-weight: bold;">Current Workouts</p>
     <!-- Responsive grid, articles will automatically wrap -->
-    <section id="workoutCardList" class="d-flex flex-wrap">
+    <section id="workoutCardList" class="d-flex flex-wrap justify-content-around">
 
         <% for (let workout of usersCurrentWorkouts) { 
             // if (workout === null || workout === undefined) {

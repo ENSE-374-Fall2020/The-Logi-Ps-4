@@ -311,7 +311,7 @@ app.get("/exercises", function (request, response) {
                 // console.log(exerciseList);
 
             }
-            response.render("exercises", { exercises: exerciseList });
+            response.render("exercises", { exercises: exerciseList, username: request.user.username });
         });
     } else { // user not logged in
         response.redirect("/login");
@@ -330,7 +330,7 @@ app.get("/workouts", function (request, response) {
                     workoutList.push(Workout);
                 });
             }
-            response.render("workouts", { allWorkouts: workoutList });
+            response.render("workouts", { allWorkouts: workoutList, username: request.user.username });
         });
     } else { // user not logged in
         response.redirect("/login");
@@ -350,7 +350,7 @@ app.get("/workoutBuilder", function (request, response) {
                 });
                 // console.log(exerciseList);
             }
-            response.render("workoutBuilder", { exerciseList: exerciseList });
+            response.render("workoutBuilder", { exerciseList: exerciseList, username: request.user.username });
         });
     } else { // user not logged in
         response.redirect("/login");
@@ -359,11 +359,11 @@ app.get("/workoutBuilder", function (request, response) {
 
 app.post("/buildWorkout", function (request, response) {
     if (request.isAuthenticated()) {
-        console.log("index.js /buildWorkout received: " + JSON.stringify(request.body));
+        // console.log("index.js /buildWorkout received: " + JSON.stringify(request.body));
 
         let newWorkout = request.body;
         let newWorkoutName = newWorkout.workoutName;
-        console.log("new Workout Name: " + newWorkoutName);
+        // console.log("new Workout Name: " + newWorkoutName);
         let newSets = []; // populated in for loop
         let setPointer = 0;
 
@@ -402,9 +402,7 @@ app.post("/buildWorkout", function (request, response) {
             sets: newSets
         });
         newWorkoutObject.save();
-        console.log("newWorkoutObject: " + newWorkoutObject);
-
-        ;
+        //console.log("newWorkoutObject: " + newWorkoutObject);
 
         // add to users current workouts
         User.findById(request.user._id, function (err, user) {

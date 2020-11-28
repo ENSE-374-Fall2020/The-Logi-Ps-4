@@ -15,7 +15,7 @@
 
 <body>
 
-    <%- include("partials/navbar", {username: "Billy", finishedWorkouts: [undefined]}); -%>
+    <%- include("partials/navbar", {username: username}); -%>
 
     <h1 class="title">Create New Workout</h1>
 
@@ -34,7 +34,7 @@
             </div>
 
             <!-- Responsive grid, articles will automatically wrap -->
-            <section id="setCardList" class="row d-flex flex-wrap form-group">
+            <section id="setCardList" class="row d-flex flex-wrap form-group justify-content-around">
 
                 <article id="blankCard" class="card setCard text-center p-3 m-3 d-none">
                     <data value=""></data> <!-- IMPORTANT: used to store id of cards in workoutBuilder.js -->
