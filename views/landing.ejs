@@ -74,7 +74,7 @@
             </form>
         </article>
     </section>
-
+    <p style="text-align: center; font-weight: bold;">Current Workouts</p>
     <!-- Responsive grid, articles will automatically wrap -->
     <section id="workoutCardList" class="d-flex flex-wrap">
 
@@ -82,8 +82,8 @@
             // if (workout === null || workout === undefined) {
             // } else {
                 try { %>
-            <%- include ("partials/workoutCard", {workout: workout, current: true}); -%>
-                <% console.log("Rendering workout: " + workout.name); 
+        <%- include ("partials/workoutCard", {workout: workout, current: true}); -%>
+        <% console.log("Rendering workout: " + workout.name); 
                 } catch {
                     console.log("ERROR: in landing.ejs:\n\tworkout from usersCurrentWorkouts is NULL or UNDEFINED\n\tskipping rendering...");
                 }
@@ -91,6 +91,22 @@
 
     </section>
 
+    <br>
+    <p style="text-align: center; font-weight: bold;">Completed Workouts</p>
+    <section style="text-align: center; position: relative;left: 39.5%; ">
+        <!--Table-->
+        <ul style = "width: 10%; float: left;list-style-type:none;">
+            <% for (let workout of usersFinishedWorkouts) { %>
+                    <li><%=workout.name%></li>
+                <% } %>
+        </ul>
+        <ul style = "width: 10%; float: left;list-style-type:none;">
+            <% for (let count of countForEachFinishedWorkouts) { %>
+                    <li><%=count%></li>
+                <% } %>
+        </ul>
+        <!--Table-->
+    </section>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
