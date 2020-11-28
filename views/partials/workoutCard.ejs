@@ -36,7 +36,10 @@
         </div>
     </div>
     <%  if (current) {  %>
+      <form id="removeWorkout" action="markAsComplete" method="POST" class="w-100">
     <button id="complete<%=workout.id%>" class='btn btn-success form-control'>Mark Completed</button>
+    <input type="hidden" name="workoutId" id="workoutId" value="<%=workout._id%>" />
+    </form>
 
     <form id="removeWorkout" action="removeWorkout" method="POST" class="w-100">
     <input type="hidden" name="workoutId" id="workoutId" value="<%=workout._id%>" />
