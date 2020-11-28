@@ -142,7 +142,8 @@ app.get("/landing", function (request, response) {
     if (request.isAuthenticated()) {
 
         let usersCurrentWorkouts = [];
-
+        let usersFinishedWorkouts = [];
+        let countForEachFinishedWorkouts = [];
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error loading user's data");
             else {
@@ -156,9 +157,23 @@ app.get("/landing", function (request, response) {
                                 }
                             });
                         }
+                        for (let finishedWorkout of user.finishedWorkouts) {
+                            await Workout.findById(finishedWorkout.workout_id, function (err, workout) {
+                                if (err) console.log("Error loading workout by user's finished workout ids");
+                                else {
+                                    usersFinishedWorkouts.push(workout);
+                                    countForEachFinishedWorkouts.push(finishedWorkout.count);
+                                }
+                            });
+                        }
                     }
                     finally {
-                        response.render("landing", { username: request.user.username, usersCurrentWorkouts: usersCurrentWorkouts });
+                        response.render("landing", {
+                            username: request.user.username,
+                            usersCurrentWorkouts: usersCurrentWorkouts,
+                            usersFinishedWorkouts: usersFinishedWorkouts,
+                            countForEachFinishedWorkouts: countForEachFinishedWorkouts
+                        });
                     }
 
                 }
@@ -173,6 +188,48 @@ app.get("/landing", function (request, response) {
 });
 
 
+app.post("/markAsComplete", function (request, response) {
+    if (request.isAuthenticated()) {
+        console.log("request.user.username : " + request.user.username)
+        console.log("body request workout id" + request.body.workoutId);
+        User.findById(request.user._id, function (err, user) {
+            if (err) console.log("Error marking workout as complete");
+            else {
+                async function saveToCompletedWorkouts() {
+                    if (user.finishedWorkouts.length != 0) {
+                        for (finishedWorkout of user.finishedWorkouts) {
+                            if (finishedWorkout.workout_id == request.body.workoutId) {
+                                console.log("matched workout id");
+                                finishedWorkout.count++;
+                                await user.save();
+                                return;
+                            }
+                        }
+                    }
+                    console.log("creating finished workouts.....");
+                    const completedWorkout = new FinishedWorkout({
+                        workout_id: request.body.workoutId,
+                        count: 1
+                    });
+                    completedWorkout.save();
+                    user.finishedWorkouts.push(completedWorkout);
+                    console.log("pushed workout " + completedWorkout + "\nto user " + user.username + "'s finishedWorkouts");
+                    user.save();
+
+                    console.log("completedWorkout" + completedWorkout);
+
+                }
+                saveToCompletedWorkouts();
+            }
+        })
+
+        response.redirect("/landing");
+    }
+    else {
+        response.redirect("/login");
+    }
+
+})
 app.post("/addWorkout", function (request, response) {
     if (request.isAuthenticated()) {
         console.log("request.user.username : " + request.user.username)
