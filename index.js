@@ -10,6 +10,7 @@ require("dotenv").config();
 const session = require("express-session")
 const passport = require("passport")
 const passportLocalMongoose = require("passport-local-mongoose");
+const e = require("express");
 
 // load database objects
 const dbObjects = require(__dirname + "/model/dbObjects.js");
@@ -233,11 +234,24 @@ app.post("/addWorkout", function (request, response) {
     if (request.isAuthenticated()) {
         console.log("request.user.username : " + request.user.username)
 
+        var alreadyExists = 0;
+
         User.findById(request.user._id, function (err, user) {
             if (err) console.log("Error adding workout to user");
             else {
+                async function checkIfExists(){
+                    try {
+                        for (let currentWorkout of user.currentWorkouts) {
+                            if (currentWorkout.workout_id == request.body.workoutId) {
+                                alreadyExists = 1;
+                            }
+                        }
+                    }
+                    finally {
+                        request.session.alreadyExists = alreadyExists;
+                    }
+                }
                 async function saveToCurrentWorkouts() {
-                    // console.log("request.body.workoutId: " + request.body.workoutId)
                     const workout = new CurrentWorkout({
                         workout_id: request.body.workoutId
                     });
@@ -248,7 +262,23 @@ app.post("/addWorkout", function (request, response) {
                     await user.save();
                     response.redirect("/landing");
                 }
-                saveToCurrentWorkouts();
+
+                async function checkAlreadyExists(){
+                    try{
+                         checkIfExists();
+                    }
+                    finally{
+                    if (alreadyExists == 0){
+                        saveToCurrentWorkouts();
+                    }
+                    else{
+                        response.redirect("/workouts");
+                    }
+                }
+                }
+
+                 checkAlreadyExists();   
+                
             }
 
         });
@@ -310,7 +340,7 @@ app.get("/exercises", function (request, response) {
                 // console.log(exerciseList);
 
             }
-            response.render("exercises", { exercises: exerciseList, username: request.user.username });
+            response.render("exercises", {exercises: exerciseList, username: request.user.username});
         });
     } else { // user not logged in
         response.redirect("/login");
@@ -319,6 +349,10 @@ app.get("/exercises", function (request, response) {
 
 app.get("/workouts", function (request, response) {
     if (request.isAuthenticated()) {
+
+        var alreadyExists =  request.session.alreadyExists;
+        request.session.alreadyExists = 0;
+        
         const workoutList = [];
 
         Workout.find({}, (err, Workouts) => {
@@ -329,7 +363,7 @@ app.get("/workouts", function (request, response) {
                     workoutList.push(Workout);
                 });
             }
-            response.render("workouts", { allWorkouts: workoutList, username: request.user.username });
+            response.render("workouts", {alreadyExists: alreadyExists, allWorkouts: workoutList, username: request.user.username});
         });
     } else { // user not logged in
         response.redirect("/login");
