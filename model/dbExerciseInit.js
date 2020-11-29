@@ -42,7 +42,7 @@ async function generateExerciseCollection() {
         _id: 2,
         name: "Squat",
         type: "strength",
-        imagePath: "img/exercises/squat.jpg",
+        imagePath: "img/exercises/squat.png",
         muscles: ["Quadriceps", "Glutes", "Hamstrings", "Abdominals"],
         bodyParts: ["Stomach", "Legs"],
         tutorialURL: "www.goToWebsite.com"
@@ -75,9 +75,9 @@ async function generateExerciseCollection() {
         _id: 5,
         name: "Sprint",
         type: "strength",
-        imagePath: "",
-        muscles: ["Legs"],
-        bodyParts: ["Legs", "Cardio"],
+        imagePath: "img/exercises/sprint.jpg",
+        muscles: ["Hamstrings", "Quadriceps", "Glutes", "Abdominals", "Calves"],
+        bodyParts: ["Legs", "Stomach", "Cardio"],
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise5.save();
@@ -86,7 +86,7 @@ async function generateExerciseCollection() {
         _id: 6,
         name: "Downward Dog",
         type: "strength",
-        imagePath: "",
+        imagePath: "img/exercises/downwarddog.png",
         muscles: ["arms", "shoulders", "legs"],
         bodyParts: ["Stomach", "Legs", "Cardio", "Shoulders"],
         tutorialURL: "www.goToWebsite.com"
@@ -103,6 +103,50 @@ async function generateExerciseCollection() {
         tutorialURL: "www.goToWebsite.com"
     });
     await exercise7.save();
+
+    const exercise8 = new Exercise({
+        _id: 8,
+        name: "Bench Press",
+        type: "strength",
+        imagePath: "img/exercises/benchpress.jpg",
+        muscles: ["Pectoralis", "Triceps", "Deltoids"],
+        bodyParts: ["Chest", "Arms"],
+        tutorialURL: "www.goToWebsite.com"
+    });
+    await exercise8.save();
+
+    const exercise9 = new Exercise({
+        _id: 9,
+        name: "Deadlift",
+        type: "strength",
+        imagePath: "img/exercises/deadlift.png",
+        muscles: ["Hamstrings", "Glutes", "Quadriceps", "Abdonminals", "Lats"],
+        bodyParts: ["Legs", "Back"],
+        tutorialURL: "www.goToWebsite.com"
+    });
+    await exercise9.save();
+
+    const exercise10 = new Exercise({
+        _id: 10,
+        name: "Tricep Dip",
+        type: "strength",
+        imagePath: "img/exercises/tricepdips.png",
+        muscles: ["Triceps", "Pectoralis"],
+        bodyParts: ["Arms", "Chest"],
+        tutorialURL: "www.goToWebsite.com"
+    });
+    await exercise10.save();
+
+    const exercise11 = new Exercise({
+        _id: 11,
+        name: "Hip Thrust",
+        type: "strength",
+        imagePath: "img/exercises/hipthrusts.png",
+        muscles: ["Glutes", "Hamstrings", "Quadriceps"],
+        bodyParts: ["Legs"],
+        tutorialURL: "www.goToWebsite.com"
+    });
+    await exercise11.save();
 
     await mongoose.connection.close();
 

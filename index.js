@@ -15,6 +15,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const dbObjects = require(__dirname + "/model/dbObjects.js");
 //require(__dirname + "/model/dbExerciseInit.js");
 
+
 const Exercise = dbObjects.Exercise;
 const Set = dbObjects.Set;
 const Workout = dbObjects.Workout;
