@@ -13,15 +13,19 @@
 
 <body>
     <div class="jumbotron">
-        <h1 class="text-center m-3">Progress: Your Path To Success</h1>
+        <article class="p-5">
+            <h1><span class="text-center display-1 bg-secondary text-light p-4">Progress</span></h1>
+            <br>
+            <h2><span class="text-center bg-dark text-light p-3">Your Path To Success</span></h2>
+        </article>
 
         <div class="login">
             <div id="accordion">
                 <div class="card">
-                    <div class="card-header" id="headingOne">
+                    <div class="card-header text-center" id="headingOne">
                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
                             aria-expanded="true" aria-controls="collapseOne">
-                            <h5 class="mb-0">Log In</h5>
+                            <h3 class="mb-0">Log In</h3>
                         </button>
                     </div>
 
@@ -30,48 +34,48 @@
 
 
                             <form class="form-signin text-center" method="POST" action="/login">
-                                <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
                                 <label for="username" class="sr-only">Username</label>
-                                <input type="text" id="username" name="username" class="form-control"
+                                <input type="text" id="username" name="username" class="form-control m-1"
                                     placeholder="Username" required autofocus>
                                 <label for="password" class="sr-only">Password</label>
-                                <input type="password" id="password" name="password" class="form-control"
+                                <input type="password" id="password" name="password" class="form-control m-1"
                                     placeholder="Password" required>
                                 <div class="checkbox mb-3">
                                 </div>
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                                <button class="btn btn-lg btn-primary btn-block m-1" type="submit">Log in</button>
                             </form>
 
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-header" id="headingTwo">
+                    <div class="card-header text-center" id="headingTwo">
                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
                             aria-expanded="false" aria-controls="collapseTwo">
-                            <h5 class="mb-0">Sign Up</h5>
+                            <h3 class="mb-0 text-center">Sign Up</h3>
                         </button>
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div class="card-body">
 
                             <form class="form-signin text-center" method="POST" name="registration" action="/register">
-                                <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
+                                <!--
                                 <label for="firstname" class="sr-only">Firstname</label>
                                 <input type="text" id="firstname" name="firstname" class="form-control"
                                     placeholder="Firstname" required autofocus>
                                 <label for="lastname" class="sr-only">Lastname</label>
                                 <input type="text" id="lastname" name="lastname" class="form-control"
                                     placeholder="Lastname" required autofocus>
+                                -->
                                 <label for="email" class="sr-only">Username</label>
-                                <input type="username" id="username" name="username" class="form-control"
+                                <input type="username" id="username" name="username" class="form-control m-1"
                                     placeholder="Username" required autofocus>
                                 <label for="password" class="sr-only">Password</label>
-                                <input type="password" id="password" name="password" class="form-control"
+                                <input type="password" id="password" name="password" class="form-control m-1"
                                     placeholder="Password" required>
-                                <div class="checkbox mb-3">
-                                </div>
-                                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+                                <input type="password" id="password2" name="password2" class="form-control m-1"
+                                    placeholder="Verify Password" required>
+                                <button class="btn btn-lg btn-primary btn-block m-1" type="submit">Sign Up</button>
                             </form>
 
                         </div>

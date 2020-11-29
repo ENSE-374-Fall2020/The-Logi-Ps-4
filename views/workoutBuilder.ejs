@@ -74,7 +74,13 @@
     <div class="container-fluid m-3">
         <form action="/buildWorkout" id="buildWorkout" name="buildWorkout" method="POST">
             <div class="row">
-                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <article id="alertMessage" class="row d-flex justify-content-center">
+                        <div class="alert alert-info">
+                            <p class="m-1">*All fields optional except "Exercise"</p>
+                            <p class="small text-muted float-right m-0">Click to hide this message</p>
+                        </div>
+                </div>
                 <div id="nameContainer" class="col-md-4 form-group">
                     <label for="workoutName">Workout Name:</label>
                     <input type="text" class="form-control" id="workoutName" name="workoutName" required />
@@ -82,9 +88,11 @@
                 <div class="col-md-4"></div>
             </div>
 
+            
 
+            </article>
             <!-- Responsive grid, articles will automatically wrap -->
-            <section id="setCardList" class="row d-flex flex-wrap form-group justify-content-around">
+            <section id="setCardList" class="row d-flex flex-wrap form-group justify-content-center">
 
                 <article id="blankCard" class="card setCard text-center p-3 m-3 d-none">
                     <data value=""></data> <!-- IMPORTANT: used to store id of cards in workoutBuilder.js -->
@@ -93,7 +101,7 @@
 
                     <div class="card-body bg-light">
                         <div class="input-group m-1">
-                            <label for="exercise">Exercise:</label>
+                            <label for="exercise">*Exercise:</label>
                             <select class="form-control" name="exercise" id="exercise" required>
                                 <option value="" selected disabled hidden>Select an Exercise...</option>
                                 <% for (exercise of exerciseList) { %>
