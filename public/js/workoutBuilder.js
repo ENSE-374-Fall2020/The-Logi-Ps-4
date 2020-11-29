@@ -95,4 +95,10 @@ $(document).ready(function () {
 
     $("#addButton").on("click", addBlankCard);
     $("#createButton").on("click", createWorkout);
+
+    // click to hide instructions
+    $("#alertMessage").on("click", function (event) {
+        console.log("Hiding help message");
+        event.currentTarget.classList.add("fade");
+    });
 }); 

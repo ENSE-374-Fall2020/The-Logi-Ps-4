@@ -16,6 +16,11 @@ html body{
     display: none;
 }
 
+.fade {
+    opacity: 0;
+    transition-duration: 0.3s;
+}
+
 .title {
     margin: 10px;
     padding: 10px;
@@ -54,7 +59,7 @@ html body{
 }
 
 .mainButton .innerButton {
-    border: solid green 1px;
+    border: solid green 2px;
     border-radius: 8px;
     font-size: 20px;
     padding: 20px;
