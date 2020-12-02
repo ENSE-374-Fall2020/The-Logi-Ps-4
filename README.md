@@ -21,7 +21,7 @@ Installation Instructions:
 - clone repository
 - install required dependencies
 - using Node, run the following scripts to populate the database:
-\t1. model/dbExerciseInit.js 
-\t2. model/dbSetAndWorkoutInit.js (optional, sample workouts)
+  1. model/dbExerciseInit.js 
+  2. model/dbSetAndWorkoutInit.js (optional, sample workouts)
 
 - run server, website is rendered on localhost:3000
