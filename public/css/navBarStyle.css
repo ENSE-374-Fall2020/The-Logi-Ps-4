@@ -112,10 +112,7 @@ html body{
 }
 
 
-
-/* Buttons stuff */
-
-/* Stuff for forum page here */
+/* Stuff for forum page */
 
 .forum-container{
     display: grid;
@@ -131,9 +128,6 @@ html body{
 .forum-container .card .card-header{
     color:  var(--custom-bluer);
 }
-
-/* Stuff for workout page */
-
 
 
 /* Workout Builder Form */

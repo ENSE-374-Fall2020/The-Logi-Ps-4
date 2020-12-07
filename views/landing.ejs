@@ -77,11 +77,9 @@
     <section id="workoutCardList" class="d-flex flex-wrap justify-content-around">
 
         <% for (let workout of usersCurrentWorkouts) { 
-            // if (workout === null || workout === undefined) {
-            // } else {
                 try { %>
         <%- include ("partials/workoutCard", {workout: workout, current: true}); -%>
-        <% console.log("Rendering workout: " + workout.name); 
+        <%
                 } catch {
                     console.log("ERROR: in landing.ejs:\n\tworkout from usersCurrentWorkouts is NULL or UNDEFINED\n\tskipping rendering...");
                 }

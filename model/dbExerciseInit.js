@@ -12,21 +12,16 @@ mongoose.connect("mongodb://localhost:27017/progressDB",
         useUnifiedTopology: true
     });
 
-console.log("connected to testdb");
+console.log("connected to progressDB");
 
 async function destroyExerciseCollection() {
-    // destroy existing collection of exercises
 
     await Exercise.deleteMany({}, function (err) {
         if (err) console.log("Error in deleting existing collection");
-        else console.log("Collection 'exercises' destroyed");
     });
 }
 
 async function generateExerciseCollection() {
-    // generate new collection of static exercises
-
-    console.log("Generating static list of exercises...");
     const exercise1 = await new Exercise({
         _id: 1,
         name: "Crunch",
@@ -149,8 +144,6 @@ async function generateExerciseCollection() {
     await exercise11.save();
 
     await mongoose.connection.close();
-
-    
 
     console.log("Exercise list created successfully");
 }
