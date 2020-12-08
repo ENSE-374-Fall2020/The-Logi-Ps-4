@@ -1,6 +1,7 @@
 # Progress
+[View the MVP demonstration](https://www.youtube.com/watch?v=xPBdxCLZosU&t=76s)
 
-A fitness tracker application where you can create custom workouts and browse a community-created selection of custom workouts.
+A fitness tracker application where you can create custom workouts and browse workouts others have created.
 
 Installation Requirements
 - mongodb
